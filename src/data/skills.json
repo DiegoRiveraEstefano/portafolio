@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Django",
+    "slug": "django",
+    "yearsOfExperience": 5,
+    "category": "Backend Development"
+  },
+  {
+    "name": "FastAPI",
+    "slug": "fastapi",
+    "yearsOfExperience": 4,
+    "category": "Backend Development"
+  },
+  {
+    "name": "Flask",
+    "slug": "flask",
+    "yearsOfExperience": 4,
+    "category": "Backend Development"
+  },
+  {
+    "name": "Vue.js",
+    "slug": "vuejs",
+    "yearsOfExperience": 4,
+    "category": "Frontend Development"
+  },
+  {
+    "name": "Astro",
+    "slug": "astro",
+    "yearsOfExperience": 4,
+    "category": "Frontend Development"
+  },
+  {
+    "name": "TailwindCSS",
+    "slug": "tailwindcss",
+    "yearsOfExperience": 5,
+    "category": "Frontend Development"
+  },
+  {
+    "name": "Pandas",
+    "slug": "pandas",
+    "yearsOfExperience": 5,
+    "category": "Data Science"
+  },
+  {
+    "name": "Polars",
+    "slug": "polars",
+    "yearsOfExperience": 4,
+    "category": "Data Science"
+  },
+  {
+    "name": "DuckDB",
+    "slug": "duckdb",
+    "yearsOfExperience": 4,
+    "category": "Data Science"
+  },
+  {
+    "name": "OpenCV",
+    "slug": "opencv",
+    "yearsOfExperience": 4,
+    "category": "Computer Vision"
+  },
+  {
+    "name": "Image Processing",
+    "slug": "image-processing",
+    "yearsOfExperience": 4,
+    "category": "Computer Vision"
+  },
+  {
+    "name": "Object Detection",
+    "slug": "object-detection",
+    "yearsOfExperience": 3,
+    "category": "Computer Vision"
+  },
+  {
+    "name": "Architecture",
+    "slug": "architecture",
+    "yearsOfExperience": 4,
+    "category": "System Design"
+  },
+  {
+    "name": "Scalability",
+    "slug": "scalability",
+    "yearsOfExperience": 4,
+    "category": "System Design"
+  },
+  {
+    "name": "Performance",
+    "slug": "performance",
+    "yearsOfExperience": 4,
+    "category": "System Design"
+  },
+  {
+    "name": "SQL",
+    "slug": "sql",
+    "yearsOfExperience": 5,
+    "category": "Databases"
+  },
+  {
+    "name": "PostgreSQL",
+    "slug": "postgresql",
+    "yearsOfExperience": 4,
+    "category": "Databases"
+  },
+  {
+    "name": "SQLite",
+    "slug": "sqlite",
+    "yearsOfExperience": 4,
+    "category": "Databases"
+  }
+]
