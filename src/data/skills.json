@@ -1,104 +1,116 @@
 [
   {
+    "name": "Python",
+    "slug": "python",
+    "yearsOfExperience": 5,
+    "category": "Languages"
+  },
+  {
+    "name": "JavaScript",
+    "slug": "javascript",
+    "yearsOfExperience": 4,
+    "category": "Languages"
+  },
+  {
+    "name": "Java",
+    "slug": "java",
+    "yearsOfExperience": 3,
+    "category": "Languages"
+  },
+  {
+    "name": "PHP",
+    "slug": "php",
+    "yearsOfExperience": 1,
+    "category": "Languages"
+  },
+  {
+     "name": "Git",
+     "slug": "git",
+     "yearsOfExperience": 2,
+     "category": "Tools"
+  },
+  {
+    "name": "GitHub",
+    "slug": "github",
+    "yearsOfExperience": 3,
+    "category": "Tools"
+  },
+  {
+    "name": "Docker",
+    "slug": "docker",
+    "yearsOfExperience": 2,
+    "category": "Tools"
+  },
+  {
+    "name": "Bash",
+    "slug": "bash",
+    "yearsOfExperience": 1,
+    "category": "Tools"
+  },
+  {
     "name": "Django",
     "slug": "django",
-    "yearsOfExperience": 5,
+    "yearsOfExperience": 4,
     "category": "Backend Development"
   },
   {
     "name": "FastAPI",
     "slug": "fastapi",
-    "yearsOfExperience": 4,
+    "yearsOfExperience": 1,
     "category": "Backend Development"
   },
   {
-    "name": "Flask",
-    "slug": "flask",
-    "yearsOfExperience": 4,
+    "name": "Laravel",
+    "slug": "laravel",
+    "yearsOfExperience": 1,
     "category": "Backend Development"
   },
   {
     "name": "Vue.js",
     "slug": "vuejs",
-    "yearsOfExperience": 4,
+    "yearsOfExperience": 3,
     "category": "Frontend Development"
   },
   {
     "name": "Astro",
     "slug": "astro",
-    "yearsOfExperience": 4,
+    "yearsOfExperience": 1,
     "category": "Frontend Development"
   },
   {
     "name": "TailwindCSS",
     "slug": "tailwindcss",
-    "yearsOfExperience": 5,
+    "yearsOfExperience": 2,
     "category": "Frontend Development"
   },
   {
     "name": "Pandas",
     "slug": "pandas",
-    "yearsOfExperience": 5,
+    "yearsOfExperience": 2,
     "category": "Data Science"
   },
   {
     "name": "Polars",
     "slug": "polars",
-    "yearsOfExperience": 4,
+    "yearsOfExperience": 2,
     "category": "Data Science"
   },
   {
     "name": "DuckDB",
     "slug": "duckdb",
-    "yearsOfExperience": 4,
+    "yearsOfExperience": 1,
     "category": "Data Science"
-  },
-  {
-    "name": "OpenCV",
-    "slug": "opencv",
-    "yearsOfExperience": 4,
-    "category": "Computer Vision"
-  },
-  {
-    "name": "Image Processing",
-    "slug": "image-processing",
-    "yearsOfExperience": 4,
-    "category": "Computer Vision"
-  },
-  {
-    "name": "Object Detection",
-    "slug": "object-detection",
-    "yearsOfExperience": 3,
-    "category": "Computer Vision"
-  },
-  {
-    "name": "Architecture",
-    "slug": "architecture",
-    "yearsOfExperience": 4,
-    "category": "System Design"
-  },
-  {
-    "name": "Scalability",
-    "slug": "scalability",
-    "yearsOfExperience": 4,
-    "category": "System Design"
-  },
-  {
-    "name": "Performance",
-    "slug": "performance",
-    "yearsOfExperience": 4,
-    "category": "System Design"
   },
   {
     "name": "SQL",
     "slug": "sql",
-    "yearsOfExperience": 5,
+    "yearsOfExperience": 4,
     "category": "Databases"
   },
   {
     "name": "PostgreSQL",
     "slug": "postgresql",
-    "yearsOfExperience": 4,
+    "yearsOfExperience": 3,
     "category": "Databases"
   },
   {

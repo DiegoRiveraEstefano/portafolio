@@ -1,0 +1,140 @@
+[
+  {
+    "title": "Análisis de Ventas & Evaluación de Visualización de Datos",
+    "description": "Proyecto de análisis de datos de ventas con enfoque en visualización",
+    "image": "",
+    "date": "2023-08-15",
+    "tags": ["Data Science", "Business Intelligence", "Visualización"],
+    "body": "Análisis completo de dataset de ventas con limpieza de datos, generación de gráficos (barras, dispersión, heatmaps) e identificación de tendencias para soporte en toma de decisiones empresariales.",
+    "slug": "analisis-ventas-visualizacion",
+    "technologies": [
+      "Python",
+      "Pandas",
+      "Polars",
+      "Matplotlib",
+      "Seaborn",
+      "Jupyter Notebook"
+    ],
+    "results": [
+      "Reportes ejecutivos automatizados",
+      "Detección de patrones de ventas",
+      "Visualizaciones para stakeholders"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/analisis-ventas-evaluacion-visualizacion-datos"
+  },
+  {
+    "title": "ERP Villa Alemana",
+    "description": "Sistema de gestión escolar integral para instituciones educativas",
+    "image": "",
+    "date": "2022-11-30",
+    "tags": ["ERP", "Gestión Escolar", "SaaS"],
+    "body": "Sistema ERP completo con módulos para administración de estudiantes, control de pagos, gestión de horarios, comunicación institucional y reportes académicos.",
+    "slug": "erp-escolar",
+    "technologies": ["Python", "Django", "JavaScript", "MySQL", "Pico CSS"],
+    "results": [
+      "Automatización de procesos académicos",
+      "Reducción de trabajo manual en 60%",
+      "Plataforma unificada para toda la institución"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/erp-villa-alemana-escolares-tecnologicos"
+  },
+  {
+    "title": "YML Traductor",
+    "description": "Herramienta CLI para traducción de archivos de configuración",
+    "image": "",
+    "date": "2023-02-20",
+    "tags": ["DevOps", "Localización", "Herramientas CLI"],
+    "body": "Traductor automático que preserva la estructura de archivos YML/JSON mientras traduce su contenido, soportando automatización en pipelines de desarrollo.",
+    "slug": "yml-traductor",
+    "technologies": ["Python", "PyYAML", "Google Translate", "Python-fire"],
+    "results": [
+      "Localización simplificada de proyectos",
+      "Soporte para múltiples idiomas",
+      "Integración con CI/CD"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/yml-traductor"
+  },
+  {
+    "title": "Scanned PDF to Text",
+    "description": "Conversor de PDF escaneados a texto editable con OCR mejorado",
+    "image": "",
+    "date": "2023-05-10",
+    "tags": ["OCR", "Procesamiento de documentos", "Automatización"],
+    "body": "Solución para digitalizar documentos escaneados mediante procesamiento de imágenes y reconocimiento óptico de caracteres (OCR) con preprocesamiento para mejorar precisión.",
+    "slug": "pdf-to-text",
+    "technologies": [
+      "Python",
+      "Tesseract OCR",
+      "OpenCV",
+      "PyPDF2",
+      "Image Processing"
+    ],
+    "results": [
+      "Digitalización masiva de documentos",
+      "Precisión mejorada en texto reconocido",
+      "Extracción estructurada de datos"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/scanned-pdf-to-text"
+  },
+  {
+    "title": "HereditasArbor",
+    "description": "Plataforma interactiva para creación de árboles genealógicos",
+    "image": "",
+    "date": "2022-09-01",
+    "tags": ["Web App", "Genealogía", "Visualización de datos"],
+    "body": "Aplicación web para mapear historias familiares con visualizaciones interactivas, importación/exportación de datos y colaboración entre usuarios.",
+    "slug": "hereditas-arbor",
+    "technologies": ["Python", "Django", "MySQL", "Numba", "TailwindCSS"],
+    "results": [
+      "Visualización interactiva de relaciones familiares",
+      "Preservación histórica digital",
+      "Colaboración multi-usuario"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/HereditasArbor"
+  },
+  {
+    "title": "Lideresas",
+    "description": "App móvil para gestión financiera de PYMEs y grupos municipales",
+    "image": "",
+    "date": "2023-03-25",
+    "tags": ["Fintech", "Gestión PYME", "App Móvil"],
+    "body": "Solución completa para seguimiento de gastos, control de boletas, generación de reportes y gestión presupuestaria para pequeñas empresas y organizaciones comunitarias.",
+    "slug": "lideresas-app",
+    "technologies": [
+      "Python",
+      "Django",
+      "TailwindCSS",
+      "S3-compatible",
+      "PostgreSQL/MySQL"
+    ],
+    "results": [
+      "Reducción de tiempo en gestión contable",
+      "Seguimiento en tiempo real de finanzas",
+      "Informes automáticos para cumplimiento fiscal"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/lideresas"
+  },
+  {
+    "title": "Brujula Digital Profesional",
+    "description": "Plataforma educativa con cursos interactivos y comunidad",
+    "image": "",
+    "date": "2023-01-15",
+    "tags": ["E-Learning", "Educación Online", "Comunidad"],
+    "body": "Ecosistema de aprendizaje con cursos estructurados, lecciones interactivas, sistema de logros, foros de discusión y generación de certificados.",
+    "slug": "brujula-digital",
+    "technologies": [
+      "Python",
+      "Django",
+      "TailwindCSS",
+      "PostgreSQL",
+      "JavaScript",
+      "YouTube Lite Embedded Player"
+    ],
+    "results": [
+      "+500 usuarios activos",
+      "Plataforma de cursos escalable",
+      "Comunidad de aprendizaje colaborativo"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/brujula_digital_profesional"
+  }
+]

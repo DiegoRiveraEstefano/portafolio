@@ -4,12 +4,18 @@ export interface Props {
   description?: string;
   keywords?: string;
 }
+import { getLangFromUrl } from "../i18n/utils";
 import "../styles/global.css";
-const { title, description = "Portfolio of a Software Engineer specializing in Backend Development, Frontend Technologies, Data Science, and Computer Vision", keywords = "software engineer, backend developer, Django, FastAPI, Vue.js, data science, computer vision" } = Astro.props;
+const {
+  title,
+  description = "Portfolio of a Software Engineer specializing in Backend Development, Frontend Technologies, Data Science, and Computer Vision",
+  keywords = "software engineer, backend developer, Django, FastAPI, Vue.js, data science, computer vision",
+} = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -18,21 +24,24 @@ const { title, description = "Portfolio of a Software Engineer specializing in B
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    
+
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="bg-gray-50 text-gray-900 font-inter">
     <slot />
@@ -41,9 +50,9 @@ const { title, description = "Portfolio of a Software Engineer specializing in B
 
 <style is:global>
   .font-inter {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
-  
+
   .gradient-text {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
