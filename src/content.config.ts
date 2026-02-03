@@ -22,6 +22,7 @@ const projects = defineCollection({
       technologies: z.array(z.string()),
       results: z.array(z.string()),
       link: z.string(),
+      archived: z.boolean().optional(),
     }),
 });
 
@@ -39,6 +40,7 @@ const skills = defineCollection({
         "Frontend Development",
         "Data Science",
         "Databases",
+        "Hardware/IoT",
       ]),
     }),
 });
@@ -59,10 +61,11 @@ const experiences = defineCollection({
   loader: file("src/data/experiences.json"),
   schema: () =>
     z.object({
-      slug: z.string(),
-      name: z.string(),
-      yearsOfExperience: z.number().min(1).max(99),
-      link: z.string().url().optional(),
+      title: z.string(),
+      company: z.string(),
+      startDate: z.string(),
+      endDate: z.string().optional(),
+      description: z.string(),
     }),
 });
 

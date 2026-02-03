@@ -1,5 +1,56 @@
 [
   {
+    "title": "Sistema de Control HID & Coprocesamiento IoT",
+    "description": "Sistema de control de dispositivos móviles basado en arquitectura maestro–esclavo",
+    "image": "",
+    "date": "2025-12-01",
+    "tags": ["IoT", "Embedded Systems", "C/C++", "CI/CD"],
+    "body": "Desarrollo de un sistema de control basado en Raspberry Pi 4 + Pico. Implementación de comunicación UART/I2C, emulación USB HID y pipelines de compilación cruzada hacia ARM64.",
+    "slug": "sistema-control-hid-iot",
+    "technologies": ["C/C++", "Python", "Raspberry Pi", "GitHub Actions", "UART/I2C"],
+    "results": [
+      "Comunicación hardware robusta",
+      "Compilación cruzada automatizada",
+      "Emulación HID de baja latencia"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano",
+    "archived": false
+  },
+  {
+    "title": "Clasificador de Tickets con ML",
+    "description": "Microservicio para preprocesamiento y clasificación automática de tickets",
+    "image": "",
+    "date": "2025-10-15",
+    "tags": ["Machine Learning", "API", "Python"],
+    "body": "Microservicio que utiliza Scikit-learn para clasificar tickets automáticamente, expuesto vía API REST para consumo en tiempo real.",
+    "slug": "clasificador-tickets-ml",
+    "technologies": ["Python", "Scikit-learn", "FastAPI", "Pandas", "Docker"],
+    "results": [
+      "Reducción de carga operativa",
+      "Clasificación en tiempo real",
+      "API escalable y documentada"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano",
+    "archived": false
+  },
+  {
+    "title": "Arquitectura de Servicios con Kafka y Go",
+    "description": "Backend para ingesta y procesamiento de datos IoT de alta concurrencia",
+    "image": "",
+    "date": "2025-10-01",
+    "tags": ["Backend", "Go", "Kafka", "Microservices"],
+    "body": "Diseño de backend para IoT utilizando Kafka para mensajería y consumidores en Go para procesamiento concurrente de alto rendimiento.",
+    "slug": "arquitectura-kafka-go",
+    "technologies": ["Go", "Apache Kafka", "Docker", "PostgreSQL"],
+    "results": [
+      "Procesamiento de alta concurrencia",
+      "Arquitectura desacoplada y escalable",
+      "Ingesta de datos robusta"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano",
+    "archived": false
+  },
+  {
     "title": "Análisis de Ventas & Evaluación de Visualización de Datos",
     "description": "Proyecto de análisis de datos de ventas con enfoque en visualización",
     "image": "",
@@ -20,7 +71,8 @@
       "Detección de patrones de ventas",
       "Visualizaciones para stakeholders"
     ],
-    "link": "https://github.com/DiegoRiveraEstefano/analisis-ventas-evaluacion-visualizacion-datos"
+    "link": "https://github.com/DiegoRiveraEstefano/analisis-ventas-evaluacion-visualizacion-datos",
+    "archived": true
   },
   {
     "title": "ERP Villa Alemana",
@@ -36,7 +88,8 @@
       "Reducción de trabajo manual en 60%",
       "Plataforma unificada para toda la institución"
     ],
-    "link": "https://github.com/DiegoRiveraEstefano/erp-villa-alemana-escolares-tecnologicos"
+    "link": "https://github.com/DiegoRiveraEstefano/erp-villa-alemana-escolares-tecnologicos",
+    "archived": true
   },
   {
     "title": "YML Traductor",
@@ -52,7 +105,8 @@
       "Soporte para múltiples idiomas",
       "Integración con CI/CD"
     ],
-    "link": "https://github.com/DiegoRiveraEstefano/yml-traductor"
+    "link": "https://github.com/DiegoRiveraEstefano/yml-traductor",
+    "archived": false
   },
   {
     "title": "Scanned PDF to Text",
@@ -74,7 +128,8 @@
       "Precisión mejorada en texto reconocido",
       "Extracción estructurada de datos"
     ],
-    "link": "https://github.com/DiegoRiveraEstefano/scanned-pdf-to-text"
+    "link": "https://github.com/DiegoRiveraEstefano/scanned-pdf-to-text",
+    "archived": false
   },
   {
     "title": "HereditasArbor",
@@ -90,7 +145,8 @@
       "Preservación histórica digital",
       "Colaboración multi-usuario"
     ],
-    "link": "https://github.com/DiegoRiveraEstefano/HereditasArbor"
+    "link": "https://github.com/DiegoRiveraEstefano/HereditasArbor",
+    "archived": true
   },
   {
     "title": "Lideresas",
@@ -112,7 +168,8 @@
       "Seguimiento en tiempo real de finanzas",
       "Informes automáticos para cumplimiento fiscal"
     ],
-    "link": "https://github.com/DiegoRiveraEstefano/lideresas"
+    "link": "https://github.com/DiegoRiveraEstefano/lideresas",
+    "archived": false
   },
   {
     "title": "Brujula Digital Profesional",
@@ -135,6 +192,7 @@
       "Plataforma de cursos escalable",
       "Comunidad de aprendizaje colaborativo"
     ],
-    "link": "https://github.com/DiegoRiveraEstefano/brujula_digital_profesional"
+    "link": "https://github.com/DiegoRiveraEstefano/brujula_digital_profesional",
+    "archived": false
   }
 ]

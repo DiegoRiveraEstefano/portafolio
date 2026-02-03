@@ -12,40 +12,34 @@
     "category": "Languages"
   },
   {
-    "name": "Java",
-    "slug": "java",
-    "yearsOfExperience": 3,
+    "name": "TypeScript",
+    "slug": "typescript",
+    "yearsOfExperience": 2,
     "category": "Languages"
   },
   {
-    "name": "PHP",
-    "slug": "php",
+    "name": "Go",
+    "slug": "go",
     "yearsOfExperience": 1,
     "category": "Languages"
   },
   {
-     "name": "Git",
-     "slug": "git",
-     "yearsOfExperience": 2,
-     "category": "Tools"
+    "name": "C/C++",
+    "slug": "c-cpp",
+    "yearsOfExperience": 1,
+    "category": "Languages"
   },
   {
-    "name": "GitHub",
-    "slug": "github",
-    "yearsOfExperience": 3,
-    "category": "Tools"
-  },
-  {
-    "name": "Docker",
-    "slug": "docker",
-    "yearsOfExperience": 2,
-    "category": "Tools"
+    "name": "SQL",
+    "slug": "sql",
+    "yearsOfExperience": 4,
+    "category": "Languages"
   },
   {
     "name": "Bash",
     "slug": "bash",
-    "yearsOfExperience": 1,
-    "category": "Tools"
+    "yearsOfExperience": 2,
+    "category": "Languages"
   },
   {
     "name": "Django",
@@ -56,14 +50,56 @@
   {
     "name": "FastAPI",
     "slug": "fastapi",
+    "yearsOfExperience": 2,
+    "category": "Backend Development"
+  },
+  {
+    "name": "Kafka",
+    "slug": "kafka",
     "yearsOfExperience": 1,
     "category": "Backend Development"
   },
   {
-    "name": "Laravel",
-    "slug": "laravel",
+    "name": "PostgREST",
+    "slug": "postgrest",
     "yearsOfExperience": 1,
     "category": "Backend Development"
+  },
+  {
+    "name": "Scikit-learn",
+    "slug": "scikit-learn",
+    "yearsOfExperience": 2,
+    "category": "Data Science"
+  },
+  {
+    "name": "Pandas",
+    "slug": "pandas",
+    "yearsOfExperience": 3,
+    "category": "Data Science"
+  },
+  {
+    "name": "Docker",
+    "slug": "docker",
+    "yearsOfExperience": 2,
+    "category": "Tools"
+  },
+  {
+    "name": "GitHub Actions",
+    "slug": "github-actions",
+    "yearsOfExperience": 1,
+    "category": "Tools"
+  },
+  {
+    "name": "Nuitka",
+    "slug": "nuitka",
+    "yearsOfExperience": 1,
+    "category": "Tools"
+  },
+  {
+    "name": "Linux",
+    "slug": "linux",
+    "yearsOfExperience": 3,
+    "category": "Tools"
   },
   {
     "name": "Vue.js",
@@ -72,51 +108,39 @@
     "category": "Frontend Development"
   },
   {
-    "name": "Astro",
-    "slug": "astro",
+    "name": "SvelteKit",
+    "slug": "sveltekit",
     "yearsOfExperience": 1,
     "category": "Frontend Development"
   },
   {
-    "name": "TailwindCSS",
-    "slug": "tailwindcss",
-    "yearsOfExperience": 2,
+    "name": "Tauri",
+    "slug": "tauri",
+    "yearsOfExperience": 1,
     "category": "Frontend Development"
   },
   {
-    "name": "Pandas",
-    "slug": "pandas",
+    "name": "Raspberry Pi",
+    "slug": "raspberry-pi",
     "yearsOfExperience": 2,
-    "category": "Data Science"
+    "category": "Hardware/IoT"
   },
   {
-    "name": "Polars",
-    "slug": "polars",
-    "yearsOfExperience": 2,
-    "category": "Data Science"
-  },
-  {
-    "name": "DuckDB",
-    "slug": "duckdb",
+    "name": "ESP32",
+    "slug": "esp32",
     "yearsOfExperience": 1,
-    "category": "Data Science"
+    "category": "Hardware/IoT"
   },
   {
-    "name": "SQL",
-    "slug": "sql",
-    "yearsOfExperience": 4,
-    "category": "Databases"
+    "name": "UART/I2C",
+    "slug": "uart-i2c",
+    "yearsOfExperience": 1,
+    "category": "Hardware/IoT"
   },
   {
     "name": "PostgreSQL",
     "slug": "postgresql",
     "yearsOfExperience": 3,
-    "category": "Databases"
-  },
-  {
-    "name": "SQLite",
-    "slug": "sqlite",
-    "yearsOfExperience": 4,
     "category": "Databases"
   }
 ]

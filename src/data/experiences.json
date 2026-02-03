@@ -1,6 +1,16 @@
 [
-    {
-        "name": "Freelance Developer",
-        "yearsOfExperience": 1
-    }
+  {
+    "title": "Desarrollador Full Stack Freelance",
+    "company": "Clientes PyMEs - Chile",
+    "startDate": "2024-07",
+    "endDate": "Presente",
+    "description": "Diseño y desarrollo de soluciones tecnológicas para digitalización empresarial. Implementación de APIs REST (Django/FastAPI), automatización con IA/ML, y despliegue de infraestructura Docker/Nginx."
+  },
+  {
+    "title": "Consultor de Software & Desarrollador Full Stack",
+    "company": "The Green Economics (Freelance)",
+    "startDate": "2025-03",
+    "endDate": "2025-12",
+    "description": "Diseño y desarrollo end-to-end de plataforma web para publicación científica. Automatización de flujos editoriales y asignación de identificadores únicos."
+  }
 ]
