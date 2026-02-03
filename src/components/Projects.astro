@@ -55,8 +55,8 @@ const projectVisuals: Record<string, { gradient: string; svg: string }> = {
 const projectCollection = await getCollection("projects");
 
 // Sort projects by date, newest first
-const allProjects = projectCollection.sort(
-  (a, b) => b.date - a.date
+const allProjects = projectCollection.filter(p => !p.data.archived).sort(
+  (a, b) => b.data.date.localeCompare(a.data.date)
 );
 ---
 
@@ -64,7 +64,7 @@ const allProjects = projectCollection.sort(
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-        Featured Projects
+        Proyectos Destacados
       </h2>
       <div
         class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"
@@ -118,13 +118,13 @@ const allProjects = projectCollection.sort(
               <div class="flex justify-between">
                 {/* Consider making these links dynamic, e.g., to `/projects/${project.slug}` */}
                 <a
-                  href={`/projects/${project.data.slug}`}
+                  href={project.data.link}
                   class="text-blue-600 hover:text-blue-800 font-medium"
                 >
-                  View Project
+                  Ver Proyecto
                 </a>
                 <a
-                  href="#"
+                  href={project.data.link}
                   class="text-gray-600 hover:text-gray-800"
                   aria-label="View project on GitHub"
                 >
@@ -142,6 +142,15 @@ const allProjects = projectCollection.sort(
           </div>
         ))
       }
+    </div>
+    
+    <div class="mt-12 text-center">
+      <a href="/archive" class="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        Ver Archivo de Proyectos
+        <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </a>
     </div>
   </div>
 </section>
