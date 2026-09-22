@@ -1,0 +1,18 @@
+[
+  {
+    "id": "inacap-ingenieria",
+    "degree": "Ingeniería en Informática",
+    "institution": "INACAP",
+    "location": "Chile",
+    "period": "2022 — 2025",
+    "status": "Titulado",
+    "statusLabel": "STATUS: TITULADO // SDE_QUALIFIED",
+    "description": "Especialización en ingeniería de desarrollo de software, arquitectura de sistemas, modelado de bases de datos relacionales y gestión de infraestructura tecnológica. Titulado formalmente.",
+    "tags": [
+      "Software Engineering",
+      "Computer Science",
+      "Distributed Systems",
+      "Database Design"
+    ]
+  }
+]

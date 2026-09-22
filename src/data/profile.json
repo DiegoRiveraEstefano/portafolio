@@ -1,0 +1,72 @@
+[
+  {
+    "id": "main",
+    "name": "Diego Rivera",
+    "shortName": "Diego Rivera",
+    "chipLabel": "SDE",
+    "chipSub": "CORE",
+    "systemStatus": "SYSTEM_NOMINAL // V3.8",
+    "location": "SANTIAGO_CL [UTC-3]",
+    "specialization": "SDE_BACKEND_DISTRIBUTED",
+    "tagline": "// INGENIERO DE SOFTWARE // BACKEND & SISTEMAS DISTRIBUIDOS",
+    "role": "<Backend Developer // Distributed Systems & DevOps>",
+    "heroDescription": "Especialista en desarrollo backend con Python (Django, FastAPI) y Go, diseño de arquitecturas escalables, optimización de latencia y sistemas distribuidos. Cuento con sólidas nociones de DevOps (Docker, Linux, CI/CD), gestión de bases de datos relacionales y experimentación con sistemas embebidos.",
+    "specs": [
+      {
+        "key": "SYS_CORE",
+        "value": "Python // Go"
+      },
+      {
+        "key": "BACKEND",
+        "value": "FastAPI // Django // Go stdlib"
+      },
+      {
+        "key": "DATA_ENGINE",
+        "value": "PostgreSQL // MySQL // Polars"
+      },
+      {
+        "key": "DEVOPS_SYS",
+        "value": "Docker // Linux // CI/CD"
+      }
+    ],
+    "about": {
+      "heading": "Ingeniería de backend enfocada en rendimiento, sistemas distribuidos y observabilidad",
+      "paragraphs": [
+        "Soy un ingeniero de software enfocado en diseñar y construir servicios backend robustos, arquitecturas escalables y APIs de alta disponibilidad. Utilizo Python y Go como lenguajes primarios para desarrollar sistemas confiables, eficientes y orientados a objetivos críticos de negocio.",
+        "Me especializo en optimización de rendimiento, diseño de esquemas de bases de datos relacionales (PostgreSQL, MySQL), pipelines de datos eficientes con Polars/SQL y automatización de despliegues mediante buenas prácticas DevOps (Docker, Linux, GitHub Actions).",
+        "Comprendo el ciclo de vida del software con rigor técnico: desde la arquitectura de servicios distribuidos y análisis de cuellos de botella hasta la integración con frontend y hardware embebido (IoT)."
+      ],
+      "pipeline": "DESIGN -> PROFILE -> OPTIMIZE -> SCALE"
+    },
+    "telemetry": [
+      {
+        "code": "REG_01 // EXP",
+        "value": "3+",
+        "color": "text-amber",
+        "statusDot": "green",
+        "label": "Años de Experiencia en Producción"
+      },
+      {
+        "code": "REG_02 // BUILDS",
+        "value": "50+",
+        "color": "text-cyan",
+        "statusDot": "green",
+        "label": "Proyectos y Repositorios Construidos"
+      },
+      {
+        "code": "REG_03 // STACK",
+        "value": "10+",
+        "color": "text-phosphor",
+        "statusDot": "green",
+        "label": "Tecnologías de Backend & DevOps"
+      },
+      {
+        "code": "REG_04 // CYCLE",
+        "value": "∞",
+        "color": "text-coral",
+        "statusDot": "amber",
+        "label": "Optimización y Aprendizaje Continuo"
+      }
+    ]
+  }
+]

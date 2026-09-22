@@ -1,0 +1,32 @@
+[
+  {
+    "id": "email",
+    "port": "[PORT_01]",
+    "type": "email",
+    "label": "Email",
+    "channelType": "CANAL DIRECTO",
+    "value": "diego.rivera.estefano@gmail.com",
+    "href": "mailto:diego.rivera.estefano@gmail.com",
+    "accent": "text-amber"
+  },
+  {
+    "id": "linkedin",
+    "port": "[PORT_02]",
+    "type": "linkedin",
+    "label": "LinkedIn",
+    "channelType": "RED PROFESIONAL",
+    "value": "/in/diegoriveraestefano",
+    "href": "https://linkedin.com/in/diegoriveraestefano",
+    "accent": "text-cyan"
+  },
+  {
+    "id": "github",
+    "port": "[PORT_03]",
+    "type": "github",
+    "label": "GitHub",
+    "channelType": "CÓDIGO FUENTE",
+    "value": "@DiegoRiveraEstefano",
+    "href": "https://github.com/DiegoRiveraEstefano",
+    "accent": "text-phosphor"
+  }
+]
