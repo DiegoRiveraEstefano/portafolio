@@ -1,0 +1,437 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const skills = await getCollection("skills");
+  return skills.map((skill) => ({
+    params: { slug: skill.data.slug },
+    props: { skill },
+  }));
+}
+
+const { skill } = Astro.props;
+const basePath = import.meta.env.BASE_URL;
+
+// Mapeo inteligente de contextos de aplicación hacia rutas internas del portafolio
+function getContextLink(context: string): { href?: string; label: string } {
+  const lower = context.toLowerCase();
+  if (lower.includes("nolan ai")) {
+    return { href: `${basePath}/experience/nolan-ai-software`, label: "Ver Experiencia Nolan AI Software →" };
+  }
+  if (lower.includes("freelance")) {
+    return { href: `${basePath}/experience/freelance-fullstack`, label: "Ver Experiencia Freelance →" };
+  }
+  if (lower.includes("the green economics")) {
+    return { href: `${basePath}/experience/the-green-economics-journal`, label: "Ver Experiencia Editorial →" };
+  }
+  if (lower.includes("scanned-pdf-to-text") || lower.includes("pdf-to-text")) {
+    return { href: `${basePath}/projects/pdf-to-text`, label: "Ver Proyecto CLI OCR →" };
+  }
+  if (lower.includes("kafka") || lower.includes("proyecto de título")) {
+    return { href: `${basePath}/projects/arquitectura-kafka-go`, label: "Ver Proyecto de Título →" };
+  }
+  if (lower.includes("docker")) {
+    return { href: `${basePath}/certifications/platzi-docker-fundamentos`, label: "Ver Certificación Docker →" };
+  }
+  if (lower.includes("git")) {
+    return { href: `${basePath}/certifications/platzi-git-github`, label: "Ver Certificación Git & GitHub →" };
+  }
+  if (lower.includes("django rest")) {
+    return { href: `${basePath}/certifications/platzi-django-rest-framework`, label: "Ver Certificación DRF →" };
+  }
+  if (lower.includes("curso de django")) {
+    return { href: `${basePath}/certifications/platzi-django`, label: "Ver Certificación Django →" };
+  }
+  if (lower.includes("curso de java")) {
+    return { href: `${basePath}/certifications/platzi-java`, label: "Ver Certificación Java →" };
+  }
+  if (lower.includes("scientific computing")) {
+    return { href: `${basePath}/certifications/freecodecamp-scientific-computing-python`, label: "Ver Certificación Scientific Computing →" };
+  }
+  if (lower.includes("responsive web design")) {
+    return { href: `${basePath}/certifications/freecodecamp-responsive-web-design`, label: "Ver Certificación Responsive Design →" };
+  }
+  return { label: "" };
+}
+---
+
+<Layout title={`${skill.data.name} // Especificación Técnica de Habilidad | Diego Rivera`}>
+  <Navigation />
+
+  <main class="skill-detail-main">
+    <div class="container">
+      <!-- Breadcrumb Bar -->
+      <nav class="breadcrumb-bar mono text-xs text-muted" aria-label="Ruta de navegación">
+        <a href={`${basePath}/`} class="crumb-link">00 // INICIO</a>
+        <span class="crumb-sep">/</span>
+        <a href={`${basePath}/skills`} class="crumb-link">02 // HABILIDADES</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current text-amber">[SKILL_SPEC: {skill.data.slug}]</span>
+      </nav>
+
+      <!-- Skill Chassis -->
+      <article class="detail-chassis specs-card corner-marks">
+        <!-- Chassis Header Bar -->
+        <div class="detail-header-bar">
+          <div class="header-status">
+            <span class="status-dot status-dot--green"></span>
+            <span class="mono text-2xs">
+              STATUS: OPERATIONAL_STACK_NODE
+            </span>
+          </div>
+          <div class="header-date mono text-2xs text-muted">
+            CATEGORÍA: {skill.data.category.toUpperCase()}
+          </div>
+        </div>
+
+        <!-- Hero Header -->
+        <header class="skill-meta-hero">
+          <span class="meta-serial mono text-xs text-amber">// SKILL_TECHNICAL_SPECIFICATION</span>
+          <h1 class="skill-headline">{skill.data.name}</h1>
+
+          <div class="tags-badge-line">
+            <span class="category-badge mono text-xs text-amber">
+              [{skill.data.category}]
+            </span>
+            {skill.data.tags.map((tag) => (
+              <span class="badge badge--cyan">#{tag}</span>
+            ))}
+          </div>
+
+          <!-- Description Box -->
+          <div class="description-card">
+            <span class="card-label mono text-2xs text-muted">[DESCRIPCIÓN_TÉCNICA]</span>
+            <p class="skill-lead">{skill.data.description}</p>
+          </div>
+
+          <!-- Action Switchboard -->
+          <div class="skill-switchboard">
+            <a href={`${basePath}/skills`} class="btn btn-primary">
+              <span class="mono">←</span>
+              <span>VER TODAS LAS HABILIDADES</span>
+            </a>
+            <a href={`${basePath}/#skills`} class="btn btn-secondary">
+              <span class="mono">↑</span>
+              <span>MATRIZ EN PANEL PRINCIPAL</span>
+            </a>
+          </div>
+        </header>
+
+        <!-- Where Applied Dashboard Strip -->
+        <div class="specs-dashboard">
+          <div class="dashboard-block full-width">
+            <span class="dash-label mono text-2xs text-muted">[DONDE_FUE_APLICADA // CONTEXTOS_DE_PRODUCCIÓN_Y_ESTUDIO]</span>
+            
+            <div class="applied-list">
+              {skill.data.appliedIn.map((item) => {
+                const linkInfo = getContextLink(item);
+                return (
+                  <div class="applied-item specs-card">
+                    <div class="applied-main">
+                      <span class="prefix mono text-phosphor" aria-hidden="true">&gt;</span>
+                      <span class="applied-text">{item}</span>
+                    </div>
+                    {linkInfo.href && (
+                      <a href={linkInfo.href} class="applied-link mono text-2xs">
+                        <span>{linkInfo.label}</span>
+                      </a>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div class="dashboard-block">
+            <span class="dash-label mono text-2xs text-muted">[TELEMETRÍA_Y_PARÁMETROS]</span>
+            <div class="telemetry-box mono text-xs">
+              <div class="telemetry-row">
+                <span class="text-muted">SLUG_IDENTIFIER:</span>
+                <span class="text-amber">{skill.data.slug}</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="text-muted">CATEGORÍA_DOMINIO:</span>
+                <span>{skill.data.category}</span>
+              </div>
+              {skill.data.yearsOfExperience && (
+                <div class="telemetry-row">
+                  <span class="text-muted">EXPERIENCIA_APROX:</span>
+                  <span class="text-phosphor">{skill.data.yearsOfExperience} años</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div class="dashboard-block">
+            <span class="dash-label mono text-2xs text-muted">[TAGS_DE_FILTRADO_ACTIVOS]</span>
+            <div class="filter-tags-grid">
+              {skill.data.tags.map((tag) => (
+                <a href={`${basePath}/skills?tag=${tag}`} class="tag-link mono text-2xs">
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Footer -->
+        <footer class="detail-footer">
+          <span class="mono text-2xs text-muted">
+            NODE_SPEC: {skill.data.slug} // VERIFIED_ENGINEERING_CAPABILITY
+          </span>
+          <a href={`${basePath}/skills`} class="btn btn-ghost btn-sm">
+            <span>CATÁLOGO DE HABILIDADES</span>
+            <span class="mono">→</span>
+          </a>
+        </footer>
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .skill-detail-main {
+    padding-top: calc(4.25rem + var(--space-6));
+    padding-bottom: var(--space-20);
+    min-height: 85vh;
+  }
+
+  .breadcrumb-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .crumb-link {
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
+  .crumb-sep {
+    color: var(--color-border-strong);
+  }
+
+  .detail-chassis {
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-elevation);
+    background-color: var(--color-surface);
+  }
+
+  .detail-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-6);
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .header-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text);
+  }
+
+  .skill-meta-hero {
+    padding: clamp(var(--space-6), 5vw, var(--space-10));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .meta-serial {
+    letter-spacing: 0.08em;
+  }
+
+  .skill-headline {
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.15;
+  }
+
+  .tags-badge-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .category-badge {
+    letter-spacing: 0.06em;
+  }
+
+  .badge--cyan {
+    border-color: color-mix(in oklch, var(--color-cyan) 35%, transparent);
+    color: var(--color-cyan-text);
+  }
+
+  .description-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+  }
+
+  .card-label {
+    letter-spacing: 0.06em;
+  }
+
+  .skill-lead {
+    font-size: clamp(var(--text-base), 2vw, var(--text-lg));
+    color: var(--color-text);
+    line-height: 1.65;
+  }
+
+  .skill-switchboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .specs-dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6) clamp(var(--space-6), 5vw, var(--space-10));
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .dashboard-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    &.full-width {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .dash-label {
+    letter-spacing: 0.06em;
+  }
+
+  .applied-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .applied-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+
+    @media (min-width: 640px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .applied-main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .prefix {
+    font-weight: 700;
+  }
+
+  .applied-text {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .applied-link {
+    color: var(--color-amber-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
+  .telemetry-box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+  }
+
+  .telemetry-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .filter-tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tag-link {
+    padding: var(--space-1) var(--space-3);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    color: var(--color-text-muted);
+    transition: all var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-amber);
+      color: var(--color-amber-text);
+    }
+  }
+
+  .detail-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) clamp(var(--space-6), 5vw, var(--space-10));
+    background-color: var(--color-surface-sunken);
+    border-top: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .btn-sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-2xs);
+  }
+</style>

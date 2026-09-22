@@ -1,164 +1,492 @@
 [
   {
-    "name": "Python",
-    "slug": "python",
-    "yearsOfExperience": 5,
-    "category": "Languages"
-  },
-  {
-    "name": "JavaScript",
-    "slug": "javascript",
-    "yearsOfExperience": 4,
-    "category": "Languages"
-  },
-  {
-    "name": "TypeScript",
-    "slug": "typescript",
-    "yearsOfExperience": 2,
-    "category": "Languages"
-  },
-  {
-    "name": "Go",
-    "slug": "go",
-    "yearsOfExperience": 2,
-    "category": "Languages"
-  },
-  {
-    "name": "Elixir",
-    "slug": "elixir",
+    "slug": "google-gemini",
+    "name": "Google Gemini",
+    "category": "AI & Machine Learning",
+    "description": "Integración de modelos fundacionales multimodales y LLMs de Google para razonamiento, procesamiento de lenguaje natural y generación de contenido estructurado.",
+    "appliedIn": ["Programador full stack en Nolan AI Software"],
+    "tags": ["ai-llm", "backend"],
     "yearsOfExperience": 1,
-    "category": "Languages"
+    "featured": true
   },
   {
-    "name": "Java",
-    "slug": "java",
-    "yearsOfExperience": 2,
-    "category": "Languages"
+    "slug": "langchain",
+    "name": "LangChain",
+    "category": "AI & Machine Learning",
+    "description": "Framework para composición de prompts, encadenamiento de tareas, integración de memoria conversacional y conexión con herramientas externas en ecosistemas LLM.",
+    "appliedIn": ["Programador full stack en Nolan AI Software"],
+    "tags": ["ai-llm", "backend"],
+    "yearsOfExperience": 1,
+    "featured": true
   },
   {
-    "name": "Django",
+    "slug": "langgraph",
+    "name": "LangGraph",
+    "category": "AI & Machine Learning",
+    "description": "Orquestación de flujos de agentes autónomos y ejecución dirigida basada en grafos cíclicos con gestión persistente de estados.",
+    "appliedIn": ["Programador full stack en Nolan AI Software"],
+    "tags": ["ai-llm", "backend", "architecture"],
+    "yearsOfExperience": 1,
+    "featured": true
+  },
+  {
+    "slug": "bases-de-datos-vectoriales",
+    "name": "Bases de datos vectoriales",
+    "category": "Databases",
+    "description": "Almacenamiento, indexación espacial y recuperación por similitud de embeddings vectoriales para arquitecturas de Recuperación Aumentada (RAG).",
+    "appliedIn": ["Programador full stack en Nolan AI Software"],
+    "tags": ["ai-llm", "database", "backend"],
+    "yearsOfExperience": 1,
+    "featured": true
+  },
+  {
+    "slug": "desarrollo-chatbots",
+    "name": "Desarrollo de chatbots",
+    "category": "AI & Machine Learning",
+    "description": "Diseño e implementación de asistentes conversacionales con contexto dinámico, control de flujos de diálogo y transmisión en streaming de respuestas.",
+    "appliedIn": ["Programador full stack en Nolan AI Software"],
+    "tags": ["ai-llm", "backend"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "diseno-de-software",
+    "name": "Diseño de software & Arquitectura",
+    "category": "Software Architecture",
+    "description": "Aplicación de principios SOLID, patrones de diseño modulares, Clean Architecture y desacoplamiento estricto de capas en sistemas de misión crítica.",
+    "appliedIn": ["Programador full stack en Nolan AI Software", "Proyecto de Título"],
+    "tags": ["architecture", "backend"],
+    "yearsOfExperience": 3,
+    "featured": true
+  },
+  {
+    "slug": "rest-api",
+    "name": "Transferencia de Estado Representacional (REST)",
+    "category": "Backend Development",
+    "description": "Diseño, estandarización y construcción de APIs HTTP semánticas, contratos OpenAPI/Swagger, códigos de estado canónicos y consumo eficiente de microservicios.",
+    "appliedIn": ["Nolan AI Software", "INACAP", "Proyecto de Título", "Full Stack Developer Freelance"],
+    "tags": ["backend", "architecture"],
+    "yearsOfExperience": 3,
+    "featured": true
+  },
+  {
     "slug": "django",
-    "yearsOfExperience": 4,
-    "category": "Backend Development"
-  },
-  {
-    "name": "FastAPI",
-    "slug": "fastapi",
-    "yearsOfExperience": 2,
-    "category": "Backend Development"
-  },
-  {
-    "name": "Go Stdlib (net/http)",
-    "slug": "go-stdlib-net-http",
-    "yearsOfExperience": 2,
-    "category": "Backend Development"
-  },
-  {
-    "name": "Kafka",
-    "slug": "kafka",
-    "yearsOfExperience": 1,
-    "category": "Backend Development"
-  },
-  {
-    "name": "SQL",
-    "slug": "sql",
-    "yearsOfExperience": 4,
-    "category": "Data Science"
-  },
-  {
-    "name": "Pandas",
-    "slug": "pandas",
+    "name": "Django",
+    "category": "Backend Development",
+    "description": "Framework backend en Python basado en arquitectura MVT, migraciones automáticas de esquemas, sistema de plantillas y ORM de alto nivel.",
+    "appliedIn": ["Nolan AI Software", "Full Stack Developer en Freelance", "INACAP", "Curso de Django"],
+    "tags": ["backend", "database"],
     "yearsOfExperience": 3,
-    "category": "Data Science"
+    "featured": true
   },
   {
-    "name": "Polars",
-    "slug": "polars",
+    "slug": "django-rest-framework",
+    "name": "Django REST Framework",
+    "category": "Backend Development",
+    "description": "Construcción de APIs REST empresariales en Django con serialización relacional compleja, viewsets dinámicos y esquemas de permisos granulares.",
+    "appliedIn": ["Nolan AI Software", "INACAP", "Full Stack Developer Freelance", "Curso de Django Rest Framework"],
+    "tags": ["backend"],
+    "yearsOfExperience": 3,
+    "featured": true
+  },
+  {
+    "slug": "fastapi-litestar",
+    "name": "FastAPI & Litestar",
+    "category": "Backend Development",
+    "description": "Desarrollo de servicios asíncronos ASGI de alto rendimiento en Python, inyección de dependencias estricta y validación de tipos estáticos con Pydantic.",
+    "appliedIn": ["Programador full stack en Nolan AI Software"],
+    "tags": ["backend"],
     "yearsOfExperience": 2,
-    "category": "Data Science"
+    "featured": true
   },
   {
-    "name": "PostgreSQL",
+    "slug": "apache-kafka",
+    "name": "Apache Kafka",
+    "category": "System Design",
+    "description": "Plataforma distribuida de mensajería orientada a eventos para ingesta de datos a escala, tópicos particionados y desacoplamiento de consumidores concurrentes.",
+    "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go"],
+    "tags": ["backend", "architecture", "tools-devops"],
+    "yearsOfExperience": 1,
+    "featured": true
+  },
+  {
+    "slug": "kafka-streams",
+    "name": "Kafka Streams",
+    "category": "System Design",
+    "description": "Procesamiento y agregación continua en tiempo real de flujos de eventos con soporte de particionamiento y tolerancia a fallos.",
+    "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go"],
+    "tags": ["backend", "architecture"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "sistemas-distribuidos",
+    "name": "Sistemas distribuidos",
+    "category": "System Design",
+    "description": "Concepción de arquitecturas con particionamiento de carga, sincronización asíncrona, backpressure y consistencia eventual de datos.",
+    "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go"],
+    "tags": ["architecture", "backend"],
+    "yearsOfExperience": 2,
+    "featured": true
+  },
+  {
     "slug": "postgresql",
+    "name": "PostgreSQL",
+    "category": "Databases",
+    "description": "Gestión de bases de datos relacionales empresariales, modelado relacional complejo, transacciones ACID, optimización de queries y tipos JSONB.",
+    "appliedIn": ["Nolan AI Software", "Proyecto de Título", "Full Stack Developer Freelance"],
+    "tags": ["database", "backend"],
     "yearsOfExperience": 3,
-    "category": "Databases"
+    "featured": true
   },
   {
-    "name": "MySQL",
+    "slug": "sqlalchemy",
+    "name": "SQLAlchemy (2.x)",
+    "category": "Databases",
+    "description": "ORM y generador de consultas SQL declarativo asíncrono para Python con eliminación de problemas N+1 y manejo de sesiones asíncronas.",
+    "appliedIn": ["Programador full stack en Nolan AI Software"],
+    "tags": ["database", "backend"],
+    "yearsOfExperience": 2,
+    "featured": true
+  },
+  {
+    "slug": "diseno-bases-datos",
+    "name": "Diseño de bases de datos",
+    "category": "Databases",
+    "description": "Normalización de esquemas relacionales (3FN), diseño entidad-relación, integridad referencial y estrategias de indexación b-tree.",
+    "appliedIn": ["Nolan AI Software", "INACAP", "Proyecto de Título", "Full Stack Developer Freelance"],
+    "tags": ["database", "architecture"],
+    "yearsOfExperience": 3,
+    "featured": false
+  },
+  {
+    "slug": "nosql",
+    "name": "NoSQL",
+    "category": "Databases",
+    "description": "Modelado de datos no relacionales orientado a documentos y almacenes clave-valor para requerimientos de baja latencia o esquemas flexibles.",
+    "appliedIn": ["INACAP"],
+    "tags": ["database"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
     "slug": "mysql",
+    "name": "MySQL",
+    "category": "Databases",
+    "description": "Administración y estructuración de bases de datos relacionales estándar con motores transaccionales InnoDB.",
+    "appliedIn": ["INACAP", "Full Stack Developer en Freelance"],
+    "tags": ["database"],
     "yearsOfExperience": 2,
-    "category": "Databases"
+    "featured": false
   },
   {
-    "name": "Git",
-    "slug": "git",
-    "yearsOfExperience": 4,
-    "category": "Tools"
+    "slug": "sql",
+    "name": "SQL",
+    "category": "Databases",
+    "description": "Lenguaje declarativo para consultas analíticas complejas, agregaciones, subqueries, uniones múltiples y optimización de planes de ejecución.",
+    "appliedIn": ["Consultor Freelance", "INACAP", "Nolan AI Software"],
+    "tags": ["database", "data-science"],
+    "yearsOfExperience": 3,
+    "featured": false
   },
   {
-    "name": "Docker",
+    "slug": "jwt",
+    "name": "JSON Web Token (JWT)",
+    "category": "Backend Development",
+    "description": "Autenticación stateless basada en tokens criptográficos según RFC 7519, manejo de refresh tokens y protección de recursos en arquitecturas desacopladas.",
+    "appliedIn": ["Curso de Django Rest Framework", "Nolan AI Software"],
+    "tags": ["backend", "tools-devops"],
+    "yearsOfExperience": 2,
+    "featured": false
+  },
+  {
+    "slug": "python",
+    "name": "Python",
+    "category": "Languages",
+    "description": "Lenguaje primario de programación para desarrollo backend asíncrono, microservicios, IA, automatización y herramientas de ingeniería.",
+    "appliedIn": ["Nolan AI Software", "Full Stack Developer en Freelance", "INACAP", "scanned-pdf-to-text", "Curso de Django", "Curso de Django Rest Framework"],
+    "tags": ["languages", "backend"],
+    "yearsOfExperience": 3,
+    "featured": true
+  },
+  {
+    "slug": "go",
+    "name": "Go (Golang)",
+    "category": "Languages",
+    "description": "Lenguaje compilado de alto rendimiento con primitivas de concurrencia nativa (goroutines y channels) para pipelines de procesamiento masivo.",
+    "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go"],
+    "tags": ["languages", "backend"],
+    "yearsOfExperience": 1,
+    "featured": true
+  },
+  {
+    "slug": "elixir",
+    "name": "Elixir",
+    "category": "Languages",
+    "description": "Lenguaje funcional concurrente ejecutado sobre la BEAM VM (Erlang) para sistemas altamente tolerantes a fallos y procesos concurrentes ligeros.",
+    "appliedIn": ["Proyecto de Título"],
+    "tags": ["languages", "backend"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "java",
+    "name": "Java / Java SE",
+    "category": "Languages",
+    "description": "Programación orientada a objetos estricta sobre la máquina virtual JVM, gestión de excepciones estructuradas y patrones empresariales.",
+    "appliedIn": ["INACAP", "Curso de Java"],
+    "tags": ["languages", "backend"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "cpp",
+    "name": "C++",
+    "category": "Languages",
+    "description": "Lenguaje de programación de propósito general con control de bajo nivel sobre memoria y punteros, utilizado en sistemas críticos y embebidos.",
+    "appliedIn": ["Proyecto de Título"],
+    "tags": ["languages", "hardware-iot"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "javascript",
+    "name": "JavaScript",
+    "category": "Languages",
+    "description": "Lenguaje de scripting dinámico para desarrollo full-stack, manipulación reactiva del DOM y lógica asíncrona basada en el event loop.",
+    "appliedIn": ["Nolan AI Software", "Consultor Freelance", "INACAP"],
+    "tags": ["languages", "frontend"],
+    "yearsOfExperience": 3,
+    "featured": false
+  },
+  {
+    "slug": "typescript",
+    "name": "TypeScript",
+    "category": "Languages",
+    "description": "Superset tipado estricto de JavaScript para desarrollo estructurado con contratos de interfaces e inferencia de tipos estática.",
+    "appliedIn": ["Portafolio Técnico", "Proyectos Personales"],
+    "tags": ["languages", "frontend"],
+    "yearsOfExperience": 2,
+    "featured": false
+  },
+  {
+    "slug": "kotlin",
+    "name": "Kotlin",
+    "category": "Languages",
+    "description": "Lenguaje moderno interoperable con Java, caracterizado por tipado seguro con nulos y sintaxis concisa para la JVM.",
+    "appliedIn": ["INACAP"],
+    "tags": ["languages"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
     "slug": "docker",
+    "name": "Docker",
+    "category": "Tools",
+    "description": "Contenedorización de microservicios con multi-stage builds, aislamiento de entornos, gestión de volúmenes persistentes y redes virtuales.",
+    "appliedIn": ["Proyecto de Título", "Nolan AI Software", "Curso de Docker: Fundamentos"],
+    "tags": ["tools-devops"],
     "yearsOfExperience": 2,
-    "category": "Tools"
+    "featured": true
   },
   {
-    "name": "Linux",
+    "slug": "git",
+    "name": "Git",
+    "category": "Tools",
+    "description": "Control de versiones distribuido, rebase interactivo, bisect para depuración de regresiones y gestión sistemática de repositorios.",
+    "appliedIn": ["Nolan AI Software", "Proyecto de Título", "Curso de Git y GitHub", "scanned-pdf-to-text"],
+    "tags": ["tools-devops"],
+    "yearsOfExperience": 3,
+    "featured": true
+  },
+  {
+    "slug": "github",
+    "name": "GitHub",
+    "category": "Tools",
+    "description": "Gestión de repositorios, directrices de Code Reviews por pares, flujos de Pull Requests y automatización de despliegues.",
+    "appliedIn": ["Nolan AI Software", "Proyecto de Título", "Curso de Git y GitHub"],
+    "tags": ["tools-devops"],
+    "yearsOfExperience": 3,
+    "featured": false
+  },
+  {
     "slug": "linux",
-    "yearsOfExperience": 3,
-    "category": "Tools"
-  },
-  {
-    "name": "Bash",
-    "slug": "bash",
+    "name": "Linux & System Administration",
+    "category": "Tools",
+    "description": "Administración de servidores GNU/Linux, procesos POSIX, scripting Bash, permisos de usuario y configuración de servicios en background.",
+    "appliedIn": ["INACAP", "Proyecto de Título", "Nolan AI Software"],
+    "tags": ["tools-devops"],
     "yearsOfExperience": 2,
-    "category": "Tools"
+    "featured": false
   },
   {
-    "name": "GitHub Actions",
-    "slug": "github-actions",
+    "slug": "nginx",
+    "name": "Nginx",
+    "category": "Tools",
+    "description": "Servidor web ligero y proxy inverso para balanceo de carga de tráfico HTTP, terminación SSL/TLS y compresión de respuestas.",
+    "appliedIn": ["Despliegues en Producción", "Proyecto de Título"],
+    "tags": ["tools-devops", "backend"],
     "yearsOfExperience": 1,
-    "category": "Tools"
+    "featured": false
   },
   {
-    "name": "Vue.js",
+    "slug": "automatizacion-pruebas",
+    "name": "Automatización de pruebas (QA)",
+    "category": "Tools",
+    "description": "Creación de suites de pruebas unitarias y de integración para asegurar estabilidad de contratos de API y prevenir regresiones de software.",
+    "appliedIn": ["Proyecto de Título", "Nolan AI Software"],
+    "tags": ["tools-devops", "backend"],
+    "yearsOfExperience": 2,
+    "featured": false
+  },
+  {
     "slug": "vuejs",
+    "name": "Vue.js",
+    "category": "Frontend Development",
+    "description": "Construcción de interfaces web reactivas basadas en Single-File Components (SFC), directivas reactivas y gestión de estado local.",
+    "appliedIn": ["Full Stack Developer en Freelance", "Proyecto de Título"],
+    "tags": ["frontend"],
     "yearsOfExperience": 3,
-    "category": "Frontend Development"
+    "featured": true
   },
   {
-    "name": "CSS",
-    "slug": "css",
-    "yearsOfExperience": 4,
-    "category": "Frontend Development"
+    "slug": "html5-css3",
+    "name": "HTML5 & CSS3 Semántico",
+    "category": "Frontend Development",
+    "description": "Maquetación semántica moderna, accesibilidad (a11y), hojas de estilo en capas (@layer) y layouts fluidos adaptables sin dependencias de frameworks.",
+    "appliedIn": ["Nolan AI Software", "Freelance", "INACAP", "Responsive Web Design"],
+    "tags": ["frontend"],
+    "yearsOfExperience": 3,
+    "featured": true
   },
   {
-    "name": "Web Components",
-    "slug": "web-components",
-    "yearsOfExperience": 2,
-    "category": "Frontend Development"
-  },
-  {
-    "name": "Tailwind CSS",
     "slug": "tailwindcss",
-    "yearsOfExperience": 3,
-    "category": "Frontend Development"
-  },
-  {
-    "name": "Raspberry Pi",
-    "slug": "raspberry-pi",
+    "name": "Tailwind CSS",
+    "category": "Frontend Development",
+    "description": "Diseño rápido de interfaces responsivas y sistemas de componentes mediante clases utilitarias atómicas.",
+    "appliedIn": ["Consultor Freelance", "Proyecto de Título"],
+    "tags": ["frontend"],
     "yearsOfExperience": 2,
-    "category": "Hardware/IoT"
+    "featured": false
   },
   {
-    "name": "ESP32",
-    "slug": "esp32",
+    "slug": "raspberry-pi",
+    "name": "Raspberry Pi",
+    "category": "Hardware/IoT",
+    "description": "Configuración de computadores monoplaca Linux para pasarelas IoT, recolectores de telemetría y servidores periféricos en el borde (edge).",
+    "appliedIn": ["Proyecto de Título"],
+    "tags": ["hardware-iot"],
     "yearsOfExperience": 1,
-    "category": "Hardware/IoT"
+    "featured": true
   },
   {
-    "name": "UART/I2C",
-    "slug": "uart-i2c",
+    "slug": "sistemas-embebidos",
+    "name": "Sistemas embebidos & IoT",
+    "category": "Hardware/IoT",
+    "description": "Interacción con microcontroladores (ESP32) y sensores periféricos mediante protocolos de comunicación serie como UART, SPI e I2C.",
+    "appliedIn": ["Proyecto de Título"],
+    "tags": ["hardware-iot"],
     "yearsOfExperience": 1,
-    "category": "Hardware/IoT"
+    "featured": false
+  },
+  {
+    "slug": "opencv",
+    "name": "OpenCV",
+    "category": "Hardware/IoT",
+    "description": "Procesamiento digital de imágenes, filtrado morfológico, detección de contornos y visión artificial en tiempo real sobre flujos de video.",
+    "appliedIn": ["Proyecto de Título"],
+    "tags": ["hardware-iot", "ai-llm"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "adb",
+    "name": "Puente de depuración de Android (ADB)",
+    "category": "Hardware/IoT",
+    "description": "Herramienta de terminal para comunicación directa, automatización de comandos shell y telemetría de dispositivos Android conectados.",
+    "appliedIn": ["Proyecto de Título"],
+    "tags": ["hardware-iot", "tools-devops"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "vulkan-api",
+    "name": "Vulkan (API)",
+    "category": "Hardware/IoT",
+    "description": "API de gráficos y cómputo de bajo nivel que proporciona acceso directo y de baja sobrecarga a los procesadores gráficos (GPUs).",
+    "appliedIn": ["Conocimiento del sector y sistemas gráficos"],
+    "tags": ["hardware-iot", "languages"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "ocr-cli",
+    "name": "CLI & OCR (Tesseract / Text Extraction)",
+    "category": "Tools",
+    "description": "Desarrollo de herramientas de terminal para extracción automatizada de texto óptico y procesamiento batch desde documentos escaneados.",
+    "appliedIn": ["scanned-pdf-to-text"],
+    "tags": ["tools-devops", "backend"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "pandas",
+    "name": "Pandas",
+    "category": "Data Science",
+    "description": "Manipulación, limpieza, agregación y análisis exploratorio de datos tabulares mediante estructuras de DataFrames en Python.",
+    "appliedIn": ["INACAP", "Full Stack Developer en Freelance"],
+    "tags": ["data-science"],
+    "yearsOfExperience": 1,
+    "featured": false
+  },
+  {
+    "slug": "data-analysis",
+    "name": "Data Analysis",
+    "category": "Data Science",
+    "description": "Extracción de insights cuantitativos, cálculo de métricas de rendimiento y modelado de datos para soporte a decisiones estratégicas.",
+    "appliedIn": ["Full Stack Developer en Freelance", "INACAP"],
+    "tags": ["data-science"],
+    "yearsOfExperience": 2,
+    "featured": false
+  },
+  {
+    "slug": "ciencias-computacion",
+    "name": "Ciencias de la computación",
+    "category": "Software Architecture",
+    "description": "Bases conceptuales en complejidad algorítmica, autómatas formales, estructuras de datos fundamentales y paradigmas computacionales.",
+    "appliedIn": ["INACAP", "Scientific Computing with Python"],
+    "tags": ["architecture", "languages"],
+    "yearsOfExperience": 3,
+    "featured": false
+  },
+  {
+    "slug": "gestion-proyectos",
+    "name": "Gestión de proyectos de software",
+    "category": "Software Architecture",
+    "description": "Metodologías ágiles, estimación técnica de requerimientos, priorización de backlog y entrega continua de valor en producción.",
+    "appliedIn": ["Nolan AI Software", "INACAP", "Proyecto de Título"],
+    "tags": ["architecture", "tools-devops"],
+    "yearsOfExperience": 2,
+    "featured": false
+  },
+  {
+    "slug": "software-erp",
+    "name": "Software ERP",
+    "category": "Software Architecture",
+    "description": "Diseño e implementación de sistemas integrales para planificación de recursos empresariales y gestión operativa de entidades.",
+    "appliedIn": ["Programador full stack en Nolan AI Software", "INACAP", "Proyecto ERP Escolar"],
+    "tags": ["architecture", "backend"],
+    "yearsOfExperience": 2,
+    "featured": false
+  },
+  {
+    "slug": "ingles",
+    "name": "Inglés Técnico",
+    "category": "Languages",
+    "description": "Comprensión lectora fluida de especificaciones técnicas, RFCs, documentación de librerías y comunicación profesional en equipos remotos globales.",
+    "appliedIn": ["Inglés Intermedio B1 (Platzi)", "Trabajo en Equipos Remotos"],
+    "tags": ["languages"],
+    "yearsOfExperience": 2,
+    "featured": false
   }
 ]

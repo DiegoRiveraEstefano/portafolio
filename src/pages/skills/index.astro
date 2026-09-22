@@ -1,0 +1,594 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+const allSkills = await getCollection("skills");
+
+// Extraer tags únicos ordenados
+const allTags = Array.from(
+  new Set(allSkills.flatMap((s) => s.data.tags))
+).sort();
+
+const basePath = import.meta.env.BASE_URL;
+---
+
+<Layout title="Catálogo Completo de Habilidades & Stack Técnico | Diego Rivera">
+  <Navigation />
+
+  <main class="skills-catalog-main">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="section-header">
+        <span class="section-index">02 // MATRIZ &amp; CAPACIDADES TÉCNICAS</span>
+        <h1 class="section-title">Catálogo Completo de Habilidades</h1>
+        <p class="section-subtitle">
+          Inventario consolidado de tecnologías, lenguajes, frameworks e infraestructura con descripción técnica, etiquetas de filtrado y contextos de aplicación en producción.
+        </p>
+      </div>
+
+      <!-- Inventory Strip -->
+      <div class="inventory-strip mono text-xs">
+        <div class="strip-item">
+          <span class="text-muted">HABILIDADES_AUDITADAS:</span>
+          <span class="text-amber font-bold">{allSkills.length}</span>
+        </div>
+        <div class="strip-item">
+          <span class="text-muted">ETIQUETAS_DE_FILTRO:</span>
+          <span class="text-phosphor font-bold">{allTags.length}</span>
+        </div>
+        <div class="strip-item">
+          <span class="text-muted">STATUS_STACK:</span>
+          <span class="text-phosphor">PRODUCTION_READY</span>
+        </div>
+      </div>
+
+      <!-- Controls Panel (Search + Tags Filter) -->
+      <div class="controls-panel specs-card">
+        <!-- Live Search Terminal -->
+        <div class="terminal-bar">
+          <div class="search-input-wrapper">
+            <span class="search-prompt mono text-amber">[QUERY:&gt;]</span>
+            <input
+              type="search"
+              id="skill-search-input"
+              class="search-input mono"
+              placeholder="Buscar por tecnología, descripción o dónde fue aplicada (ej. Python, Gemini, Nolan, Docker)..."
+              autocomplete="off"
+              aria-label="Buscar habilidades por palabra clave"
+            />
+            <button id="clear-search-btn" class="clear-btn mono text-2xs" type="button" aria-label="Limpiar búsqueda">
+              [CLR]
+            </button>
+          </div>
+
+          <div class="search-stats mono text-xs">
+            <span class="text-muted">MOSTRANDO:</span>
+            <span id="results-count" class="text-amber font-bold">{allSkills.length}</span>
+            <span class="text-muted">/ TOTAL:</span>
+            <span class="text-phosphor font-bold">{allSkills.length}</span>
+          </div>
+        </div>
+
+        <!-- Filter Tags Bar -->
+        <div class="tags-filter-bar">
+          <span class="filter-label mono text-2xs text-muted">FILTRAR_POR_TAG:</span>
+          <div class="tag-buttons-wrapper" id="tag-buttons-group">
+            <button class="tag-btn mono text-2xs active" data-tag="all">
+              [TODOS]
+            </button>
+            {allTags.map((tag) => (
+              <button class="tag-btn mono text-2xs" data-tag={tag}>
+                #{tag}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Grid -->
+      <div id="skills-grid" class="skills-grid">
+        {
+          allSkills.map((skill, index) => {
+            const serialNum = String(index + 1).padStart(2, "0");
+            const searchIndex = `${skill.data.name} ${skill.data.category} ${skill.data.description} ${skill.data.appliedIn.join(" ")} ${skill.data.tags.join(" ")}`.toLowerCase();
+            const tagsJoined = skill.data.tags.join(" ");
+
+            return (
+              <article
+                class="skill-catalog-card specs-card corner-marks"
+                data-search-content={searchIndex}
+                data-tags={tagsJoined}
+              >
+                <!-- Card Header -->
+                <div class="card-header">
+                  <div class="header-ident">
+                    <span class="card-serial mono text-xs text-amber">[SKL_{serialNum}]</span>
+                    <span class="category-tag mono text-2xs text-muted">
+                      {skill.data.category}
+                    </span>
+                  </div>
+                  {skill.data.yearsOfExperience && (
+                    <span class="exp-badge mono text-2xs text-phosphor">
+                      {skill.data.yearsOfExperience}Y_EXP
+                    </span>
+                  )}
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="title-row">
+                    <h2 class="card-title">
+                      <a href={`${basePath}/skills/${skill.data.slug}`} class="title-link">
+                        {skill.data.name}
+                      </a>
+                    </h2>
+                  </div>
+
+                  <!-- Description -->
+                  <p class="skill-desc">{skill.data.description}</p>
+
+                  <!-- Where Applied Block -->
+                  <div class="applied-block">
+                    <span class="block-title mono text-3xs text-muted">[DONDE_FUE_APLICADA]</span>
+                    <ul class="applied-chips-list">
+                      {skill.data.appliedIn.map((place) => (
+                        <li class="applied-chip mono text-2xs">
+                          <span class="chip-dot" aria-hidden="true">•</span>
+                          <span>{place}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <!-- Tags -->
+                  <div class="card-tags">
+                    {skill.data.tags.map((tag) => (
+                      <span class="badge badge--cyan">#{tag}</span>
+                    ))}
+                  </div>
+
+                  <!-- Card Action -->
+                  <div class="card-actions">
+                    <a href={`${basePath}/skills/${skill.data.slug}`} class="btn btn-primary btn-sm full-width">
+                      <span>VER ESPECIFICACIÓN TÉCNICA</span>
+                      <span class="mono">→</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state specs-card" hidden>
+        <span class="status-dot status-dot--amber"></span>
+        <h3 class="empty-title mono text-base text-amber">[0_RECORDS_MATCHED // QUERY_EMPTY]</h3>
+        <p class="empty-desc text-muted">
+          No se encontraron habilidades que coincidan con los criterios de búsqueda o el tag seleccionado.
+        </p>
+        <button id="reset-filter-btn" class="btn btn-secondary btn-sm mono">
+          RESTABLECER_FILTROS
+        </button>
+      </div>
+
+      <!-- Return Button -->
+      <div class="catalog-return">
+        <a href={`${basePath}/`} class="btn btn-secondary">
+          <span class="mono">←</span>
+          <span>VOLVER AL PANEL PRINCIPAL</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .skills-catalog-main {
+    padding-top: calc(4.25rem + var(--space-8));
+    padding-bottom: var(--space-20);
+    min-height: 85vh;
+  }
+
+  .inventory-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-3) var(--space-5);
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    margin-bottom: var(--space-8);
+  }
+
+  .strip-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  /* Controls Panel */
+  .controls-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    margin-bottom: var(--space-8);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-solid);
+  }
+
+  .terminal-bar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    padding: var(--space-2) var(--space-3);
+    transition: border-color var(--transition-fast);
+
+    &:focus-within {
+      border-color: var(--color-amber);
+    }
+  }
+
+  .search-prompt {
+    font-weight: 700;
+    user-select: none;
+  }
+
+  .search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+
+    &::placeholder {
+      color: var(--color-text-subtle);
+    }
+  }
+
+  .clear-btn {
+    padding: 2px 6px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-text);
+      border-color: var(--color-border-strong);
+    }
+  }
+
+  .search-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    white-space: nowrap;
+  }
+
+  /* Tags Filter Bar */
+  .tags-filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--color-border-subtle);
+  }
+
+  .filter-label {
+    letter-spacing: 0.06em;
+  }
+
+  .tag-buttons-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tag-btn {
+    padding: var(--space-1) var(--space-3);
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-amber);
+      color: var(--color-amber-text);
+    }
+
+    &.active {
+      background-color: var(--color-amber-muted);
+      border-color: var(--color-amber);
+      color: var(--color-amber-text);
+      font-weight: 700;
+    }
+  }
+
+  /* Skills Grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .skill-catalog-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-solid);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0px 0px var(--color-border-strong);
+      border-color: var(--color-border-strong);
+    }
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .header-ident {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .card-serial {
+    font-weight: 700;
+  }
+
+  .exp-badge {
+    padding: 1px 6px;
+    background-color: var(--color-phosphor-muted);
+    border: 1px solid color-mix(in oklch, var(--color-phosphor) 30%, transparent);
+    border-radius: var(--radius-xs);
+  }
+
+  .card-body {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: 1.25;
+
+    .title-link {
+      color: var(--color-text);
+      transition: color var(--transition-fast);
+
+      &:hover {
+        color: var(--color-amber-text);
+      }
+    }
+  }
+
+  .skill-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  .applied-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-3);
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xs);
+  }
+
+  .block-title {
+    letter-spacing: 0.06em;
+  }
+
+  .applied-chips-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .applied-chip {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-1);
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .chip-dot {
+    color: var(--color-amber-text);
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .badge--cyan {
+    border-color: color-mix(in oklch, var(--color-cyan) 35%, transparent);
+    color: var(--color-cyan-text);
+  }
+
+  .card-actions {
+    display: flex;
+    align-items: center;
+    margin-top: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--color-border-subtle);
+  }
+
+  .full-width {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-2xs);
+  }
+
+  .empty-state {
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    background-color: var(--color-surface);
+    margin-top: var(--space-4);
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .empty-desc {
+    max-width: 50ch;
+    font-size: var(--text-sm);
+  }
+
+  .catalog-return {
+    margin-top: var(--space-12);
+    text-align: center;
+  }
+</style>
+
+<script>
+  const searchInput = document.getElementById("skill-search-input") as HTMLInputElement | null;
+  const clearBtn = document.getElementById("clear-search-btn");
+  const resetBtn = document.getElementById("reset-filter-btn");
+  const resultsCountEl = document.getElementById("results-count");
+  const emptyStateEl = document.getElementById("empty-state");
+  const cards = document.querySelectorAll<HTMLElement>("[data-search-content]");
+  const tagBtns = document.querySelectorAll<HTMLButtonElement>("#tag-buttons-group .tag-btn");
+
+  let activeTag = "all";
+
+  // Check URL query parameters (e.g. ?tag=backend)
+  const urlParams = new URLSearchParams(window.location.search);
+  const tagFromUrl = urlParams.get("tag");
+  if (tagFromUrl) {
+    activeTag = tagFromUrl;
+    tagBtns.forEach((btn) => {
+      if (btn.getAttribute("data-tag") === activeTag) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+  }
+
+  function filterSkills() {
+    const query = searchInput?.value.trim().toLowerCase() || "";
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const content = card.getAttribute("data-search-content") || "";
+      const cardTags = (card.getAttribute("data-tags") || "").split(" ");
+
+      const matchesText = !query || content.includes(query);
+      const matchesTag = activeTag === "all" || cardTags.includes(activeTag);
+
+      if (matchesText && matchesTag) {
+        card.style.display = "";
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (resultsCountEl) {
+      resultsCountEl.textContent = String(visibleCount);
+    }
+
+    if (emptyStateEl) {
+      if (visibleCount === 0) {
+        emptyStateEl.removeAttribute("hidden");
+      } else {
+        emptyStateEl.setAttribute("hidden", "");
+      }
+    }
+  }
+
+  searchInput?.addEventListener("input", filterSkills);
+
+  tagBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      tagBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeTag = btn.getAttribute("data-tag") || "all";
+      filterSkills();
+    });
+  });
+
+  clearBtn?.addEventListener("click", () => {
+    if (searchInput) {
+      searchInput.value = "";
+      filterSkills();
+      searchInput.focus();
+    }
+  });
+
+  resetBtn?.addEventListener("click", () => {
+    if (searchInput) {
+      searchInput.value = "";
+    }
+    activeTag = "all";
+    tagBtns.forEach((b) => {
+      if (b.getAttribute("data-tag") === "all") {
+        b.classList.add("active");
+      } else {
+        b.classList.remove("active");
+      }
+    });
+    filterSkills();
+  });
+
+  // Initial filter run
+  filterSkills();
+</script>
