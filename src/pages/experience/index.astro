@@ -1,0 +1,326 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+const experiencesList = await getCollection("experiences");
+---
+
+<Layout title="Historial de Servicio & Experiencia Laboral | Diego Rivera">
+  <Navigation />
+
+  <main class="experience-archive-main">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="section-header">
+        <span class="section-index">02 // HISTORIAL DE SERVICIO &amp; PRODUCCIÓN</span>
+        <h1 class="section-title">Experiencia Laboral</h1>
+        <p class="section-subtitle">
+          Registro detallado de roles profesionales, arquitectura de microservicios, consultoría de software y liderazgo técnico.
+        </p>
+      </div>
+
+      <!-- Inventory Strip -->
+      <div class="experience-strip mono text-xs">
+        <div class="strip-item">
+          <span class="text-muted">REGISTROS_TOTALES:</span>
+          <span class="text-amber font-bold">{experiencesList.length}</span>
+        </div>
+        <div class="strip-item">
+          <span class="text-muted">STATUS_CORE:</span>
+          <span class="text-phosphor">ACTIVE_FULLSTACK_ENGINEERING</span>
+        </div>
+      </div>
+
+      <!-- Experience Cards List -->
+      <div class="experience-cards-list">
+        {
+          experiencesList.map((exp, index) => {
+            const serial = String(index + 1).padStart(2, "0");
+
+            return (
+              <article class="exp-catalog-card specs-card corner-marks">
+                <div class="card-header-bar">
+                  <div class="header-left">
+                    <span class="serial-tag mono text-xs text-amber">[SRV_LOG_{serial}]</span>
+                    <div class="status-tag mono text-2xs">
+                      <span class={`status-dot status-dot--${exp.data.current ? "green" : "amber"}`}></span>
+                      <span>{exp.data.current ? "ACTIVE_SERVICE" : "COMPLETED_CYCLE"}</span>
+                    </div>
+                  </div>
+                  <div class="header-right mono text-2xs text-muted">
+                    <span>{exp.data.period}</span>
+                    <span class="sep">/</span>
+                    <span class="duration-highlight">{exp.data.duration}</span>
+                  </div>
+                </div>
+
+                <div class="card-body">
+                  <div class="role-company-box">
+                    <h2 class="role-name">
+                      <a href={`/experience/${exp.id}`} class="role-link">
+                        {exp.data.role}
+                      </a>
+                    </h2>
+                    <div class="company-row">
+                      <strong class="company-txt mono text-amber">{exp.data.company}</strong>
+                      <span class="dot-sep" aria-hidden="true">•</span>
+                      <span class="mono text-xs text-muted">{exp.data.employmentType}</span>
+                      <span class="dot-sep" aria-hidden="true">•</span>
+                      <span class="mono text-xs text-subtle">{exp.data.location}</span>
+                    </div>
+                  </div>
+
+                  {exp.data.summary && <p class="exp-summary">{exp.data.summary}</p>}
+
+                  {
+                    exp.data.highlights && exp.data.highlights.length > 0 && (
+                      <div class="highlights-box">
+                        <span class="box-label mono text-2xs text-muted">[RESPONSABILIDADES_Y_LOGROS_CLAVE]</span>
+                        <ul class="highlights-list">
+                          {exp.data.highlights.map((item) => (
+                            <li class="highlight-item">
+                              <span class="item-icon mono text-phosphor" aria-hidden="true">&gt;</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                  }
+
+                  <div class="card-techs">
+                    {exp.data.technologies.map((tech) => (
+                      <span class="badge">{tech}</span>
+                    ))}
+                  </div>
+
+                  <div class="card-actions">
+                    <a href={`/experience/${exp.id}`} class="btn btn-primary btn-sm">
+                      <span>VER ESPECIFICACIÓN DETALLADA [MD]</span>
+                      <span class="mono">→</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <!-- Return Button -->
+      <div class="archive-return">
+        <a href="/" class="btn btn-secondary">
+          <span class="mono">←</span>
+          <span>VOLVER AL PANEL PRINCIPAL</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .experience-archive-main {
+    padding-top: calc(4.25rem + var(--space-8));
+    padding-bottom: var(--space-20);
+    min-height: 85vh;
+  }
+
+  .experience-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-3) var(--space-5);
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    margin-bottom: var(--space-8);
+  }
+
+  .strip-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .experience-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .exp-catalog-card {
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-solid);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0px 0px var(--color-border-strong);
+      border-color: var(--color-border-strong);
+    }
+  }
+
+  .card-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-5);
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .serial-tag {
+    font-weight: 700;
+  }
+
+  .status-tag {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 2px 8px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    color: var(--color-text);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+
+    .sep {
+      color: var(--color-border-strong);
+    }
+  }
+
+  .duration-highlight {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .card-body {
+    padding: clamp(var(--space-5), 4vw, var(--space-8));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .role-company-box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .role-name {
+    font-size: clamp(var(--text-lg), 2.5vw, var(--text-2xl));
+    font-weight: 700;
+    line-height: 1.2;
+
+    .role-link {
+      color: var(--color-text);
+      transition: color var(--transition-fast);
+
+      &:hover {
+        color: var(--color-amber-text);
+      }
+    }
+  }
+
+  .company-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: 2px;
+  }
+
+  .company-txt {
+    font-size: var(--text-sm);
+    letter-spacing: 0.04em;
+  }
+
+  .dot-sep {
+    color: var(--color-border-strong);
+  }
+
+  .exp-summary {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 70ch;
+  }
+
+  .highlights-box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xs);
+  }
+
+  .box-label {
+    letter-spacing: 0.06em;
+  }
+
+  .highlights-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text);
+  }
+
+  .item-icon {
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .card-techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    padding-top: var(--space-2);
+  }
+
+  .card-actions {
+    display: flex;
+    align-items: center;
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--color-border-subtle);
+  }
+
+  .btn-sm {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-2xs);
+  }
+
+  .archive-return {
+    margin-top: var(--space-12);
+    text-align: center;
+  }
+</style>

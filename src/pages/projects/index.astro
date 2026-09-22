@@ -1,0 +1,422 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+const allProjects = (await getCollection("projects")).sort(
+  (a, b) => b.data.date.localeCompare(a.data.date)
+);
+---
+
+<Layout title="Catálogo de Proyectos & Especificaciones | Diego Rivera">
+  <Navigation />
+
+  <main class="catalog-main">
+    <div class="container">
+      <!-- Catalog Header -->
+      <div class="section-header">
+        <span class="section-index">03 // INVENTARIO DE SOFTWARE</span>
+        <h1 class="section-title">Catálogo Completo de Proyectos</h1>
+        <p class="section-subtitle">
+          Registro exhaustivo de arquitecturas backend, herramientas de infraestructura, pipelines de procesamiento y sistemas embebidos.
+        </p>
+      </div>
+
+      <!-- Live Search Terminal Strip -->
+      <div class="search-terminal specs-card">
+        <div class="terminal-bar">
+          <div class="search-input-wrapper">
+            <span class="search-prompt mono text-amber">[QUERY:&gt;]</span>
+            <input
+              type="search"
+              id="project-search-input"
+              class="search-input mono"
+              placeholder="Buscar por tecnología, título o tag (ej. Python, Go, Kafka, Docker)..."
+              autocomplete="off"
+              aria-label="Buscar proyectos por palabra clave"
+            />
+            <button id="clear-search-btn" class="clear-btn mono text-2xs" type="button" aria-label="Limpiar búsqueda">
+              [CLR]
+            </button>
+          </div>
+
+          <div class="search-stats mono text-xs">
+            <span class="text-muted">MOSTRANDO:</span>
+            <span id="results-count" class="text-amber font-bold">{allProjects.length}</span>
+            <span class="text-muted">/ TOTAL:</span>
+            <span class="text-phosphor font-bold">{allProjects.length}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div id="projects-grid" class="projects-grid">
+        {
+          allProjects.map((project, index) => {
+            const serialNum = String(index + 1).padStart(2, "0");
+            const searchIndex = `${project.data.title} ${project.data.description} ${project.data.technologies.join(" ")} ${project.data.tags.join(" ")}`.toLowerCase();
+
+            return (
+              <article
+                class="catalog-card specs-card corner-marks"
+                data-search-content={searchIndex}
+              >
+                <!-- Card Header -->
+                <div class="card-header">
+                  <div class="header-ident">
+                    <span class="card-serial mono text-xs text-amber">[PRJ_{serialNum}]</span>
+                    <span class={`status-tag mono text-2xs ${project.data.archived ? "status--archived" : "status--active"}`}>
+                      {project.data.archived ? "ARCHIVED" : "PRODUCTION"}
+                    </span>
+                  </div>
+                  <span class="card-date mono text-2xs text-muted">{project.data.date}</span>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body">
+                  <h2 class="card-title">
+                    <a href={`/projects/${project.id}`} class="title-link">
+                      {project.data.title}
+                    </a>
+                  </h2>
+                  <p class="card-desc">{project.data.description}</p>
+
+                  <div class="card-techs">
+                    {project.data.technologies.map((tech) => (
+                      <span class="badge">{tech}</span>
+                    ))}
+                  </div>
+
+                  <!-- Actions -->
+                  <div class="card-actions">
+                    <a href={`/projects/${project.id}`} class="btn btn-primary btn-sm">
+                      <span>VER DETALLE TÉCNICO</span>
+                      <span class="mono">→</span>
+                    </a>
+
+                    {
+                      project.data.link && (
+                        <a
+                          href={project.data.link}
+                          class="btn btn-secondary btn-sm btn-icon"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Ver repositorio o enlace externo"
+                        >
+                          <span class="mono">↗</span>
+                        </a>
+                      )
+                    }
+                  </div>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state specs-card" hidden>
+        <span class="status-dot status-dot--amber"></span>
+        <h3 class="empty-title mono text-base text-amber">[0_RECORDS_MATCHED // QUERY_EMPTY]</h3>
+        <p class="empty-desc text-muted">
+          No se encontraron proyectos que coincidan con los criterios de búsqueda. Intenta con otra tecnología o término general.
+        </p>
+        <button id="reset-search-btn" class="btn btn-secondary btn-sm mono">
+          RESTABLECER_FILTRO
+        </button>
+      </div>
+
+      <!-- Return Button -->
+      <div class="catalog-return">
+        <a href="/" class="btn btn-secondary">
+          <span class="mono">←</span>
+          <span>VOLVER AL PANEL PRINCIPAL</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .catalog-main {
+    padding-top: calc(4.25rem + var(--space-8));
+    padding-bottom: var(--space-20);
+    min-height: 85vh;
+  }
+
+  /* Search Terminal */
+  .search-terminal {
+    padding: var(--space-4) var(--space-5);
+    margin-bottom: var(--space-8);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-solid);
+  }
+
+  .terminal-bar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    padding: var(--space-2) var(--space-3);
+    transition: border-color var(--transition-fast);
+
+    &:focus-within {
+      border-color: var(--color-amber);
+    }
+  }
+
+  .search-prompt {
+    font-weight: 700;
+    user-select: none;
+  }
+
+  .search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+
+    &::placeholder {
+      color: var(--color-text-subtle);
+    }
+  }
+
+  .clear-btn {
+    padding: 2px 6px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-text);
+      border-color: var(--color-border-strong);
+    }
+  }
+
+  .search-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    white-space: nowrap;
+  }
+
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .catalog-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-solid);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0px 0px var(--color-border-strong);
+      border-color: var(--color-border-strong);
+    }
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .header-ident {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .card-serial {
+    font-weight: 700;
+  }
+
+  .status-tag {
+    padding: 1px 6px;
+    border-radius: var(--radius-xs);
+    font-weight: 600;
+  }
+
+  .status--active {
+    background-color: var(--color-phosphor-muted);
+    color: var(--color-phosphor-text);
+    border: 1px solid color-mix(in oklch, var(--color-phosphor) 30%, transparent);
+  }
+
+  .status--archived {
+    background-color: var(--color-surface-elevated);
+    color: var(--color-text-subtle);
+    border: 1px solid var(--color-border);
+  }
+
+  .card-body {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: 1.25;
+
+    .title-link {
+      color: var(--color-text);
+      transition: color var(--transition-fast);
+
+      &:hover {
+        color: var(--color-amber-text);
+      }
+    }
+  }
+
+  .card-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  .card-techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--color-border-subtle);
+  }
+
+  .btn-sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-2xs);
+  }
+
+  .btn-icon {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  /* Empty State */
+  .empty-state {
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    background-color: var(--color-surface);
+    margin-top: var(--space-4);
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .empty-desc {
+    max-width: 50ch;
+    font-size: var(--text-sm);
+  }
+
+  .catalog-return {
+    margin-top: var(--space-12);
+    text-align: center;
+  }
+</style>
+
+<script>
+  const searchInput = document.getElementById("project-search-input") as HTMLInputElement | null;
+  const clearBtn = document.getElementById("clear-search-btn");
+  const resetBtn = document.getElementById("reset-search-btn");
+  const resultsCountEl = document.getElementById("results-count");
+  const emptyStateEl = document.getElementById("empty-state");
+  const cards = document.querySelectorAll<HTMLElement>("[data-search-content]");
+
+  function filterProjects() {
+    const query = searchInput?.value.trim().toLowerCase() || "";
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const content = card.getAttribute("data-search-content") || "";
+      const matches = !query || content.includes(query);
+
+      if (matches) {
+        card.style.display = "";
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (resultsCountEl) {
+      resultsCountEl.textContent = String(visibleCount);
+    }
+
+    if (emptyStateEl) {
+      if (visibleCount === 0) {
+        emptyStateEl.removeAttribute("hidden");
+      } else {
+        emptyStateEl.setAttribute("hidden", "");
+      }
+    }
+  }
+
+  searchInput?.addEventListener("input", filterProjects);
+
+  clearBtn?.addEventListener("click", () => {
+    if (searchInput) {
+      searchInput.value = "";
+      filterProjects();
+      searchInput.focus();
+    }
+  });
+
+  resetBtn?.addEventListener("click", () => {
+    if (searchInput) {
+      searchInput.value = "";
+      filterProjects();
+      searchInput.focus();
+    }
+  });
+</script>

@@ -1,0 +1,361 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Layout title={`${project.data.title} // Especificación Técnica | Diego Rivera`}>
+  <Navigation />
+
+  <main class="project-detail-main">
+    <div class="container">
+      <!-- Breadcrumb Bar -->
+      <nav class="breadcrumb-bar mono text-xs text-muted" aria-label="Ruta de navegación">
+        <a href="/" class="crumb-link">00 // INICIO</a>
+        <span class="crumb-sep">/</span>
+        <a href="/projects" class="crumb-link">03 // CATÁLOGO</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current text-amber">[PRJ_SPEC: {project.id}]</span>
+      </nav>
+
+      <!-- Project Detail Chassis -->
+      <article class="detail-chassis specs-card corner-marks">
+        <!-- Chassis Header Bar -->
+        <div class="detail-header-bar">
+          <div class="header-status">
+            <span class={`status-dot status-dot--${project.data.archived ? "amber" : "green"}`}></span>
+            <span class="mono text-2xs">
+              STATUS: {project.data.archived ? "ARCHIVED_PRESERVED" : "PRODUCTION_ACTIVE"}
+            </span>
+          </div>
+          <div class="header-date mono text-2xs text-muted">
+            REG_DATE: {project.data.date}
+          </div>
+        </div>
+
+        <!-- Project Hero Header -->
+        <header class="project-meta-hero">
+          <span class="meta-serial mono text-xs text-amber">// TECHNICAL_SPECIFICATION_SHEET</span>
+          <h1 class="project-headline">{project.data.title}</h1>
+          <p class="project-lead">{project.data.description}</p>
+
+          <!-- Action Switchboard -->
+          <div class="project-switchboard">
+            {
+              project.data.link && (
+                <a
+                  href={project.data.link}
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>ABRIR REPOSITORIO / ENLACE</span>
+                  <span class="mono">↗</span>
+                </a>
+              )
+            }
+            <a href="/projects" class="btn btn-secondary">
+              <span class="mono">←</span>
+              <span>VOLVER AL CATÁLOGO</span>
+            </a>
+          </div>
+        </header>
+
+        <!-- Technical Telemetry & Specs Strip -->
+        <div class="specs-dashboard">
+          <div class="dashboard-block">
+            <span class="dash-label mono text-2xs text-muted">[STACK_TECNOLÓGICO]</span>
+            <div class="tech-badges">
+              {project.data.technologies.map((tech) => (
+                <span class="badge">{tech}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="dashboard-block">
+            <span class="dash-label mono text-2xs text-muted">[DOMINIO_Y_TAGS]</span>
+            <div class="tech-badges">
+              {project.data.tags.map((tag) => (
+                <span class="badge badge--cyan">{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          {
+            project.data.results && project.data.results.length > 0 && (
+              <div class="dashboard-block full-width">
+                <span class="dash-label mono text-2xs text-muted">[RESULTADOS_CLAVE_VERIFICADOS]</span>
+                <ul class="results-list">
+                  {project.data.results.map((res) => (
+                    <li class="result-item">
+                      <span class="res-check mono text-phosphor">[OK]</span>
+                      <span>{res}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+        </div>
+
+        <!-- Markdown Rendered Technical Body -->
+        <div class="markdown-body">
+          <Content />
+        </div>
+
+        <!-- Detail Footer -->
+        <footer class="detail-footer">
+          <span class="mono text-2xs text-muted">
+            SPEC_ID: {project.id} // DOCUMENT_INTEGRITY: VERIFIED
+          </span>
+          <a href="/projects" class="btn btn-ghost btn-sm">
+            <span>EXPLORAR MÁS PROYECTOS</span>
+            <span class="mono">→</span>
+          </a>
+        </footer>
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .project-detail-main {
+    padding-top: calc(4.25rem + var(--space-6));
+    padding-bottom: var(--space-20);
+    min-height: 85vh;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .crumb-link {
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
+  .crumb-sep {
+    color: var(--color-border-strong);
+  }
+
+  /* Detail Chassis */
+  .detail-chassis {
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-elevation);
+    background-color: var(--color-surface);
+  }
+
+  .detail-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-6);
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .header-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text);
+  }
+
+  /* Meta Hero */
+  .project-meta-hero {
+    padding: clamp(var(--space-6), 5vw, var(--space-10));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .meta-serial {
+    letter-spacing: 0.08em;
+  }
+
+  .project-headline {
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.15;
+  }
+
+  .project-lead {
+    font-size: clamp(var(--text-base), 2vw, var(--text-lg));
+    color: var(--color-text-muted);
+    max-width: 65ch;
+  }
+
+  .project-switchboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  /* Specs Dashboard */
+  .specs-dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6) clamp(var(--space-6), 5vw, var(--space-10));
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .dashboard-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+
+    &.full-width {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .dash-label {
+    letter-spacing: 0.06em;
+  }
+
+  .tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .results-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-1);
+  }
+
+  .result-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+
+  /* Markdown Body Styling */
+  .markdown-body {
+    padding: clamp(var(--space-6), 5vw, var(--space-10));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    color: var(--color-text);
+    font-size: var(--text-base);
+    line-height: 1.7;
+
+    h2 {
+      font-size: var(--text-2xl);
+      margin-top: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--color-border-subtle);
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+
+      &::before {
+        content: "##";
+        font-family: var(--font-mono);
+        font-size: 0.7em;
+        color: var(--color-amber-text);
+      }
+    }
+
+    h3 {
+      font-size: var(--text-xl);
+      margin-top: var(--space-4);
+      color: var(--color-text);
+    }
+
+    p {
+      color: var(--color-text-muted);
+    }
+
+    ul, ol {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding-left: var(--space-6);
+      list-style-type: square;
+      color: var(--color-text-muted);
+    }
+
+    strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    code:not(pre code) {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      padding: 2px 6px;
+      background-color: var(--color-surface-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xs);
+      color: var(--color-text);
+    }
+
+    pre {
+      background-color: var(--color-surface-sunken);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xs);
+      padding: var(--space-4);
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      line-height: 1.5;
+    }
+  }
+
+  /* Detail Footer */
+  .detail-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) clamp(var(--space-6), 5vw, var(--space-10));
+    background-color: var(--color-surface-sunken);
+    border-top: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .btn-sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-2xs);
+  }
+</style>

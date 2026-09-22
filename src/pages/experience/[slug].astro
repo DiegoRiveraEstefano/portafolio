@@ -1,0 +1,369 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const experiences = await getCollection("experiences");
+  return experiences.map((experience) => ({
+    params: { slug: experience.id },
+    props: { experience },
+  }));
+}
+
+const { experience } = Astro.props;
+const { Content } = await render(experience);
+---
+
+<Layout title={`${experience.data.role} @ ${experience.data.company} // Experiencia | Diego Rivera`}>
+  <Navigation />
+
+  <main class="experience-detail-main">
+    <div class="container">
+      <!-- Breadcrumb Bar -->
+      <nav class="breadcrumb-bar mono text-xs text-muted" aria-label="Ruta de navegación">
+        <a href="/" class="crumb-link">00 // INICIO</a>
+        <span class="crumb-sep">/</span>
+        <a href="/experience" class="crumb-link">02 // HISTORIAL_SERVICIO</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current text-amber">[SRV_SPEC: {experience.id}]</span>
+      </nav>
+
+      <!-- Experience Detail Chassis -->
+      <article class="detail-chassis specs-card corner-marks">
+        <!-- Chassis Header Bar -->
+        <div class="detail-header-bar">
+          <div class="header-status">
+            <span class={`status-dot status-dot--${experience.data.current ? "green" : "amber"}`}></span>
+            <span class="mono text-2xs">
+              STATUS: {experience.data.current ? "ACTIVE_ENGAGEMENT" : "COMPLETED_RECORD"}
+            </span>
+          </div>
+          <div class="header-date mono text-2xs text-muted">
+            PERIOD: {experience.data.period} // {experience.data.duration}
+          </div>
+        </div>
+
+        <!-- Role & Company Hero Header -->
+        <header class="experience-meta-hero">
+          <span class="meta-serial mono text-xs text-amber">// SERVICE_RECORD_SPECIFICATION</span>
+          <h1 class="experience-headline">{experience.data.role}</h1>
+          <div class="company-badge-line">
+            <strong class="company-highlight mono text-amber">{experience.data.company}</strong>
+            <span class="dot-sep" aria-hidden="true">•</span>
+            <span class="mono text-xs text-muted">{experience.data.employmentType}</span>
+            <span class="dot-sep" aria-hidden="true">•</span>
+            <span class="mono text-xs text-subtle">{experience.data.location}</span>
+          </div>
+
+          {experience.data.summary && <p class="experience-lead">{experience.data.summary}</p>}
+
+          <!-- Action Switchboard -->
+          <div class="experience-switchboard">
+            <a href="/experience" class="btn btn-secondary">
+              <span class="mono">←</span>
+              <span>VER TODAS LAS EXPERIENCIAS</span>
+            </a>
+            <a href="/#experience" class="btn btn-ghost">
+              <span class="mono">↑</span>
+              <span>PANEL PRINCIPAL</span>
+            </a>
+          </div>
+        </header>
+
+        <!-- Technical Telemetry & Specs Strip -->
+        <div class="specs-dashboard">
+          <div class="dashboard-block">
+            <span class="dash-label mono text-2xs text-muted">[STACK_TECNOLÓGICO_APLICADO]</span>
+            <div class="tech-badges">
+              {experience.data.technologies.map((tech) => (
+                <span class="badge">{tech}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="dashboard-block full-width">
+            <span class="dash-label mono text-2xs text-muted">[RESPONSABILIDADES_Y_LOGROS_CLAVE]</span>
+            <ul class="highlights-list">
+              {experience.data.highlights.map((item) => (
+                <li class="highlight-item">
+                  <span class="item-prefix mono text-phosphor" aria-hidden="true">&gt;</span>
+                  <span class="item-text">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Markdown Rendered Technical Body -->
+        <div class="markdown-body">
+          <Content />
+        </div>
+
+        <!-- Detail Footer -->
+        <footer class="detail-footer">
+          <span class="mono text-2xs text-muted">
+            NODE_ID: {experience.id} // VERIFIED_SERVICE_RECORD
+          </span>
+          <a href="/experience" class="btn btn-ghost btn-sm">
+            <span>HISTORIAL COMPLETO</span>
+            <span class="mono">→</span>
+          </a>
+        </footer>
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .experience-detail-main {
+    padding-top: calc(4.25rem + var(--space-6));
+    padding-bottom: var(--space-20);
+    min-height: 85vh;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .crumb-link {
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
+  .crumb-sep {
+    color: var(--color-border-strong);
+  }
+
+  /* Detail Chassis */
+  .detail-chassis {
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-elevation);
+    background-color: var(--color-surface);
+  }
+
+  .detail-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-6);
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .header-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text);
+  }
+
+  /* Meta Hero */
+  .experience-meta-hero {
+    padding: clamp(var(--space-6), 5vw, var(--space-10));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .meta-serial {
+    letter-spacing: 0.08em;
+  }
+
+  .experience-headline {
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.15;
+  }
+
+  .company-badge-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .company-highlight {
+    font-size: var(--text-base);
+    letter-spacing: 0.04em;
+  }
+
+  .dot-sep {
+    color: var(--color-border-strong);
+  }
+
+  .experience-lead {
+    font-size: clamp(var(--text-base), 2vw, var(--text-lg));
+    color: var(--color-text-muted);
+    max-width: 68ch;
+    line-height: 1.6;
+    margin-top: var(--space-1);
+  }
+
+  .experience-switchboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  /* Specs Dashboard */
+  .specs-dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6) clamp(var(--space-6), 5vw, var(--space-10));
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .dashboard-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    &.full-width {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .dash-label {
+    letter-spacing: 0.06em;
+  }
+
+  .tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .highlights-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  .item-prefix {
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .item-text {
+    color: var(--color-text);
+  }
+
+  /* Markdown Body */
+  .markdown-body {
+    padding: clamp(var(--space-6), 5vw, var(--space-10));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    color: var(--color-text);
+    font-size: var(--text-base);
+    line-height: 1.7;
+
+    h2 {
+      font-size: var(--text-2xl);
+      margin-top: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--color-border-subtle);
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+
+      &::before {
+        content: "##";
+        font-family: var(--font-mono);
+        font-size: 0.7em;
+        color: var(--color-amber-text);
+      }
+    }
+
+    h3 {
+      font-size: var(--text-xl);
+      margin-top: var(--space-4);
+      color: var(--color-text);
+    }
+
+    p {
+      color: var(--color-text-muted);
+    }
+
+    ul, ol {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding-left: var(--space-6);
+      list-style-type: square;
+      color: var(--color-text-muted);
+    }
+
+    strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    code:not(pre code) {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      padding: 2px 6px;
+      background-color: var(--color-surface-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xs);
+      color: var(--color-text);
+    }
+
+    pre {
+      background-color: var(--color-surface-sunken);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xs);
+      padding: var(--space-4);
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      line-height: 1.5;
+    }
+  }
+
+  /* Detail Footer */
+  .detail-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) clamp(var(--space-6), 5vw, var(--space-10));
+    background-color: var(--color-surface-sunken);
+    border-top: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .btn-sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-2xs);
+  }
+</style>
