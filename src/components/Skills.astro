@@ -4,363 +4,398 @@ import { getCollection } from "astro:content";
 const basePath = import.meta.env.BASE_URL;
 
 // Obtener todas las habilidades de la colección 'skills'
-const skillsData = await getCollection("skills");
+const allSkills = await getCollection("skills");
+// Filtrar únicamente las skills más relevantes configuradas para la página principal
+const skillsData = allSkills.filter((s) => s.data.showOnHome);
 
 interface SkillItem {
-  name: string;
-  slug: string;
-  yearsOfExperience: number;
+    name: string;
+    slug: string;
+    yearsOfExperience: number;
 }
 
-const skillsByCategory = skillsData.reduce((acc: Record<string, SkillItem[]>, skill) => {
-  const category = skill.data.category;
-  if (!acc[category]) {
-    acc[category] = [];
-  }
-  acc[category].push({
-    name: skill.data.name,
-    slug: skill.data.slug,
-    yearsOfExperience: skill.data.yearsOfExperience ?? 1,
-  });
-  return acc;
-}, {});
+const skillsByCategory = skillsData.reduce(
+    (acc: Record<string, SkillItem[]>, skill) => {
+        const category = skill.data.category;
+        if (!acc[category]) {
+            acc[category] = [];
+        }
+        acc[category].push({
+            name: skill.data.name,
+            slug: skill.data.slug,
+            yearsOfExperience: skill.data.yearsOfExperience ?? 1,
+        });
+        return acc;
+    },
+    {},
+);
 
 // Orden de prioridad técnico
 const priorityOrder = [
-  "Backend Development",
-  "Databases",
-  "AI & Machine Learning",
-  "System Design",
-  "Software Architecture",
-  "Tools",
-  "Languages",
-  "Data Science",
-  "Hardware/IoT",
-  "Frontend Development",
+    "Backend Development",
+    "Databases",
+    "AI & Machine Learning",
+    "System Design",
+    "Software Architecture",
+    "Tools",
+    "Languages",
+    "Data Science",
+    "Hardware/IoT",
+    "Frontend Development",
 ];
 
-const sortedCategories = Object.entries(skillsByCategory).sort(([catA], [catB]) => {
-  const idxA = priorityOrder.indexOf(catA);
-  const idxB = priorityOrder.indexOf(catB);
-  return (idxA === -1 ? 99 : idxA) - (idxB === -1 ? 99 : idxB);
-});
+const sortedCategories = Object.entries(skillsByCategory).sort(
+    ([catA], [catB]) => {
+        const idxA = priorityOrder.indexOf(catA);
+        const idxB = priorityOrder.indexOf(catB);
+        return (idxA === -1 ? 99 : idxA) - (idxB === -1 ? 99 : idxB);
+    },
+);
 
 // Metadatos técnicos e íconos limpios (sin clases Tailwind)
-const categoryMeta: Record<string, { code: string; colorClass: string; svg: string }> = {
-  "Backend Development": {
-    code: "MOD_01",
-    colorClass: "module--phosphor",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>`,
-  },
-  "Databases": {
-    code: "MOD_02",
-    colorClass: "module--cyan",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>`,
-  },
-  "AI & Machine Learning": {
-    code: "MOD_03",
-    colorClass: "module--phosphor",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>`,
-  },
-  "System Design": {
-    code: "MOD_04",
-    colorClass: "module--amber",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`,
-  },
-  "Software Architecture": {
-    code: "MOD_05",
-    colorClass: "module--amber",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>`,
-  },
-  "Tools": {
-    code: "MOD_06",
-    colorClass: "module--amber",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>`,
-  },
-  "Languages": {
-    code: "MOD_07",
-    colorClass: "module--purple",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2 2m-2-2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"></path></svg>`,
-  },
-  "Data Science": {
-    code: "MOD_08",
-    colorClass: "module--cyan",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`,
-  },
-  "Hardware/IoT": {
-    code: "MOD_09",
-    colorClass: "module--amber",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>`,
-  },
-  "Frontend Development": {
-    code: "MOD_10",
-    colorClass: "module--purple",
-    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`,
-  },
+const categoryMeta: Record<
+    string,
+    { code: string; colorClass: string; svg: string }
+> = {
+    "Backend Development": {
+        code: "MOD_01",
+        colorClass: "module--phosphor",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>`,
+    },
+    Databases: {
+        code: "MOD_02",
+        colorClass: "module--cyan",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>`,
+    },
+    "AI & Machine Learning": {
+        code: "MOD_03",
+        colorClass: "module--phosphor",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>`,
+    },
+    "System Design": {
+        code: "MOD_04",
+        colorClass: "module--amber",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`,
+    },
+    "Software Architecture": {
+        code: "MOD_05",
+        colorClass: "module--amber",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>`,
+    },
+    Tools: {
+        code: "MOD_06",
+        colorClass: "module--amber",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>`,
+    },
+    Languages: {
+        code: "MOD_07",
+        colorClass: "module--purple",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2 2m-2-2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"></path></svg>`,
+    },
+    "Data Science": {
+        code: "MOD_08",
+        colorClass: "module--cyan",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`,
+    },
+    "Hardware/IoT": {
+        code: "MOD_09",
+        colorClass: "module--amber",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>`,
+    },
+    "Frontend Development": {
+        code: "MOD_10",
+        colorClass: "module--purple",
+        svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`,
+    },
 };
 ---
 
 <section id="skills" class="section skills-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-index">02 // STACK &amp; CAPACIDADES</span>
-      <h2 class="section-title">Habilidades Técnicas</h2>
-      <p class="section-subtitle">
-        Módulos y tecnologías probadas en entornos de backend de alto rendimiento, infraestructura y sistemas distribuidos.
-      </p>
-    </div>
+    <div class="container">
+        <div class="section-header">
+            <span class="section-index">02 // STACK &amp; CAPACIDADES</span>
+            <h2 class="section-title">Habilidades Técnicas</h2>
+            <p class="section-subtitle">
+                Módulos y tecnologías probadas en entornos de backend de alto
+                rendimiento, infraestructura y sistemas distribuidos.
+            </p>
+        </div>
 
-    <div class="modules-grid">
-      {
-        sortedCategories.map(([category, skills]) => {
-          const meta = categoryMeta[category] || {
-            code: "MOD_XX",
-            colorClass: "module--amber",
-            svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>`,
-          };
+        <div class="modules-grid">
+            {sortedCategories.map(([category, skills]) => {
+                const meta = categoryMeta[category] || {
+                    code: "MOD_XX",
+                    colorClass: "module--amber",
+                    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>`,
+                };
 
-          return (
-            <div class={`module-card ${meta.colorClass} specs-card`}>
-              <!-- Module Header -->
-              <div class="module-top">
-                <div class="module-icon-wrap">
-                  <div class="module-icon">
-                    <Fragment set:html={meta.svg} />
-                  </div>
-                  <span class="mono text-2xs module-code">{meta.code}</span>
-                </div>
-                <h3 class="module-title">{category}</h3>
-              </div>
+                return (
+                    <div class={`module-card ${meta.colorClass} specs-card`}>
+                        <!-- Module Header -->
+                        <div class="module-top">
+                            <div class="module-icon-wrap">
+                                <div class="module-icon">
+                                    <Fragment set:html={meta.svg} />
+                                </div>
+                                <span class="mono text-2xs module-code">
+                                    {meta.code}
+                                </span>
+                            </div>
+                            <h3 class="module-title">{category}</h3>
+                        </div>
 
-              <!-- Skills List -->
-              <ul class="skills-list">
-                {skills.map((skill) => (
-                  <li class="skill-row">
-                    <a href={`${basePath}/skills/${skill.slug}`} class="skill-name-link">
-                      {skill.name}
-                    </a>
-                    <span class="skill-calibre mono">
-                      <span class="calibre-num">{skill.yearsOfExperience}Y</span>
-                      <span class="calibre-dots" aria-hidden="true">
-                        {"■".repeat(Math.min(skill.yearsOfExperience, 4))}
-                        {"□".repeat(Math.max(0, 4 - skill.yearsOfExperience))}
-                      </span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
+                        <!-- Skills List -->
+                        <ul class="skills-list">
+                            {skills.map((skill) => (
+                                <li class="skill-row">
+                                    <a
+                                        href={`${basePath}/skills/${skill.slug}`}
+                                        class="skill-name-link"
+                                    >
+                                        {skill.name}
+                                    </a>
+                                    <span class="skill-calibre mono">
+                                        <span class="calibre-num">
+                                            {skill.yearsOfExperience}Y
+                                        </span>
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
 
-              <!-- Module Footprint Pin Bar -->
-              <div class="module-pinbar mono text-2xs" aria-hidden="true">
-                <span>[BUS_SYNC]</span>
-                <span>PIN_COUNT: {skills.length}</span>
-              </div>
+                        <!-- Module Footprint Pin Bar -->
+                        <div
+                            class="module-pinbar mono text-2xs"
+                            aria-hidden="true"
+                        >
+                            <span>[BUS_SYNC]</span>
+                            <span>PIN_COUNT: {skills.length}</span>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+
+        <!-- Catalog Callout Panel -->
+        <div class="archive-callout">
+            <div class="archive-meta mono text-xs text-muted">
+                <span>STACK_INVENTORY: COMPLETE_TECHNICAL_MATRIX</span>
             </div>
-          );
-        })
-      }
+            <a href={`${basePath}/skills`} class="btn btn-secondary">
+                <span>
+                    EXPLORAR CATÁLOGO COMPLETO DE HABILIDADES (
+                    {allSkills.length})
+                </span>
+                <span class="mono">→</span>
+            </a>
+        </div>
     </div>
-
-    <!-- Catalog Callout Panel -->
-    <div class="archive-callout">
-      <div class="archive-meta mono text-xs text-muted">
-        <span>STACK_INVENTORY: COMPLETE_TECHNICAL_MATRIX</span>
-      </div>
-      <a href={`${basePath}/skills`} class="btn btn-secondary">
-        <span>
-          EXPLORAR CATÁLOGO COMPLETO DE HABILIDADES ({skillsData.length})
-        </span>
-        <span class="mono">→</span>
-      </a>
-    </div>
-  </div>
 </section>
 
 <style>
-  .modules-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--space-6);
-  }
-
-  .module-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: var(--space-4);
-    position: relative;
-    box-shadow: var(--shadow-solid);
-    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 3px 3px 0px 0px var(--color-border-strong);
+    .modules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-6);
     }
-  }
 
-  .module-top {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-3);
-    padding-bottom: var(--space-3);
-    border-bottom: 1px solid var(--color-border-subtle);
-  }
+    .module-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: var(--space-4);
+        position: relative;
+        box-shadow: var(--shadow-solid);
+        transition:
+            transform var(--transition-fast),
+            border-color var(--transition-fast),
+            box-shadow var(--transition-fast);
 
-  .module-icon-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-  }
-
-  .module-icon {
-    width: 36px;
-    height: 36px;
-    padding: 7px;
-    border-radius: var(--radius-xs);
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface-sunken);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      width: 100%;
-      height: 100%;
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 3px 3px 0px 0px var(--color-border-strong);
+        }
     }
-  }
 
-  .module-code {
-    letter-spacing: 0.08em;
-    color: var(--color-text-subtle);
-  }
+    .module-top {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-3);
+        padding-bottom: var(--space-3);
+        border-bottom: 1px solid var(--color-border-subtle);
+    }
 
-  .module-title {
-    font-size: var(--text-base);
-    font-weight: 600;
-    color: var(--color-text);
-    line-height: 1.25;
-    padding-top: 2px;
-  }
+    .module-icon-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+    }
 
-  /* Specific Module Color Accents */
-  .module--phosphor {
     .module-icon {
-      color: var(--color-phosphor-text);
-      border-color: color-mix(in oklch, var(--color-phosphor) 30%, transparent);
+        width: 36px;
+        height: 36px;
+        padding: 7px;
+        border-radius: var(--radius-xs);
+        border: 1px solid var(--color-border);
+        background-color: var(--color-surface-sunken);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
     }
-    &:hover {
-      border-color: var(--color-phosphor);
+
+    .module-code {
+        letter-spacing: 0.08em;
+        color: var(--color-text-subtle);
     }
-  }
 
-  .module--cyan {
-    .module-icon {
-      color: var(--color-cyan-text);
-      border-color: color-mix(in oklch, var(--color-cyan) 30%, transparent);
+    .module-title {
+        font-size: var(--text-base);
+        font-weight: 600;
+        color: var(--color-text);
+        line-height: 1.25;
+        padding-top: 2px;
     }
-    &:hover {
-      border-color: var(--color-cyan);
+
+    /* Specific Module Color Accents */
+    .module--phosphor {
+        .module-icon {
+            color: var(--color-phosphor-text);
+            border-color: color-mix(
+                in oklch,
+                var(--color-phosphor) 30%,
+                transparent
+            );
+        }
+        &:hover {
+            border-color: var(--color-phosphor);
+        }
     }
-  }
 
-  .module--amber {
-    .module-icon {
-      color: var(--color-amber-text);
-      border-color: color-mix(in oklch, var(--color-amber) 30%, transparent);
+    .module--cyan {
+        .module-icon {
+            color: var(--color-cyan-text);
+            border-color: color-mix(
+                in oklch,
+                var(--color-cyan) 30%,
+                transparent
+            );
+        }
+        &:hover {
+            border-color: var(--color-cyan);
+        }
     }
-    &:hover {
-      border-color: var(--color-amber);
+
+    .module--amber {
+        .module-icon {
+            color: var(--color-amber-text);
+            border-color: color-mix(
+                in oklch,
+                var(--color-amber) 30%,
+                transparent
+            );
+        }
+        &:hover {
+            border-color: var(--color-amber);
+        }
     }
-  }
 
-  .module--purple {
-    .module-icon {
-      color: var(--color-purple-text);
-      border-color: color-mix(in oklch, var(--color-purple) 30%, transparent);
+    .module--purple {
+        .module-icon {
+            color: var(--color-purple-text);
+            border-color: color-mix(
+                in oklch,
+                var(--color-purple) 30%,
+                transparent
+            );
+        }
+        &:hover {
+            border-color: var(--color-purple);
+        }
     }
-    &:hover {
-      border-color: var(--color-purple);
+
+    /* Skills Rows */
+    .skills-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        margin-block: var(--space-1);
     }
-  }
 
-  /* Skills Rows */
-  .skills-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    margin-block: var(--space-1);
-  }
+    .skill-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: var(--text-sm);
+        padding: var(--space-1) 0;
+        border-bottom: 1px dashed var(--color-border-subtle);
 
-  .skill-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: var(--text-sm);
-    padding: var(--space-1) 0;
-    border-bottom: 1px dashed var(--color-border-subtle);
-
-    &:last-child {
-      border-bottom: none;
+        &:last-child {
+            border-bottom: none;
+        }
     }
-  }
 
-  .skill-name-link {
-    color: var(--color-text);
-    font-weight: 500;
-    transition: color var(--transition-fast);
+    .skill-name-link {
+        color: var(--color-text);
+        font-weight: 500;
+        transition: color var(--transition-fast);
 
-    &:hover {
-      color: var(--color-amber-text);
+        &:hover {
+            color: var(--color-amber-text);
+        }
     }
-  }
 
-  .skill-calibre {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: var(--text-xs);
-    color: var(--color-text-muted);
-  }
-
-  .calibre-num {
-    font-weight: 600;
-    color: var(--color-text-subtle);
-  }
-
-  .calibre-dots {
-    font-size: var(--text-2xs);
-    letter-spacing: 1px;
-    color: var(--color-amber-text);
-    opacity: 0.8;
-  }
-
-  .module-pinbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: var(--space-2);
-    border-top: 1px solid var(--color-border-subtle);
-    color: var(--color-text-subtle);
-    font-size: var(--text-2xs);
-  }
-
-  /* Archive Callout */
-  .archive-callout {
-    margin-top: var(--space-12);
-    padding: var(--space-6);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
-    box-shadow: var(--shadow-solid);
-
-    @media (min-width: 640px) {
-      flex-direction: row;
+    .skill-calibre {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: var(--text-xs);
+        color: var(--color-text-muted);
     }
-  }
+
+    .calibre-num {
+        font-weight: 600;
+        color: var(--color-text-subtle);
+    }
+
+    .calibre-dots {
+        font-size: var(--text-2xs);
+        letter-spacing: 1px;
+        color: var(--color-amber-text);
+        opacity: 0.8;
+    }
+
+    .module-pinbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: var(--space-2);
+        border-top: 1px solid var(--color-border-subtle);
+        color: var(--color-text-subtle);
+        font-size: var(--text-2xs);
+    }
+
+    /* Archive Callout */
+    .archive-callout {
+        margin-top: var(--space-12);
+        padding: var(--space-6);
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        box-shadow: var(--shadow-solid);
+
+        @media (min-width: 640px) {
+            flex-direction: row;
+        }
+    }
 </style>

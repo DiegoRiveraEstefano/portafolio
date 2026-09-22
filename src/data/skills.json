@@ -7,7 +7,8 @@
     "appliedIn": ["Programador full stack en Nolan AI Software"],
     "tags": ["ai-llm", "backend"],
     "yearsOfExperience": 1,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "langchain",
@@ -17,7 +18,8 @@
     "appliedIn": ["Programador full stack en Nolan AI Software"],
     "tags": ["ai-llm", "backend"],
     "yearsOfExperience": 1,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "langgraph",
@@ -27,7 +29,8 @@
     "appliedIn": ["Programador full stack en Nolan AI Software"],
     "tags": ["ai-llm", "backend", "architecture"],
     "yearsOfExperience": 1,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "bases-de-datos-vectoriales",
@@ -37,7 +40,8 @@
     "appliedIn": ["Programador full stack en Nolan AI Software"],
     "tags": ["ai-llm", "database", "backend"],
     "yearsOfExperience": 1,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "desarrollo-chatbots",
@@ -47,7 +51,8 @@
     "appliedIn": ["Programador full stack en Nolan AI Software"],
     "tags": ["ai-llm", "backend"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "diseno-de-software",
@@ -57,7 +62,8 @@
     "appliedIn": ["Programador full stack en Nolan AI Software", "Proyecto de Título"],
     "tags": ["architecture", "backend"],
     "yearsOfExperience": 3,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "rest-api",
@@ -67,7 +73,8 @@
     "appliedIn": ["Nolan AI Software", "INACAP", "Proyecto de Título", "Full Stack Developer Freelance"],
     "tags": ["backend", "architecture"],
     "yearsOfExperience": 3,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "django",
@@ -77,7 +84,8 @@
     "appliedIn": ["Nolan AI Software", "Full Stack Developer en Freelance", "INACAP", "Curso de Django"],
     "tags": ["backend", "database"],
     "yearsOfExperience": 3,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "django-rest-framework",
@@ -87,7 +95,8 @@
     "appliedIn": ["Nolan AI Software", "INACAP", "Full Stack Developer Freelance", "Curso de Django Rest Framework"],
     "tags": ["backend"],
     "yearsOfExperience": 3,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "fastapi-litestar",
@@ -97,7 +106,8 @@
     "appliedIn": ["Programador full stack en Nolan AI Software"],
     "tags": ["backend"],
     "yearsOfExperience": 2,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "apache-kafka",
@@ -107,7 +117,8 @@
     "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go"],
     "tags": ["backend", "architecture", "tools-devops"],
     "yearsOfExperience": 1,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "kafka-streams",
@@ -117,7 +128,8 @@
     "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go"],
     "tags": ["backend", "architecture"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "sistemas-distribuidos",
@@ -127,7 +139,8 @@
     "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go"],
     "tags": ["architecture", "backend"],
     "yearsOfExperience": 2,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "postgresql",
@@ -137,7 +150,8 @@
     "appliedIn": ["Nolan AI Software", "Proyecto de Título", "Full Stack Developer Freelance"],
     "tags": ["database", "backend"],
     "yearsOfExperience": 3,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "sqlalchemy",
@@ -147,7 +161,8 @@
     "appliedIn": ["Programador full stack en Nolan AI Software"],
     "tags": ["database", "backend"],
     "yearsOfExperience": 2,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "diseno-bases-datos",
@@ -157,7 +172,8 @@
     "appliedIn": ["Nolan AI Software", "INACAP", "Proyecto de Título", "Full Stack Developer Freelance"],
     "tags": ["database", "architecture"],
     "yearsOfExperience": 3,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "nosql",
@@ -167,7 +183,8 @@
     "appliedIn": ["INACAP"],
     "tags": ["database"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "mysql",
@@ -177,7 +194,8 @@
     "appliedIn": ["INACAP", "Full Stack Developer en Freelance"],
     "tags": ["database"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "sql",
@@ -187,7 +205,8 @@
     "appliedIn": ["Consultor Freelance", "INACAP", "Nolan AI Software"],
     "tags": ["database", "data-science"],
     "yearsOfExperience": 3,
-    "featured": false
+    "featured": false,
+    "showOnHome": true
   },
   {
     "slug": "jwt",
@@ -197,7 +216,8 @@
     "appliedIn": ["Curso de Django Rest Framework", "Nolan AI Software"],
     "tags": ["backend", "tools-devops"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "python",
@@ -207,7 +227,8 @@
     "appliedIn": ["Nolan AI Software", "Full Stack Developer en Freelance", "INACAP", "scanned-pdf-to-text", "Curso de Django", "Curso de Django Rest Framework"],
     "tags": ["languages", "backend"],
     "yearsOfExperience": 3,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "go",
@@ -217,7 +238,8 @@
     "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go"],
     "tags": ["languages", "backend"],
     "yearsOfExperience": 1,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "elixir",
@@ -227,7 +249,8 @@
     "appliedIn": ["Proyecto de Título"],
     "tags": ["languages", "backend"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "java",
@@ -237,7 +260,8 @@
     "appliedIn": ["INACAP", "Curso de Java"],
     "tags": ["languages", "backend"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "cpp",
@@ -247,7 +271,8 @@
     "appliedIn": ["Proyecto de Título"],
     "tags": ["languages", "hardware-iot"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "javascript",
@@ -257,7 +282,8 @@
     "appliedIn": ["Nolan AI Software", "Consultor Freelance", "INACAP"],
     "tags": ["languages", "frontend"],
     "yearsOfExperience": 3,
-    "featured": false
+    "featured": false,
+    "showOnHome": true
   },
   {
     "slug": "typescript",
@@ -267,7 +293,8 @@
     "appliedIn": ["Portafolio Técnico", "Proyectos Personales"],
     "tags": ["languages", "frontend"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": true
   },
   {
     "slug": "kotlin",
@@ -277,7 +304,8 @@
     "appliedIn": ["INACAP"],
     "tags": ["languages"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "docker",
@@ -287,7 +315,8 @@
     "appliedIn": ["Proyecto de Título", "Nolan AI Software", "Curso de Docker: Fundamentos"],
     "tags": ["tools-devops"],
     "yearsOfExperience": 2,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "git",
@@ -297,7 +326,8 @@
     "appliedIn": ["Nolan AI Software", "Proyecto de Título", "Curso de Git y GitHub", "scanned-pdf-to-text"],
     "tags": ["tools-devops"],
     "yearsOfExperience": 3,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "github",
@@ -307,7 +337,8 @@
     "appliedIn": ["Nolan AI Software", "Proyecto de Título", "Curso de Git y GitHub"],
     "tags": ["tools-devops"],
     "yearsOfExperience": 3,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "linux",
@@ -317,7 +348,8 @@
     "appliedIn": ["INACAP", "Proyecto de Título", "Nolan AI Software"],
     "tags": ["tools-devops"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": true
   },
   {
     "slug": "nginx",
@@ -327,7 +359,8 @@
     "appliedIn": ["Despliegues en Producción", "Proyecto de Título"],
     "tags": ["tools-devops", "backend"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "automatizacion-pruebas",
@@ -337,7 +370,8 @@
     "appliedIn": ["Proyecto de Título", "Nolan AI Software"],
     "tags": ["tools-devops", "backend"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "vuejs",
@@ -347,7 +381,8 @@
     "appliedIn": ["Full Stack Developer en Freelance", "Proyecto de Título"],
     "tags": ["frontend"],
     "yearsOfExperience": 3,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "html5-css3",
@@ -357,7 +392,8 @@
     "appliedIn": ["Nolan AI Software", "Freelance", "INACAP", "Responsive Web Design"],
     "tags": ["frontend"],
     "yearsOfExperience": 3,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "tailwindcss",
@@ -367,7 +403,8 @@
     "appliedIn": ["Consultor Freelance", "Proyecto de Título"],
     "tags": ["frontend"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": true
   },
   {
     "slug": "raspberry-pi",
@@ -377,7 +414,8 @@
     "appliedIn": ["Proyecto de Título"],
     "tags": ["hardware-iot"],
     "yearsOfExperience": 1,
-    "featured": true
+    "featured": true,
+    "showOnHome": true
   },
   {
     "slug": "sistemas-embebidos",
@@ -387,7 +425,8 @@
     "appliedIn": ["Proyecto de Título"],
     "tags": ["hardware-iot"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": true
   },
   {
     "slug": "opencv",
@@ -397,7 +436,8 @@
     "appliedIn": ["Proyecto de Título"],
     "tags": ["hardware-iot", "ai-llm"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": true
   },
   {
     "slug": "adb",
@@ -407,7 +447,8 @@
     "appliedIn": ["Proyecto de Título"],
     "tags": ["hardware-iot", "tools-devops"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "vulkan-api",
@@ -417,7 +458,8 @@
     "appliedIn": ["Conocimiento del sector y sistemas gráficos"],
     "tags": ["hardware-iot", "languages"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "ocr-cli",
@@ -427,7 +469,8 @@
     "appliedIn": ["scanned-pdf-to-text"],
     "tags": ["tools-devops", "backend"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "pandas",
@@ -437,7 +480,8 @@
     "appliedIn": ["INACAP", "Full Stack Developer en Freelance"],
     "tags": ["data-science"],
     "yearsOfExperience": 1,
-    "featured": false
+    "featured": false,
+    "showOnHome": true
   },
   {
     "slug": "data-analysis",
@@ -447,7 +491,8 @@
     "appliedIn": ["Full Stack Developer en Freelance", "INACAP"],
     "tags": ["data-science"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "ciencias-computacion",
@@ -457,7 +502,8 @@
     "appliedIn": ["INACAP", "Scientific Computing with Python"],
     "tags": ["architecture", "languages"],
     "yearsOfExperience": 3,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "gestion-proyectos",
@@ -467,7 +513,8 @@
     "appliedIn": ["Nolan AI Software", "INACAP", "Proyecto de Título"],
     "tags": ["architecture", "tools-devops"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "software-erp",
@@ -477,7 +524,8 @@
     "appliedIn": ["Programador full stack en Nolan AI Software", "INACAP", "Proyecto ERP Escolar"],
     "tags": ["architecture", "backend"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   },
   {
     "slug": "ingles",
@@ -487,6 +535,7 @@
     "appliedIn": ["Inglés Intermedio B1 (Platzi)", "Trabajo en Equipos Remotos"],
     "tags": ["languages"],
     "yearsOfExperience": 2,
-    "featured": false
+    "featured": false,
+    "showOnHome": false
   }
 ]

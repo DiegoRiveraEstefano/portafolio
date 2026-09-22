@@ -72,6 +72,7 @@ const skills = defineCollection({
       tags: z.array(z.string()),
       yearsOfExperience: z.number().min(1).max(99).optional(),
       featured: z.boolean().default(false),
+      showOnHome: z.boolean().default(false),
     }),
 });
 
