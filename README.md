@@ -5,7 +5,7 @@
 
 ---
 
-## ⚡ Aspectos Técnicos Destacados
+## Aspectos Técnicos Destacados
 
 * **Zero-Framework CSS**: Arquitectura CSS pura y modular organizada en `@layer` (`reset`, `tokens`, `base`, `layout`, `components`, `utilities`).
 * **Colorimetría OKLCH & Modo Dual**: Paleta técnica de alta fidelidad perceptual (`oklch()`) con soporte nativo de modo claro/oscuro mediante `light-dark()`.
@@ -16,7 +16,7 @@
 
 ---
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 | Capa | Tecnología / Herramienta |
 | :--- | :--- |
@@ -28,7 +28,7 @@
 
 ---
 
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```text
 portafolio/
@@ -50,16 +50,19 @@ portafolio/
 │   │   │   ├── nolan-ai-software.md
 │   │   │   ├── the-green-economics-journal.md
 │   │   │   └── freelance-fullstack.md
-│   │   └── projects/           # Documentación de proyectos y arquitecturas (*.md)
-│   │       ├── arquitectura-kafka-go.md
-│   │       ├── analisis-ventas-visualizacion.md
+│   │   ├── projects/           # Documentación de proyectos y arquitecturas (*.md)
+│   │   │   ├── arquitectura-kafka-go.md
+│   │   │   ├── analisis-ventas-visualizacion.md
+│   │   │   └── ...
+│   │   └── certifications/     # Acreditaciones y licencias técnicas (*.md)
+│   │       ├── platzi-docker-fundamentos.md
+│   │       ├── platzi-git-github.md
 │   │       └── ...
 │   │
 │   ├── data/                   # Datos estructurados en JSON (Colecciones)
 │   │   ├── profile.json        # Identidad, tags, telemetría y especificaciones
-│   │   ├── skills.json         # Inventario de habilidades con años de experiencia
+│   │   ├── skills.json         # Inventario enriquecido (descripción, contexto y tags)
 │   │   ├── education.json      # Título profesional e institución
-│   │   ├── certifications.json # Certificaciones técnicas
 │   │   └── socials.json        # Puertos y enlaces de contacto
 │   │
 │   ├── layouts/
@@ -71,9 +74,15 @@ portafolio/
 │   │   ├── projects/
 │   │   │   ├── index.astro     # Catálogo completo de proyectos con buscador
 │   │   │   └── [slug].astro    # Ficha técnica individual de cada proyecto
-│   │   └── experience/
-│   │       ├── index.astro     # Archivo histórico de experiencia laboral
-│   │       └── [slug].astro    # Detalle individual de cada rol y arquitectura
+│   │   ├── experience/
+│   │   │   ├── index.astro     # Archivo histórico de experiencia laboral
+│   │   │   └── [slug].astro    # Detalle individual de cada rol y arquitectura
+│   │   ├── certifications/
+│   │   │   ├── index.astro     # Catálogo completo de certificaciones con buscador
+│   │   │   └── [slug].astro    # Ficha técnica individual de cada credencial
+│   │   └── skills/
+│   │       ├── index.astro     # Catálogo de habilidades con filtros por tag y buscador
+│   │       └── [slug].astro    # Especificación técnica individual de cada habilidad
 │   │
 │   ├── styles/                 # Arquitectura de estilos Vanilla CSS
 │   │   ├── layers.css          # Declaración de orden @layer
@@ -92,7 +101,7 @@ portafolio/
 
 ---
 
-## 🚀 Comandos de Desarrollo
+## Comandos de Desarrollo
 
 Todas las operaciones se ejecutan desde la raíz del proyecto:
 
@@ -112,7 +121,7 @@ npm run preview
 
 ---
 
-## 📝 Gestión de Contenido
+## Gestión de Contenido
 
 ### Agregar un Nuevo Proyecto
 Crea un archivo Markdown en `src/content/projects/[slug].md` con el siguiente frontmatter:
@@ -164,10 +173,10 @@ technologies:
 
 ---
 
-## 👤 Contacto & Perfil
+## Contacto & Perfil
 
 * **Ingeniero**: Diego Rivera
 * **Especialidad**: Backend Development // Distributed Systems & DevOps
 * **Email**: [diego.rivera.estefano@gmail.com](mailto:diego.rivera.estefano@gmail.com)
 * **GitHub**: [@DiegoRiveraEstefano](https://github.com/DiegoRiveraEstefano)
-* **LinkedIn**: [/in/diegoriveraestefano](https://linkedin.com/in/diegoriveraestefano)
+* **LinkedIn**: [/in/diegoriveraestefano](https://linkedin.com/in/diego-rivera-estefano)
