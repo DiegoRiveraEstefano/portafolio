@@ -1,31 +1,65 @@
-// 1. Import utilities from `astro:content`
 import { defineCollection, z } from "astro:content";
+import { file, glob } from "astro/loaders";
 
-// 2. Import loader(s)
-import { file } from "astro/loaders";
-import { date } from "astro:schema";
-
-// 3. Define your collection(s)
-
-// IT projects 
-const projects = defineCollection({
-  loader: file("src/data/projects.json"),
-  schema: ({ image }) =>
+// 1. Perfil y Biografía
+const profile = defineCollection({
+  loader: file("src/data/profile.json"),
+  schema: () =>
     z.object({
-      title: z.string(),
-      description: z.string(),
-      image: image().optional(),
-      date: z.string().date(),
-      tags: z.array(z.string()),
-      body: z.string(),
-      slug: z.string(),
-      technologies: z.array(z.string()),
-      results: z.array(z.string()),
-      link: z.string(),
-      archived: z.boolean().optional(),
+      id: z.string(),
+      name: z.string(),
+      shortName: z.string(),
+      chipLabel: z.string(),
+      chipSub: z.string(),
+      systemStatus: z.string(),
+      location: z.string(),
+      specialization: z.string(),
+      tagline: z.string(),
+      role: z.string(),
+      heroDescription: z.string(),
+      specs: z.array(
+        z.object({
+          key: z.string(),
+          value: z.string(),
+        })
+      ),
+      about: z.object({
+        heading: z.string(),
+        paragraphs: z.array(z.string()),
+        pipeline: z.string(),
+      }),
+      telemetry: z.array(
+        z.object({
+          code: z.string(),
+          value: z.string(),
+          color: z.string(),
+          statusDot: z.string(),
+          label: z.string(),
+        })
+      ),
     }),
 });
 
+// 2. Proyectos (Archivos Markdown)
+const projects = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "src/content/projects" }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      date: z.string(),
+      tags: z.array(z.string()),
+      technologies: z.array(z.string()),
+      results: z.array(z.string()),
+      link: z.string(),
+      github: z.string().optional(),
+      archived: z.boolean().default(false),
+      featured: z.boolean().default(false),
+    }),
+});
+
+
+// 3. Habilidades
 const skills = defineCollection({
   loader: file("src/data/skills.json"),
   schema: () =>
@@ -41,45 +75,88 @@ const skills = defineCollection({
         "Data Science",
         "Databases",
         "Hardware/IoT",
+        "System Design",
       ]),
     }),
 });
 
+// 4. Educación Formal
+const education = defineCollection({
+  loader: file("src/data/education.json"),
+  schema: () =>
+    z.object({
+      id: z.string(),
+      degree: z.string(),
+      institution: z.string(),
+      location: z.string(),
+      period: z.string(),
+      status: z.string(),
+      statusLabel: z.string(),
+      description: z.string(),
+      tags: z.array(z.string()),
+    }),
+});
+
+// 5. Certificaciones
 const certifications = defineCollection({
   loader: file("src/data/certifications.json"),
   schema: () =>
     z.object({
-      slug: z.string(),
+      id: z.string(),
       name: z.string(),
+      slug: z.string(),
       platform: z.string(),
-      date: z.string().date(),
+      date: z.string(),
+      displayDate: z.string(),
+      status: z.string(),
+      topic: z.string(),
       link: z.string().url().optional(),
     }),
 });
 
-const experiences = defineCollection({
-  loader: file("src/data/experiences.json"),
-  schema: () =>
-    z.object({
-      title: z.string(),
-      company: z.string(),
-      startDate: z.string(),
-      endDate: z.string().optional(),
-      description: z.string(),
-    }),
-});
-
-
+// 6. Enlaces y Canales de Contacto
 const socials = defineCollection({
   loader: file("src/data/socials.json"),
   schema: () =>
     z.object({
-      slug: z.string(),
-      type: z.enum(["github", "linkedin", "twitter", "instagram", "facebook"]),
-      name: z.string(),
-      link: z.string().url(),
+      id: z.string(),
+      port: z.string(),
+      type: z.enum(["email", "linkedin", "github", "twitter", "website"]),
+      label: z.string(),
+      channelType: z.string(),
+      value: z.string(),
+      href: z.string(),
+      accent: z.string(),
     }),
 });
 
-// 4. Export a single `collections` object to register your collection(s)
-export const collections = { skills, projects };
+// 7. Experiencia Laboral (Archivos Markdown)
+const experiences = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "src/content/experiences" }),
+  schema: () =>
+    z.object({
+      role: z.string(),
+      company: z.string(),
+      employmentType: z.string(),
+      location: z.string(),
+      period: z.string(),
+      duration: z.string(),
+      current: z.boolean().default(false),
+      summary: z.string().optional(),
+      highlights: z.array(z.string()).default([]),
+      technologies: z.array(z.string()).default([]),
+    }),
+});
+
+
+// Exportar colecciones registradas
+export const collections = {
+  profile,
+  skills,
+  projects,
+  education,
+  certifications,
+  socials,
+  experiences,
+};
+

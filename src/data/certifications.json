@@ -1,9 +1,24 @@
 [
-    {
-      "name": "Certificación de Desarrollador Web",
-      "slug": "certificacion-desarrollador-web",
-      "platform": "FreeCodeCamp",
-      "date": "2022-09-01",
-      "link": "https://www.freecodecamp.org/certification/developer-web"
-    }
+  {
+    "id": "scientific-computing-python",
+    "name": "Scientific Computing with Python",
+    "slug": "scientific-computing-with-python",
+    "platform": "FreeCodeCamp",
+    "date": "2022-07",
+    "displayDate": "Jul 2022",
+    "status": "VERIFIED",
+    "topic": "ID_TOPIC: Algorithmic Thinking, Data Structures, Numerical Computation",
+    "link": "https://www.freecodecamp.org/certification/scientific-computing-with-python"
+  },
+  {
+    "id": "responsive-web-design",
+    "name": "Responsive Web Design",
+    "slug": "responsive-web-design",
+    "platform": "FreeCodeCamp",
+    "date": "2024-09",
+    "displayDate": "Sept 2024",
+    "status": "VERIFIED",
+    "topic": "ID_TOPIC: Modern Semantic Layouts, Accessibility, Fluid Architecture",
+    "link": "https://www.freecodecamp.org/certification/responsive-web-design"
+  }
 ]

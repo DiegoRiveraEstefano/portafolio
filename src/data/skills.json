@@ -20,24 +20,18 @@
   {
     "name": "Go",
     "slug": "go",
+    "yearsOfExperience": 2,
+    "category": "Languages"
+  },
+  {
+    "name": "Elixir",
+    "slug": "elixir",
     "yearsOfExperience": 1,
     "category": "Languages"
   },
   {
-    "name": "C/C++",
-    "slug": "c-cpp",
-    "yearsOfExperience": 1,
-    "category": "Languages"
-  },
-  {
-    "name": "SQL",
-    "slug": "sql",
-    "yearsOfExperience": 4,
-    "category": "Languages"
-  },
-  {
-    "name": "Bash",
-    "slug": "bash",
+    "name": "Java",
+    "slug": "java",
     "yearsOfExperience": 2,
     "category": "Languages"
   },
@@ -54,21 +48,21 @@
     "category": "Backend Development"
   },
   {
+    "name": "Go Stdlib (net/http)",
+    "slug": "go-stdlib-net-http",
+    "yearsOfExperience": 2,
+    "category": "Backend Development"
+  },
+  {
     "name": "Kafka",
     "slug": "kafka",
     "yearsOfExperience": 1,
     "category": "Backend Development"
   },
   {
-    "name": "PostgREST",
-    "slug": "postgrest",
-    "yearsOfExperience": 1,
-    "category": "Backend Development"
-  },
-  {
-    "name": "Scikit-learn",
-    "slug": "scikit-learn",
-    "yearsOfExperience": 2,
+    "name": "SQL",
+    "slug": "sql",
+    "yearsOfExperience": 4,
     "category": "Data Science"
   },
   {
@@ -78,8 +72,44 @@
     "category": "Data Science"
   },
   {
+    "name": "Polars",
+    "slug": "polars",
+    "yearsOfExperience": 2,
+    "category": "Data Science"
+  },
+  {
+    "name": "PostgreSQL",
+    "slug": "postgresql",
+    "yearsOfExperience": 3,
+    "category": "Databases"
+  },
+  {
+    "name": "MySQL",
+    "slug": "mysql",
+    "yearsOfExperience": 2,
+    "category": "Databases"
+  },
+  {
+    "name": "Git",
+    "slug": "git",
+    "yearsOfExperience": 4,
+    "category": "Tools"
+  },
+  {
     "name": "Docker",
     "slug": "docker",
+    "yearsOfExperience": 2,
+    "category": "Tools"
+  },
+  {
+    "name": "Linux",
+    "slug": "linux",
+    "yearsOfExperience": 3,
+    "category": "Tools"
+  },
+  {
+    "name": "Bash",
+    "slug": "bash",
     "yearsOfExperience": 2,
     "category": "Tools"
   },
@@ -90,33 +120,27 @@
     "category": "Tools"
   },
   {
-    "name": "Nuitka",
-    "slug": "nuitka",
-    "yearsOfExperience": 1,
-    "category": "Tools"
-  },
-  {
-    "name": "Linux",
-    "slug": "linux",
-    "yearsOfExperience": 3,
-    "category": "Tools"
-  },
-  {
     "name": "Vue.js",
     "slug": "vuejs",
     "yearsOfExperience": 3,
     "category": "Frontend Development"
   },
   {
-    "name": "SvelteKit",
-    "slug": "sveltekit",
-    "yearsOfExperience": 1,
+    "name": "CSS",
+    "slug": "css",
+    "yearsOfExperience": 4,
     "category": "Frontend Development"
   },
   {
-    "name": "Tauri",
-    "slug": "tauri",
-    "yearsOfExperience": 1,
+    "name": "Web Components",
+    "slug": "web-components",
+    "yearsOfExperience": 2,
+    "category": "Frontend Development"
+  },
+  {
+    "name": "Tailwind CSS",
+    "slug": "tailwindcss",
+    "yearsOfExperience": 3,
     "category": "Frontend Development"
   },
   {
@@ -136,11 +160,5 @@
     "slug": "uart-i2c",
     "yearsOfExperience": 1,
     "category": "Hardware/IoT"
-  },
-  {
-    "name": "PostgreSQL",
-    "slug": "postgresql",
-    "yearsOfExperience": 3,
-    "category": "Databases"
   }
 ]

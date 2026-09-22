@@ -1,16 +1,79 @@
 [
   {
-    "title": "Desarrollador Full Stack Freelance",
-    "company": "Clientes PyMEs - Chile",
-    "startDate": "2024-07",
-    "endDate": "Presente",
-    "description": "Diseño y desarrollo de soluciones tecnológicas para digitalización empresarial. Implementación de APIs REST (Django/FastAPI), automatización con IA/ML, y despliegue de infraestructura Docker/Nginx."
+    "id": "nolan-ai-software",
+    "role": "Programador Full Stack",
+    "company": "Nolan AI Software",
+    "employmentType": "Jornada completa",
+    "location": "En remoto",
+    "period": "ene. 2026 — sept. 2026",
+    "duration": "9 meses",
+    "current": true,
+    "description": "Desarrollo de soluciones de software escalables y profesionalización del ciclo de vida de desarrollo, elevando los estándares de calidad y la madurez de los procesos técnicos del equipo.",
+    "highlights": [
+      "Diseño y construcción de aplicaciones web, APIs y microservicios robustos utilizando Python (Litestar, SQLAlchemy 2.x, Pydantic) y JavaScript.",
+      "Diseño, optimización y mantenimiento de bases de datos relacionales, asegurando integridad transaccional y alto rendimiento.",
+      "Implementación de interfaces dinámicas y modulares utilizando Jinja2, HTML5, CSS3 y JavaScript moderno.",
+      "Cultura de Ingeniería: Adopción de estándares de codificación, revisiones sistemáticas de código (Code Reviews) y organización de repositorios que redujeron drásticamente la deuda técnica.",
+      "Documentación & QA: Elaboración de documentación técnica exhaustiva y adopción de buenas prácticas de ingeniería para garantizar la continuidad operativa de los sistemas."
+    ],
+    "technologies": [
+      "Python",
+      "Litestar",
+      "SQLAlchemy 2.x",
+      "Pydantic",
+      "JavaScript",
+      "LangGraph",
+      "Docker",
+      "Code Reviews"
+    ]
   },
   {
-    "title": "Consultor de Software & Desarrollador Full Stack",
-    "company": "The Green Economics (Freelance)",
-    "startDate": "2025-03",
-    "endDate": "2025-12",
-    "description": "Diseño y desarrollo end-to-end de plataforma web para publicación científica. Automatización de flujos editoriales y asignación de identificadores únicos."
+    "id": "the-green-economics-journal",
+    "role": "Cofundador & Desarrollador Full Stack",
+    "company": "The Green Economics Journal",
+    "employmentType": "Profesional independiente",
+    "location": "Gran Santiago, Chile · Híbrido",
+    "period": "ene. 2025 — ago. 2026",
+    "duration": "1 año 8 meses",
+    "current": false,
+    "description": "Cofundador y responsable del diseño y desarrollo end-to-end de la plataforma web para la publicación y divulgación de papers científicos sobre economía verde, democratizando la gestión editorial y transformando un proceso complejo en una experiencia fluida.",
+    "highlights": [
+      "Panel de Administración Intuitivo: Creación de un panel de gestión que permite a editores no técnicos subir, revisar y publicar artículos académicos sin fricción.",
+      "Automatización de Flujos Editoriales: Algoritmos para la asignación automática de identificadores únicos y metadatos a cada publicación, eliminando errores humanos y reduciendo el tiempo operativo.",
+      "Arquitectura Full Stack: Desarrollo completo sobre Python/Django con frontend reactivo, garantizando la integridad de datos y una carga ultra-rápida de documentos científicos."
+    ],
+    "technologies": [
+      "Python",
+      "Django",
+      "PostgreSQL",
+      "JavaScript",
+      "HTML5/CSS3",
+      "Automatización Editorial"
+    ]
+  },
+  {
+    "id": "freelance-fullstack",
+    "role": "Full Stack Developer",
+    "company": "Freelance (Consultor Independiente)",
+    "employmentType": "Profesional independiente",
+    "location": "Chile · Híbrido",
+    "period": "abr. 2024 — abr. 2026",
+    "duration": "2 años 1 mes",
+    "current": false,
+    "description": "Consultoría y desarrollo de software a medida para clientes de los sectores HealthTech, académico y EdTech, resolviendo problemas complejos de negocio y automatizando procesos críticos.",
+    "highlights": [
+      "Plataforma HealthTech: Lideré el desarrollo de un sistema para análisis de datos clínicos que procesa resultados de exámenes de sangre, aplicando modelos estadísticos para evaluar riesgos de salud y presentar visualizaciones para especialistas.",
+      "Automatización Académica: Implementé un sistema integral para gestión de journals científicos con módulo de asignación automática de identificadores a publicaciones.",
+      "Herramientas EdTech: Diseño y puesta en marcha de plataforma educacional y lector de contenido digital centrado en la experiencia de usuario."
+    ],
+    "technologies": [
+      "Python",
+      "Django",
+      "FastAPI",
+      "Vue.js",
+      "PostgreSQL",
+      "Docker",
+      "HealthTech"
+    ]
   }
 ]
