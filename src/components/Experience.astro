@@ -1,425 +1,500 @@
 ---
 import { getCollection } from "astro:content";
+const basePath = import.meta.env.BASE_URL;
 
 const rawExperiences = await getCollection("experiences");
 
 const experienceOrder: Record<string, number> = {
-  "nolan-ai-software": 1,
-  "the-green-economics-journal": 2,
-  "freelance-fullstack": 3,
+    "nolan-ai-software": 1,
+    "the-green-economics-journal": 2,
+    "freelance-fullstack": 3,
 };
 
 const experiencesList = rawExperiences.sort(
-  (a, b) => (experienceOrder[a.id] ?? 99) - (experienceOrder[b.id] ?? 99)
+    (a, b) => (experienceOrder[a.id] ?? 99) - (experienceOrder[b.id] ?? 99),
 );
 ---
 
 <section id="experience" class="section experience-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-index">02 // HISTORIAL DE SERVICIO &amp; PRODUCCIÓN</span>
-      <h2 class="section-title">Experiencia Laboral</h2>
-      <p class="section-subtitle">
-        Trayectoria en desarrollo backend, arquitecturas escalables y liderazgo técnico en producción.
-      </p>
+    <div class="container">
+        <div class="section-header">
+            <span class="section-index">
+                02 // HISTORIAL DE SERVICIO &amp; PRODUCCIÓN
+            </span>
+            <h2 class="section-title">Experiencia Laboral</h2>
+            <p class="section-subtitle">
+                Trayectoria en desarrollo backend, arquitecturas escalables y
+                liderazgo técnico en producción.
+            </p>
+        </div>
+
+        <!-- Responsive Engineering Cards Grid -->
+        <div
+            class="experience-grid"
+            role="region"
+            aria-label="Historial de experiencia laboral"
+        >
+            {experiencesList.map((exp, index) => {
+                const serial = String(index + 1).padStart(2, "0");
+                const isDefaultOpen = index === 0;
+
+                return (
+                    <article
+                        class="exp-card specs-card corner-marks"
+                        id={`srv-${exp.id}`}
+                    >
+                        <!-- Card Top Status Bar -->
+                        <div class="card-bar">
+                            <div class="bar-left">
+                                <span class="serial-tag mono text-xs text-amber">
+                                    [SRV_{serial}]
+                                </span>
+                                <div class="status-indicator mono text-2xs">
+                                    <span
+                                        class={`status-dot status-dot--${exp.data.current ? "green" : "amber"}`}
+                                    ></span>
+                                    <span class="status-lbl">
+                                        {exp.data.current
+                                            ? "ACTIVE_SERVICE"
+                                            : "COMPLETED"}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="bar-right mono text-2xs text-muted">
+                                <span class="duration-badge">
+                                    {exp.data.duration}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Main Card Body -->
+                        <div class="card-body">
+                            <div class="card-header-info">
+                                <h3 class="role-title">{exp.data.role}</h3>
+                                <div class="company-subline">
+                                    <strong class="company-name mono text-amber">
+                                        {exp.data.company}
+                                    </strong>
+                                    <span class="dot" aria-hidden="true">
+                                        •
+                                    </span>
+                                    <span class="mono text-xs text-muted">
+                                        {exp.data.employmentType}
+                                    </span>
+                                    <span class="dot" aria-hidden="true">
+                                        •
+                                    </span>
+                                    <span class="mono text-xs text-subtle">
+                                        {exp.data.location}
+                                    </span>
+                                </div>
+                                <div class="period-subline mono text-2xs text-muted">
+                                    <svg
+                                        class="clock-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
+                                    </svg>
+                                    <span>{exp.data.period}</span>
+                                </div>
+                            </div>
+
+                            {exp.data.summary && (
+                                <p class="role-summary text-muted">
+                                    {exp.data.summary}
+                                </p>
+                            )}
+
+                            <!-- In-Situ Accordion for Technical Highlights -->
+                            {exp.data.highlights &&
+                                exp.data.highlights.length > 0 && (
+                                    <details
+                                        class="highlights-accordion"
+                                        open={isDefaultOpen}
+                                    >
+                                        <summary class="accordion-trigger mono text-2xs">
+                                            <span class="trigger-label">
+                                                <span
+                                                    class="plus-icon"
+                                                    aria-hidden="true"
+                                                >
+                                                    [+]
+                                                </span>
+                                                <span
+                                                    class="minus-icon"
+                                                    aria-hidden="true"
+                                                >
+                                                    [-]
+                                                </span>
+                                                LOGROS &amp; RESPONSABILIDADES (
+                                                {exp.data.highlights.length})
+                                            </span>
+                                            <span class="trigger-hint mono text-3xs text-muted">
+                                                [TOGGLE]
+                                            </span>
+                                        </summary>
+                                        <div class="accordion-content">
+                                            <ul class="highlights-list">
+                                                {exp.data.highlights.map(
+                                                    (item) => (
+                                                        <li class="highlight-item">
+                                                            <span
+                                                                class="prefix mono text-phosphor"
+                                                                aria-hidden="true"
+                                                            >
+                                                                &gt;
+                                                            </span>
+                                                            <span class="desc">
+                                                                {item}
+                                                            </span>
+                                                        </li>
+                                                    ),
+                                                )}
+                                            </ul>
+                                        </div>
+                                    </details>
+                                )}
+
+                            <!-- Technologies Badges -->
+                            <div class="tech-row">
+                                {exp.data.technologies.map((tech) => (
+                                    <span class="badge">{tech}</span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <!-- Footer Actions -->
+                        <div class="card-footer">
+                            <a
+                                href={`${basePath}/experience/${exp.id}`}
+                                class="btn btn-primary btn-sm full-width"
+                            >
+                                <span>VER ESPECIFICACIÓN DETALLADA [MD]</span>
+                                <span class="mono">→</span>
+                            </a>
+                            <div class="node-meta mono text-3xs text-muted">
+                                <span>NODE_ID: {exp.id}</span>
+                            </div>
+                        </div>
+                    </article>
+                );
+            })}
+        </div>
+
+        <!-- Career Archive Callout Panel -->
+        <div class="archive-callout">
+            <div class="archive-meta mono text-xs text-muted">
+                <span>SERVICE_LOG: COMPLETE_CAREER_ARCHIVE</span>
+            </div>
+            <a href={`${basePath}/experience`} class="btn btn-secondary">
+                <span>
+                    VER HISTORIAL COMPLETO DE SERVICIOS (
+                    {experiencesList.length})
+                </span>
+                <span class="mono">→</span>
+            </a>
+        </div>
     </div>
-
-    <!-- Responsive Engineering Cards Grid -->
-    <div class="experience-grid" role="region" aria-label="Historial de experiencia laboral">
-      {
-        experiencesList.map((exp, index) => {
-          const serial = String(index + 1).padStart(2, "0");
-          const isDefaultOpen = index === 0;
-
-          return (
-            <article class="exp-card specs-card corner-marks" id={`srv-${exp.id}`}>
-              <!-- Card Top Status Bar -->
-              <div class="card-bar">
-                <div class="bar-left">
-                  <span class="serial-tag mono text-xs text-amber">[SRV_{serial}]</span>
-                  <div class="status-indicator mono text-2xs">
-                    <span class={`status-dot status-dot--${exp.data.current ? "green" : "amber"}`}></span>
-                    <span class="status-lbl">{exp.data.current ? "ACTIVE_SERVICE" : "COMPLETED"}</span>
-                  </div>
-                </div>
-
-                <div class="bar-right mono text-2xs text-muted">
-                  <span class="duration-badge">{exp.data.duration}</span>
-                </div>
-              </div>
-
-              <!-- Main Card Body -->
-              <div class="card-body">
-                <div class="card-header-info">
-                  <h3 class="role-title">{exp.data.role}</h3>
-                  <div class="company-subline">
-                    <strong class="company-name mono text-amber">{exp.data.company}</strong>
-                    <span class="dot" aria-hidden="true">•</span>
-                    <span class="mono text-xs text-muted">{exp.data.employmentType}</span>
-                    <span class="dot" aria-hidden="true">•</span>
-                    <span class="mono text-xs text-subtle">{exp.data.location}</span>
-                  </div>
-                  <div class="period-subline mono text-2xs text-muted">
-                    <svg class="clock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{exp.data.period}</span>
-                  </div>
-                </div>
-
-                {exp.data.summary && (
-                  <p class="role-summary text-muted">{exp.data.summary}</p>
-                )}
-
-                <!-- In-Situ Accordion for Technical Highlights -->
-                {exp.data.highlights && exp.data.highlights.length > 0 && (
-                  <details class="highlights-accordion" open={isDefaultOpen}>
-                    <summary class="accordion-trigger mono text-2xs">
-                      <span class="trigger-label">
-                        <span class="plus-icon" aria-hidden="true">[+]</span>
-                        <span class="minus-icon" aria-hidden="true">[-]</span>
-                        LOGROS &amp; RESPONSABILIDADES ({exp.data.highlights.length})
-                      </span>
-                      <span class="trigger-hint mono text-3xs text-muted">[TOGGLE]</span>
-                    </summary>
-                    <div class="accordion-content">
-                      <ul class="highlights-list">
-                        {exp.data.highlights.map((item) => (
-                          <li class="highlight-item">
-                            <span class="prefix mono text-phosphor" aria-hidden="true">&gt;</span>
-                            <span class="desc">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </details>
-                )}
-
-                <!-- Technologies Badges -->
-                <div class="tech-row">
-                  {exp.data.technologies.map((tech) => (
-                    <span class="badge">{tech}</span>
-                  ))}
-                </div>
-              </div>
-
-              <!-- Footer Actions -->
-              <div class="card-footer">
-                <a
-                  href={`/experience/${exp.id}`}
-                  class="btn btn-primary btn-sm full-width"
-                >
-                  <span>VER ESPECIFICACIÓN DETALLADA [MD]</span>
-                  <span class="mono">→</span>
-                </a>
-                <div class="node-meta mono text-3xs text-muted">
-                  <span>NODE_ID: {exp.id}</span>
-                </div>
-              </div>
-            </article>
-          );
-        })
-      }
-    </div>
-
-    <!-- Career Archive Callout Panel -->
-    <div class="archive-callout">
-      <div class="archive-meta mono text-xs text-muted">
-        <span>SERVICE_LOG: COMPLETE_CAREER_ARCHIVE</span>
-      </div>
-      <a href="/experience" class="btn btn-secondary">
-        <span>VER HISTORIAL COMPLETO DE SERVICIOS ({experiencesList.length})</span>
-        <span class="mono">→</span>
-      </a>
-    </div>
-  </div>
 </section>
 
 <style>
-  /* Experience Grid */
-  .experience-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-    align-items: start;
+    /* Experience Grid */
+    .experience-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        align-items: start;
 
-    @media (min-width: 768px) and (max-width: 1023px) {
-      grid-template-columns: repeat(2, 1fr);
+        @media (min-width: 768px) and (max-width: 1023px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr);
+    /* Card Base */
+    .exp-card {
+        padding: 0;
+        overflow: hidden;
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-solid);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+            transform var(--transition-fast),
+            border-color var(--transition-fast),
+            box-shadow var(--transition-fast);
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 3px 3px 0px 0px var(--color-border-strong);
+        }
     }
-  }
 
-  /* Card Base */
-  .exp-card {
-    padding: 0;
-    overflow: hidden;
-    background-color: var(--color-surface);
-    box-shadow: var(--shadow-solid);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition:
-      transform var(--transition-fast),
-      border-color var(--transition-fast),
-      box-shadow var(--transition-fast);
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 3px 3px 0px 0px var(--color-border-strong);
+    /* Header Bar */
+    .card-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-3) var(--space-5);
+        background-color: var(--color-surface-sunken);
+        border-bottom: 1px solid var(--color-border);
+        gap: var(--space-2);
     }
-  }
 
-  /* Header Bar */
-  .card-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--space-3) var(--space-5);
-    background-color: var(--color-surface-sunken);
-    border-bottom: 1px solid var(--color-border);
-    gap: var(--space-2);
-  }
+    .bar-left {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+    }
 
-  .bar-left {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-  }
+    .serial-tag {
+        font-weight: 700;
+    }
 
-  .serial-tag {
-    font-weight: 700;
-  }
+    .status-indicator {
+        display: flex;
+        align-items: center;
+        gap: var(--space-1);
+        padding: 1px 6px;
+        border-radius: var(--radius-xs);
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+    }
 
-  .status-indicator {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-    padding: 1px 6px;
-    border-radius: var(--radius-xs);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-  }
+    .duration-badge {
+        padding: 2px 6px;
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--radius-xs);
+    }
 
-  .duration-badge {
-    padding: 2px 6px;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-xs);
-  }
+    /* Card Body */
+    .card-body {
+        padding: var(--space-5);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        flex: 1;
+    }
 
-  /* Card Body */
-  .card-body {
-    padding: var(--space-5);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    flex: 1;
-  }
+    .card-header-info {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+    }
 
-  .card-header-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-  }
+    .role-title {
+        font-size: var(--text-xl);
+        font-weight: 700;
+        color: var(--color-text);
+        line-height: 1.25;
+    }
 
-  .role-title {
-    font-size: var(--text-xl);
-    font-weight: 700;
-    color: var(--color-text);
-    line-height: 1.25;
-  }
+    .company-subline {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-2);
+        margin-top: 2px;
+    }
 
-  .company-subline {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-2);
-    margin-top: 2px;
-  }
+    .company-name {
+        font-size: var(--text-sm);
+    }
 
-  .company-name {
-    font-size: var(--text-sm);
-  }
+    .dot {
+        color: var(--color-border-strong);
+    }
 
-  .dot {
-    color: var(--color-border-strong);
-  }
+    .period-subline {
+        display: flex;
+        align-items: center;
+        gap: var(--space-1);
+        margin-top: var(--space-1);
+    }
 
-  .period-subline {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-    margin-top: var(--space-1);
-  }
+    .clock-icon {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+    }
 
-  .clock-icon {
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-  }
+    .role-summary {
+        font-size: var(--text-sm);
+        line-height: 1.6;
+    }
 
-  .role-summary {
-    font-size: var(--text-sm);
-    line-height: 1.6;
-  }
+    /* Highlights Accordion */
+    .highlights-accordion {
+        border: 1px dashed var(--color-border);
+        border-radius: var(--radius-xs);
+        background-color: var(--color-surface-sunken);
+        transition:
+            border-color var(--transition-fast),
+            background-color var(--transition-fast);
 
-  /* Highlights Accordion */
-  .highlights-accordion {
-    border: 1px dashed var(--color-border);
-    border-radius: var(--radius-xs);
-    background-color: var(--color-surface-sunken);
-    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+        &[open] {
+            border-style: solid;
+            border-color: var(--color-border-strong);
+            background-color: var(--color-surface-sunken);
 
-    &[open] {
-      border-style: solid;
-      border-color: var(--color-border-strong);
-      background-color: var(--color-surface-sunken);
+            .plus-icon {
+                display: none;
+            }
+            .minus-icon {
+                display: inline;
+            }
+            .trigger-hint {
+                color: var(--color-phosphor-text);
+            }
+        }
 
-      .plus-icon {
-        display: none;
-      }
-      .minus-icon {
-        display: inline;
-      }
-      .trigger-hint {
+        &:not([open]) {
+            .plus-icon {
+                display: inline;
+            }
+            .minus-icon {
+                display: none;
+            }
+        }
+    }
+
+    .accordion-trigger {
+        cursor: pointer;
+        padding: var(--space-3) var(--space-4);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        list-style: none;
+        user-select: none;
+        color: var(--color-text);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        border-radius: var(--radius-xs);
+        transition:
+            background-color var(--transition-fast),
+            color var(--transition-fast);
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        &:hover {
+            color: var(--color-amber-text);
+            background-color: var(--color-surface);
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--color-amber);
+            outline-offset: -2px;
+        }
+    }
+
+    .trigger-label {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+    }
+
+    .plus-icon {
+        color: var(--color-amber-text);
+        font-weight: 700;
+    }
+
+    .minus-icon {
         color: var(--color-phosphor-text);
-      }
+        font-weight: 700;
     }
 
-    &:not([open]) {
-      .plus-icon {
-        display: inline;
-      }
-      .minus-icon {
-        display: none;
-      }
-    }
-  }
-
-  .accordion-trigger {
-    cursor: pointer;
-    padding: var(--space-3) var(--space-4);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style: none;
-    user-select: none;
-    color: var(--color-text);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    border-radius: var(--radius-xs);
-    transition: background-color var(--transition-fast), color var(--transition-fast);
-
-    &::-webkit-details-marker {
-      display: none;
+    .accordion-content {
+        padding: 0 var(--space-4) var(--space-4) var(--space-4);
+        border-top: 1px dashed var(--color-border-subtle);
+        margin-top: var(--space-2);
+        padding-top: var(--space-3);
     }
 
-    &:hover {
-      color: var(--color-amber-text);
-      background-color: var(--color-surface);
+    .highlights-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
     }
 
-    &:focus-visible {
-      outline: 2px solid var(--color-amber);
-      outline-offset: -2px;
+    .highlight-item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-2);
+        font-size: var(--text-xs);
+        line-height: 1.55;
+        color: var(--color-text);
     }
-  }
 
-  .trigger-label {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-  }
-
-  .plus-icon {
-    color: var(--color-amber-text);
-    font-weight: 700;
-  }
-
-  .minus-icon {
-    color: var(--color-phosphor-text);
-    font-weight: 700;
-  }
-
-  .accordion-content {
-    padding: 0 var(--space-4) var(--space-4) var(--space-4);
-    border-top: 1px dashed var(--color-border-subtle);
-    margin-top: var(--space-2);
-    padding-top: var(--space-3);
-  }
-
-  .highlights-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .highlight-item {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-2);
-    font-size: var(--text-xs);
-    line-height: 1.55;
-    color: var(--color-text);
-  }
-
-  .prefix {
-    font-weight: 700;
-    flex-shrink: 0;
-    line-height: 1.55;
-  }
-
-  .desc {
-    flex: 1;
-  }
-
-  /* Technologies Row */
-  .tech-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-1);
-    margin-top: auto;
-  }
-
-  /* Card Footer */
-  .card-footer {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-4) var(--space-5);
-    background-color: var(--color-surface-sunken);
-    border-top: 1px solid var(--color-border);
-  }
-
-  .full-width {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .node-meta {
-    text-align: center;
-    letter-spacing: 0.05em;
-  }
-
-  /* Archive Callout */
-  .archive-callout {
-    margin-top: var(--space-12);
-    padding: var(--space-6);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
-    box-shadow: var(--shadow-solid);
-
-    @media (min-width: 640px) {
-      flex-direction: row;
+    .prefix {
+        font-weight: 700;
+        flex-shrink: 0;
+        line-height: 1.55;
     }
-  }
+
+    .desc {
+        flex: 1;
+    }
+
+    /* Technologies Row */
+    .tech-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-1);
+        margin-top: auto;
+    }
+
+    /* Card Footer */
+    .card-footer {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        padding: var(--space-4) var(--space-5);
+        background-color: var(--color-surface-sunken);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .full-width {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .node-meta {
+        text-align: center;
+        letter-spacing: 0.05em;
+    }
+
+    /* Archive Callout */
+    .archive-callout {
+        margin-top: var(--space-12);
+        padding: var(--space-6);
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        box-shadow: var(--shadow-solid);
+
+        @media (min-width: 640px) {
+            flex-direction: row;
+        }
+    }
 </style>

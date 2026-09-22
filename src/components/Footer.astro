@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
+const basePath = import.meta.env.BASE_URL;
 const currentYear = new Date().getFullYear();
 const profileList = await getCollection("profile");
 const profile = profileList[0]?.data;
@@ -25,15 +26,14 @@ const socialsList = await getCollection("socials");
       <div class="footer-nav">
         <span class="nav-title mono text-xs text-muted">[SECTIONS_INDEX]</span>
         <ul class="footer-links">
-          <li><a href="/#about"><span class="mono text-amber">01 //</span> Sobre Mí</a></li>
-          <li><a href="/#experience"><span class="mono text-amber">02 //</span> Experiencia</a></li>
-          <li><a href="/#skills"><span class="mono text-amber">03 //</span> Habilidades</a></li>
-          <li><a href="/#projects"><span class="mono text-amber">04 //</span> Proyectos</a></li>
-          <li><a href="/#education"><span class="mono text-amber">05 //</span> Educación</a></li>
-          <li><a href="/#contact"><span class="mono text-amber">06 //</span> Contacto</a></li>
-          <li><a href="/experience"><span class="mono text-amber">&gt;&gt; //</span> Catálogo de Experiencias</a></li>
-          <li><a href="/projects"><span class="mono text-amber">&gt;&gt; //</span> Catálogo de Proyectos</a></li>
-
+          <li><a href={`${basePath}/#about`}><span class="mono text-amber">01 //</span> Sobre Mí</a></li>
+          <li><a href={`${basePath}/#experience`}><span class="mono text-amber">02 //</span> Experiencia</a></li>
+          <li><a href={`${basePath}/#skills`}><span class="mono text-amber">03 //</span> Habilidades</a></li>
+          <li><a href={`${basePath}/#projects`}><span class="mono text-amber">04 //</span> Proyectos</a></li>
+          <li><a href={`${basePath}/#education`}><span class="mono text-amber">05 //</span> Educación</a></li>
+          <li><a href={`${basePath}/#contact`}><span class="mono text-amber">06 //</span> Contacto</a></li>
+          <li><a href={`${basePath}/experience`}><span class="mono text-amber">&gt;&gt; //</span> Catálogo de Experiencias</a></li>
+          <li><a href={`${basePath}/projects`}><span class="mono text-amber">&gt;&gt; //</span> Catálogo de Proyectos</a></li>
         </ul>
       </div>
 

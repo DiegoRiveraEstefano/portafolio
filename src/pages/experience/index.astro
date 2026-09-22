@@ -15,6 +15,7 @@ const experienceOrder: Record<string, number> = {
 const experiencesList = rawExperiences.sort(
   (a, b) => (experienceOrder[a.id] ?? 99) - (experienceOrder[b.id] ?? 99)
 );
+const basePath = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Historial de Servicio & Experiencia Laboral | Diego Rivera">
@@ -69,7 +70,7 @@ const experiencesList = rawExperiences.sort(
                 <div class="card-body">
                   <div class="role-company-box">
                     <h2 class="role-name">
-                      <a href={`/experience/${exp.id}`} class="role-link">
+                      <a href={`${basePath}/experience/${exp.id}`} class="role-link">
                         {exp.data.role}
                       </a>
                     </h2>
@@ -107,7 +108,7 @@ const experiencesList = rawExperiences.sort(
                   </div>
 
                   <div class="card-actions">
-                    <a href={`/experience/${exp.id}`} class="btn btn-primary btn-sm">
+                    <a href={`${basePath}/experience/${exp.id}`} class="btn btn-primary btn-sm">
                       <span>VER ESPECIFICACIÓN DETALLADA [MD]</span>
                       <span class="mono">→</span>
                     </a>
@@ -121,7 +122,7 @@ const experiencesList = rawExperiences.sort(
 
       <!-- Return Button -->
       <div class="archive-return">
-        <a href="/" class="btn btn-secondary">
+        <a href={`${basePath}/`} class="btn btn-secondary">
           <span class="mono">←</span>
           <span>VOLVER AL PANEL PRINCIPAL</span>
         </a>

@@ -7,6 +7,7 @@ import { getCollection } from "astro:content";
 const allProjects = (await getCollection("projects")).sort(
   (a, b) => b.data.date.localeCompare(a.data.date)
 );
+const basePath = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Catálogo de Proyectos & Especificaciones | Diego Rivera">
@@ -76,7 +77,7 @@ const allProjects = (await getCollection("projects")).sort(
                 <!-- Card Body -->
                 <div class="card-body">
                   <h2 class="card-title">
-                    <a href={`/projects/${project.id}`} class="title-link">
+                    <a href={`${basePath}/projects/${project.id}`} class="title-link">
                       {project.data.title}
                     </a>
                   </h2>
@@ -90,7 +91,7 @@ const allProjects = (await getCollection("projects")).sort(
 
                   <!-- Actions -->
                   <div class="card-actions">
-                    <a href={`/projects/${project.id}`} class="btn btn-primary btn-sm">
+                    <a href={`${basePath}/projects/${project.id}`} class="btn btn-primary btn-sm">
                       <span>VER DETALLE TÉCNICO</span>
                       <span class="mono">→</span>
                     </a>
@@ -130,7 +131,7 @@ const allProjects = (await getCollection("projects")).sort(
 
       <!-- Return Button -->
       <div class="catalog-return">
-        <a href="/" class="btn btn-secondary">
+        <a href={`${basePath}/`} class="btn btn-secondary">
           <span class="mono">←</span>
           <span>VOLVER AL PANEL PRINCIPAL</span>
         </a>

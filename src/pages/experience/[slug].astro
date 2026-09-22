@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 
 const { experience } = Astro.props;
 const { Content } = await render(experience);
+const basePath = import.meta.env.BASE_URL;
 ---
 
 <Layout title={`${experience.data.role} @ ${experience.data.company} // Experiencia | Diego Rivera`}>
@@ -23,9 +24,9 @@ const { Content } = await render(experience);
     <div class="container">
       <!-- Breadcrumb Bar -->
       <nav class="breadcrumb-bar mono text-xs text-muted" aria-label="Ruta de navegación">
-        <a href="/" class="crumb-link">00 // INICIO</a>
+        <a href={`${basePath}/`} class="crumb-link">00 // INICIO</a>
         <span class="crumb-sep">/</span>
-        <a href="/experience" class="crumb-link">02 // HISTORIAL_SERVICIO</a>
+        <a href={`${basePath}/experience`} class="crumb-link">02 // HISTORIAL_SERVICIO</a>
         <span class="crumb-sep">/</span>
         <span class="crumb-current text-amber">[SRV_SPEC: {experience.id}]</span>
       </nav>
@@ -61,11 +62,11 @@ const { Content } = await render(experience);
 
           <!-- Action Switchboard -->
           <div class="experience-switchboard">
-            <a href="/experience" class="btn btn-secondary">
+            <a href={`${basePath}/experience`} class="btn btn-secondary">
               <span class="mono">←</span>
               <span>VER TODAS LAS EXPERIENCIAS</span>
             </a>
-            <a href="/#experience" class="btn btn-ghost">
+            <a href={`${basePath}/#experience`} class="btn btn-ghost">
               <span class="mono">↑</span>
               <span>PANEL PRINCIPAL</span>
             </a>
@@ -106,7 +107,7 @@ const { Content } = await render(experience);
           <span class="mono text-2xs text-muted">
             NODE_ID: {experience.id} // VERIFIED_SERVICE_RECORD
           </span>
-          <a href="/experience" class="btn btn-ghost btn-sm">
+          <a href={`${basePath}/experience`} class="btn btn-ghost btn-sm">
             <span>HISTORIAL COMPLETO</span>
             <span class="mono">→</span>
           </a>

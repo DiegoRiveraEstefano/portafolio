@@ -1,275 +1,338 @@
 ---
+const basePath = import.meta.env.BASE_URL;
 ---
 
 <header class="nav-header">
-  <div class="container nav-container">
-    <a href="#" class="nav-brand">
-      <span class="status-dot status-dot--green"></span>
-      <span class="brand-text">
-        <strong class="brand-title">DIEGO RIVERA</strong>
-        <span class="brand-spec">SDE // SYS_ONLINE</span>
-      </span>
-    </a>
+    <div class="container nav-container">
+        <a href={`${basePath}/`} class="nav-brand">
+            <span class="status-dot status-dot--green"></span>
+            <span class="brand-text">
+                <strong class="brand-title">DIEGO RIVERA</strong>
+                <span class="brand-spec">SDE // SYS_ONLINE</span>
+            </span>
+        </a>
 
-    <!-- Desktop Navigation -->
-    <nav class="nav-menu" aria-label="Navegación principal">
-      <ul class="nav-list">
-        <li><a href="/#about" class="nav-link"><span class="nav-num">01</span><span class="nav-label">Sobre Mí</span></a></li>
-        <li><a href="/#experience" class="nav-link"><span class="nav-num">02</span><span class="nav-label">Experiencia</span></a></li>
-        <li><a href="/#skills" class="nav-link"><span class="nav-num">03</span><span class="nav-label">Habilidades</span></a></li>
-        <li><a href="/#projects" class="nav-link"><span class="nav-num">04</span><span class="nav-label">Proyectos</span></a></li>
-        <li><a href="/#education" class="nav-link"><span class="nav-num">05</span><span class="nav-label">Educación</span></a></li>
-        <li><a href="/#contact" class="nav-link nav-link--cta"><span class="nav-num">06</span><span class="nav-label">Contacto</span></a></li>
-      </ul>
-    </nav>
+        <!-- Desktop Navigation -->
+        <nav class="nav-menu" aria-label="Navegación principal">
+            <ul class="nav-list">
+                <li>
+                    <a href={`${basePath}/#about`} class="nav-link">
+                        <span class="nav-num">01</span>
+                        <span class="nav-label">Sobre Mí</span>
+                    </a>
+                </li>
+                <li>
+                    <a href={`${basePath}/#experience`} class="nav-link">
+                        <span class="nav-num">02</span>
+                        <span class="nav-label">Experiencia</span>
+                    </a>
+                </li>
+                <li>
+                    <a href={`${basePath}/#skills`} class="nav-link">
+                        <span class="nav-num">03</span>
+                        <span class="nav-label">Habilidades</span>
+                    </a>
+                </li>
+                <li>
+                    <a href={`${basePath}/#projects`} class="nav-link">
+                        <span class="nav-num">04</span>
+                        <span class="nav-label">Proyectos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href={`${basePath}/#education`} class="nav-link">
+                        <span class="nav-num">05</span>
+                        <span class="nav-label">Educación</span>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href={`${basePath}/#contact`}
+                        class="nav-link nav-link--cta"
+                    >
+                        <span class="nav-num">06</span>
+                        <span class="nav-label">Contacto</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-    <!-- Mobile Menu Button -->
-    <button
-      id="mobile-menu-toggle"
-      class="mobile-toggle"
-      aria-expanded="false"
-      aria-controls="mobile-menu-drawer"
-      aria-label="Abrir menú de navegación"
-    >
-      <span class="toggle-box">
-        <span class="toggle-bar"></span>
-        <span class="toggle-bar"></span>
-      </span>
-      <span class="toggle-label mono">MENU</span>
-    </button>
-  </div>
-
-  <!-- Mobile Drawer -->
-  <div id="mobile-menu-drawer" class="mobile-drawer" hidden>
-    <div class="container">
-      <div class="mobile-drawer-header">
-        <span class="mono text-muted text-xs">DIAGNOSTIC_NAV // SECTIONS</span>
-      </div>
-      <ul class="mobile-nav-list">
-        <li><a href="/#about" class="mobile-link"><span class="nav-num">01 //</span> Sobre Mí</a></li>
-        <li><a href="/#experience" class="mobile-link"><span class="nav-num">02 //</span> Experiencia</a></li>
-        <li><a href="/#skills" class="mobile-link"><span class="nav-num">03 //</span> Habilidades</a></li>
-        <li><a href="/#projects" class="mobile-link"><span class="nav-num">04 //</span> Proyectos</a></li>
-        <li><a href="/#education" class="mobile-link"><span class="nav-num">05 //</span> Educación</a></li>
-        <li><a href="/#contact" class="mobile-link"><span class="nav-num">06 //</span> Contacto</a></li>
-      </ul>
+        <!-- Mobile Menu Button -->
+        <button
+            id="mobile-menu-toggle"
+            class="mobile-toggle"
+            aria-expanded="false"
+            aria-controls="mobile-menu-drawer"
+            aria-label="Abrir menú de navegación"
+        >
+            <span class="toggle-box">
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+            </span>
+            <span class="toggle-label mono">MENU</span>
+        </button>
     </div>
-  </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu-drawer" class="mobile-drawer" hidden>
+        <div class="container">
+            <div class="mobile-drawer-header">
+                <span class="mono text-muted text-xs">
+                    DIAGNOSTIC_NAV // SECTIONS
+                </span>
+            </div>
+            <ul class="mobile-nav-list">
+                <li>
+                    <a href={`${basePath}/#about`} class="mobile-link">
+                        <span class="nav-num">01 //</span> Sobre Mí
+                    </a>
+                </li>
+                <li>
+                    <a href={`${basePath}/#experience`} class="mobile-link">
+                        <span class="nav-num">02 //</span> Experiencia
+                    </a>
+                </li>
+                <li>
+                    <a href={`${basePath}/#skills`} class="mobile-link">
+                        <span class="nav-num">03 //</span> Habilidades
+                    </a>
+                </li>
+                <li>
+                    <a href={`${basePath}/#projects`} class="mobile-link">
+                        <span class="nav-num">04 //</span> Proyectos
+                    </a>
+                </li>
+                <li>
+                    <a href={`${basePath}/#education`} class="mobile-link">
+                        <span class="nav-num">05 //</span> Educación
+                    </a>
+                </li>
+                <li>
+                    <a href={`${basePath}/#contact`} class="mobile-link">
+                        <span class="nav-num">06 //</span> Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </header>
 
 <style>
-  .nav-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background-color: color-mix(in oklch, var(--color-bg) 85%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-border);
-  }
+    .nav-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background-color: color-mix(in oklch, var(--color-bg) 85%, transparent);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--color-border);
+    }
 
-  .nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 4.25rem;
-  }
+    .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 4.25rem;
+    }
 
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-2) 0;
-  }
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        padding: var(--space-2) 0;
+    }
 
-  .brand-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
+    .brand-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+    }
 
-  .brand-title {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--color-text);
-  }
+    .brand-title {
+        font-family: var(--font-sans);
+        font-size: var(--text-sm);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--color-text);
+    }
 
-  .brand-spec {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    letter-spacing: 0.06em;
-    color: var(--color-phosphor-text);
-  }
+    .brand-spec {
+        font-family: var(--font-mono);
+        font-size: var(--text-2xs);
+        letter-spacing: 0.06em;
+        color: var(--color-phosphor-text);
+    }
 
-  .nav-menu {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
     .nav-menu {
-      display: block;
-    }
-  }
-
-  .nav-list {
-    display: flex;
-    align-items: center;
-    gap: var(--space-6);
-  }
-
-  .nav-link {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.04em;
-    color: var(--color-text-muted);
-    padding: var(--space-2) var(--space-2);
-    border-radius: var(--radius-xs);
-    transition: color var(--transition-fast), background-color var(--transition-fast);
-
-    &:hover {
-      color: var(--color-text);
-      background-color: var(--color-surface-elevated);
-
-      .nav-num {
-        color: var(--color-amber-text);
-      }
-    }
-  }
-
-  .nav-num {
-    color: var(--color-text-subtle);
-    font-size: var(--text-2xs);
-    transition: color var(--transition-fast);
-  }
-
-  .nav-link--cta {
-    border: 1px solid var(--color-border-strong);
-    background-color: var(--color-surface);
-    color: var(--color-text);
-
-    &:hover {
-      border-color: var(--color-amber);
-      background-color: var(--color-amber-muted);
-    }
-  }
-
-  /* Mobile Toggle */
-  .mobile-toggle {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-2) var(--space-3);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xs);
-    background-color: var(--color-surface);
-    color: var(--color-text);
-
-    @media (min-width: 768px) {
-      display: none;
-    }
-
-    &:hover {
-      border-color: var(--color-border-strong);
-    }
-  }
-
-  .toggle-box {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    width: 14px;
-  }
-
-  .toggle-bar {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-text);
-    transition: transform var(--transition-fast);
-  }
-
-  .toggle-label {
-    font-size: var(--text-2xs);
-    letter-spacing: 0.08em;
-  }
-
-  /* Mobile Drawer */
-  .mobile-drawer {
-    border-top: 1px solid var(--color-border);
-    background-color: var(--color-surface);
-    padding-block: var(--space-4) var(--space-6);
-
-    &[hidden] {
-      display: none;
+        display: none;
     }
 
     @media (min-width: 768px) {
-      display: none !important;
+        .nav-menu {
+            display: block;
+        }
     }
-  }
 
-  .mobile-drawer-header {
-    padding-bottom: var(--space-2);
-    margin-bottom: var(--space-2);
-    border-bottom: 1px dashed var(--color-border-subtle);
-  }
+    .nav-list {
+        display: flex;
+        align-items: center;
+        gap: var(--space-6);
+    }
 
-  .mobile-nav-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: var(--space-1);
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        letter-spacing: 0.04em;
+        color: var(--color-text-muted);
+        padding: var(--space-2) var(--space-2);
+        border-radius: var(--radius-xs);
+        transition:
+            color var(--transition-fast),
+            background-color var(--transition-fast);
 
-  .mobile-link {
-    display: block;
-    padding: var(--space-2) var(--space-3);
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    color: var(--color-text);
-    border-radius: var(--radius-xs);
-    border: 1px solid transparent;
+        &:hover {
+            color: var(--color-text);
+            background-color: var(--color-surface-elevated);
 
-    &:hover {
-      background-color: var(--color-surface-elevated);
-      border-color: var(--color-border);
+            .nav-num {
+                color: var(--color-amber-text);
+            }
+        }
     }
 
     .nav-num {
-      color: var(--color-amber-text);
-      margin-right: var(--space-1);
+        color: var(--color-text-subtle);
+        font-size: var(--text-2xs);
+        transition: color var(--transition-fast);
     }
-  }
+
+    .nav-link--cta {
+        border: 1px solid var(--color-border-strong);
+        background-color: var(--color-surface);
+        color: var(--color-text);
+
+        &:hover {
+            border-color: var(--color-amber);
+            background-color: var(--color-amber-muted);
+        }
+    }
+
+    /* Mobile Toggle */
+    .mobile-toggle {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-2) var(--space-3);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xs);
+        background-color: var(--color-surface);
+        color: var(--color-text);
+
+        @media (min-width: 768px) {
+            display: none;
+        }
+
+        &:hover {
+            border-color: var(--color-border-strong);
+        }
+    }
+
+    .toggle-box {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 14px;
+    }
+
+    .toggle-bar {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-text);
+        transition: transform var(--transition-fast);
+    }
+
+    .toggle-label {
+        font-size: var(--text-2xs);
+        letter-spacing: 0.08em;
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+        border-top: 1px solid var(--color-border);
+        background-color: var(--color-surface);
+        padding-block: var(--space-4) var(--space-6);
+
+        &[hidden] {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            display: none !important;
+        }
+    }
+
+    .mobile-drawer-header {
+        padding-bottom: var(--space-2);
+        margin-bottom: var(--space-2);
+        border-bottom: 1px dashed var(--color-border-subtle);
+    }
+
+    .mobile-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    .mobile-link {
+        display: block;
+        padding: var(--space-2) var(--space-3);
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-text);
+        border-radius: var(--radius-xs);
+        border: 1px solid transparent;
+
+        &:hover {
+            background-color: var(--color-surface-elevated);
+            border-color: var(--color-border);
+        }
+
+        .nav-num {
+            color: var(--color-amber-text);
+            margin-right: var(--space-1);
+        }
+    }
 </style>
 
 <script>
-  const toggleBtn = document.getElementById("mobile-menu-toggle");
-  const drawer = document.getElementById("mobile-menu-drawer");
+    const toggleBtn = document.getElementById("mobile-menu-toggle");
+    const drawer = document.getElementById("mobile-menu-drawer");
 
-  if (toggleBtn && drawer) {
-    toggleBtn.addEventListener("click", () => {
-      const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
-      toggleBtn.setAttribute("aria-expanded", String(!isExpanded));
-      if (isExpanded) {
-        drawer.setAttribute("hidden", "");
-      } else {
-        drawer.removeAttribute("hidden");
-      }
-    });
+    if (toggleBtn && drawer) {
+        toggleBtn.addEventListener("click", () => {
+            const isExpanded =
+                toggleBtn.getAttribute("aria-expanded") === "true";
+            toggleBtn.setAttribute("aria-expanded", String(!isExpanded));
+            if (isExpanded) {
+                drawer.setAttribute("hidden", "");
+            } else {
+                drawer.removeAttribute("hidden");
+            }
+        });
 
-    // Close on navigation click
-    const mobileLinks = drawer.querySelectorAll("a");
-    mobileLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        toggleBtn.setAttribute("aria-expanded", "false");
-        drawer.setAttribute("hidden", "");
-      });
-    });
-  }
+        // Close on navigation click
+        const mobileLinks = drawer.querySelectorAll("a");
+        mobileLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                toggleBtn.setAttribute("aria-expanded", "false");
+                drawer.setAttribute("hidden", "");
+            });
+        });
+    }
 </script>
