@@ -1,1 +1,6 @@
-@import "tailwindcss";
+/* Orquestador de Estilos Vanilla Modernos con @layer */
+@import "./layers.css";
+@import "./tokens.css";
+@import "./reset.css";
+@import "./base.css";
+@import "./utilities.css";

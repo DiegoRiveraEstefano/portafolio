@@ -1,32 +1,262 @@
-<section class="relative bg-gradient-to-br from-blue-50 to-indigo-100 pt-20 pb-16 overflow-hidden">
-  <div class="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))]"></div>
-  
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center">
-      <div class="mb-8">
-        <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-          SDE
+---
+import { getCollection } from "astro:content";
+
+const profileList = await getCollection("profile");
+const profile = profileList[0]?.data;
+---
+
+<section class="section hero-section">
+  <div class="container">
+    <div class="hero-chassis corner-marks">
+      <!-- Chassis Header Bar -->
+      <div class="chassis-header">
+        <div class="chassis-status">
+          <span class="status-dot status-dot--green"></span>
+          <span class="mono text-2xs text-phosphor">{profile?.systemStatus || "SYSTEM_NOMINAL // V3.8"}</span>
+        </div>
+        <div class="chassis-meta mono text-2xs text-muted">
+          <span>LOC: {profile?.location || "SANTIAGO_CL [UTC-3]"}</span>
+          <span class="separator">/</span>
+          <span>SPEC: {profile?.specialization || "SDE_BACKEND_DISTRIBUTED"}</span>
         </div>
       </div>
-      
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-        Ingeniero de Software
-        <span class="block gradient-text">| Full Stack Developer</span>
-      </h1>
-      
-      <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-        Especialista en Python (Django, FastAPI), desarrollo de soluciones IA/ML y sistemas embebidos.
-        Enfocado en construir arquitecturas escalables y de alto rendimiento alineadas a objetivos de negocio.
-      </p>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#projects" class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl">
-          Ver Proyectos
-        </a>
-        <a href="#contact" class="inline-flex items-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors shadow-lg hover:shadow-xl">
-          Contacto
-        </a>
+
+      <!-- Main Specs Body -->
+      <div class="hero-body">
+        <div class="hero-chip-badge">
+          <div class="chip-socket">
+            <span class="chip-label mono">{profile?.chipLabel || "SDE"}</span>
+            <span class="chip-sub mono">{profile?.chipSub || "CORE"}</span>
+          </div>
+        </div>
+
+        <div class="hero-content">
+          <div class="hero-tagline mono text-xs text-amber">
+            {profile?.tagline || "// INGENIERO DE SOFTWARE // BACKEND & SISTEMAS DISTRIBUIDOS"}
+          </div>
+
+          <h1 class="hero-title">
+            {profile?.name || "Diego Rivera"}
+            <span class="hero-role mono">{profile?.role || "<Backend Developer // Distributed Systems & DevOps>"}</span>
+          </h1>
+
+          <p class="hero-desc">
+            {profile?.heroDescription}
+          </p>
+
+          <!-- Hardware Specs Badges -->
+          <div class="specs-grid">
+            {
+              profile?.specs.map((spec) => (
+                <div class="spec-item">
+                  <span class="spec-key mono">{spec.key}</span>
+                  <span class="spec-val mono">{spec.value}</span>
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- Action Switches -->
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <span>EXPLORAR PROYECTOS</span>
+              <span class="mono">↓</span>
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+              <span>CONEXIÓN DIRECTA</span>
+              <span class="mono">&gt;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chassis Footer Ribbon -->
+      <div class="chassis-footer">
+        <span class="mono text-2xs text-muted">INPUT_READY: SCROLL_TO_INITIALIZE_DATA</span>
+        <div class="chassis-pulse mono text-2xs text-amber">
+          <span>● BUS_ACTIVE</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-section {
+    padding-top: calc(4.25rem + var(--space-8));
+    padding-bottom: var(--space-12);
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  .hero-chassis {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-elevation);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .chassis-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-6);
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .chassis-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .chassis-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+
+    .separator {
+      color: var(--color-border-strong);
+    }
+  }
+
+  .hero-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    padding: clamp(var(--space-6), 6vw, var(--space-12));
+
+    @media (min-width: 900px) {
+      grid-template-columns: auto 1fr;
+      align-items: flex-start;
+      gap: var(--space-12);
+    }
+  }
+
+  /* Chip Socket Visual */
+  .hero-chip-badge {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .chip-socket {
+    width: 88px;
+    height: 88px;
+    background-color: var(--color-surface-elevated);
+    border: 2px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: inset 0 0 0 2px var(--color-surface-sunken), var(--shadow-solid);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background-color: var(--color-amber);
+    }
+  }
+
+  .chip-label {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1;
+  }
+
+  .chip-sub {
+    font-size: var(--text-2xs);
+    letter-spacing: 0.14em;
+    color: var(--color-text-subtle);
+    margin-top: 4px;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .hero-tagline {
+    letter-spacing: 0.08em;
+  }
+
+  .hero-title {
+    font-family: var(--font-sans);
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-text);
+  }
+
+  .hero-role {
+    display: block;
+    font-size: clamp(var(--text-lg), 2.5vw, var(--text-2xl));
+    font-weight: 500;
+    color: var(--color-amber-text);
+    margin-top: var(--space-1);
+  }
+
+  .hero-desc {
+    font-size: clamp(var(--text-base), 1.8vw, var(--text-lg));
+    color: var(--color-text-muted);
+    max-width: 68ch;
+  }
+
+  /* Specs Grid */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+    padding: var(--space-4);
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xs);
+  }
+
+  .spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .spec-key {
+    font-size: var(--text-2xs);
+    color: var(--color-text-subtle);
+    letter-spacing: 0.06em;
+  }
+
+  .spec-val {
+    font-size: var(--text-xs);
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .chassis-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-6);
+    background-color: var(--color-surface-sunken);
+    border-top: 1px solid var(--color-border);
+  }
+</style>

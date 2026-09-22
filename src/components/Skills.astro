@@ -1,11 +1,15 @@
 ---
 import { getCollection } from "astro:content";
-import { Fragment } from "astro/jsx-runtime";
 
 // Obtener todas las habilidades de la colección 'skills'
 const skillsData = await getCollection("skills");
 
-const skillsByCategory = skillsData.reduce((acc, skill) => {
+interface SkillItem {
+  name: string;
+  yearsOfExperience: number;
+}
+
+const skillsByCategory = skillsData.reduce((acc: Record<string, SkillItem[]>, skill) => {
   const category = skill.data.category;
   if (!acc[category]) {
     acc[category] = [];
@@ -17,94 +21,285 @@ const skillsByCategory = skillsData.reduce((acc, skill) => {
   return acc;
 }, {});
 
-// Definir los íconos y colores para cada categoría
-const categoryIcons = {
-  "Languages": {
-    svg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2 2m-2-2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"></path></svg>`,
-    bgColor: "bg-blue-100",
-    textColor: "text-blue-600",
-  },
-  "Tools": {
-    svg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>`,
-    bgColor: "bg-green-100",
-    textColor: "text-green-600",
-  },
+// Orden de prioridad técnico
+const priorityOrder = [
+  "Backend Development",
+  "Databases",
+  "Tools",
+  "Languages",
+  "Data Science",
+  "Hardware/IoT",
+  "Frontend Development",
+];
+
+const sortedCategories = Object.entries(skillsByCategory).sort(([catA], [catB]) => {
+  const idxA = priorityOrder.indexOf(catA);
+  const idxB = priorityOrder.indexOf(catB);
+  return (idxA === -1 ? 99 : idxA) - (idxB === -1 ? 99 : idxB);
+});
+
+// Metadatos técnicos e íconos limpios (sin clases Tailwind)
+const categoryMeta: Record<string, { code: string; colorClass: string; svg: string }> = {
   "Backend Development": {
-    svg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>`,
-    bgColor: "bg-green-100",
-    textColor: "text-green-600",
-  },
-  "Frontend Development": {
-    svg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`,
-    bgColor: "bg-blue-100",
-    textColor: "text-blue-600",
-  },
-  "Data Science": {
-    svg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`,
-    bgColor: "bg-purple-100",
-    textColor: "text-purple-600",
-  },
-  "System Design": {
-    svg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>`,
-    bgColor: "bg-yellow-100",
-    textColor: "text-yellow-600",
+    code: "MOD_01",
+    colorClass: "module--phosphor",
+    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>`,
   },
   "Databases": {
-    svg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>`,
-    bgColor: "bg-indigo-100",
-    textColor: "text-indigo-600",
+    code: "MOD_02",
+    colorClass: "module--cyan",
+    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>`,
+  },
+  "Tools": {
+    code: "MOD_03",
+    colorClass: "module--amber",
+    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>`,
+  },
+  "Languages": {
+    code: "MOD_04",
+    colorClass: "module--purple",
+    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2 2m-2-2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"></path></svg>`,
+  },
+  "Data Science": {
+    code: "MOD_05",
+    colorClass: "module--cyan",
+    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`,
   },
   "Hardware/IoT": {
-    svg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>`,
-    bgColor: "bg-red-100",
-    textColor: "text-red-600",
+    code: "MOD_06",
+    colorClass: "module--amber",
+    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>`,
+  },
+  "Frontend Development": {
+    code: "MOD_07",
+    colorClass: "module--purple",
+    svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`,
   },
 };
 ---
 
-<section id="skills" class="py-16 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-        Habilidades Técnicas
-      </h2>
-      <div
-        class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"
-      >
-      </div>
+<section id="skills" class="section skills-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-index">02 // STACK &amp; CAPACIDADES</span>
+      <h2 class="section-title">Habilidades Técnicas</h2>
+      <p class="section-subtitle">
+        Módulos y tecnologías probadas en entornos de backend de alto rendimiento, infraestructura y sistemas distribuidos.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="modules-grid">
       {
-        Object.entries(skillsByCategory).map(([category, skills]) => (
-          <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div class="flex items-center mb-4">
-              <div
-                class:list={[
-                  "w-12 h-12 rounded-lg flex items-center justify-center mr-4",
-                  categoryIcons[category].bgColor,
-                ]}
-              >
-                <Fragment
-                  set:html={categoryIcons[category].svg}
-                  class:list={[categoryIcons[category].textColor]}
-                />
-              </div>
-              <h3 class="text-xl font-semibold text-gray-900">{category}</h3>
-            </div>
-            <div class="space-y-3">
-              {skills.map((skill) => (
-                <div class="flex items-center justify-between">
-                  <span class="text-gray-600">{skill.name}</span>
-                  <span class="text-gray-700 font-medium">
-                    {skill.yearsOfExperience} años
-                  </span>
+        sortedCategories.map(([category, skills]) => {
+          const meta = categoryMeta[category] || {
+            code: "MOD_XX",
+            colorClass: "module--amber",
+            svg: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>`,
+          };
+
+          return (
+            <div class={`module-card ${meta.colorClass} specs-card`}>
+              <!-- Module Header -->
+              <div class="module-top">
+                <div class="module-icon-wrap">
+                  <div class="module-icon">
+                    <Fragment set:html={meta.svg} />
+                  </div>
+                  <span class="mono text-2xs module-code">{meta.code}</span>
                 </div>
-              ))}
+                <h3 class="module-title">{category}</h3>
+              </div>
+
+              <!-- Skills List -->
+              <ul class="skills-list">
+                {skills.map((skill) => (
+                  <li class="skill-row">
+                    <span class="skill-name">{skill.name}</span>
+                    <span class="skill-calibre mono">
+                      <span class="calibre-num">{skill.yearsOfExperience}Y</span>
+                      <span class="calibre-dots" aria-hidden="true">
+                        {"■".repeat(Math.min(skill.yearsOfExperience, 4))}
+                        {"□".repeat(Math.max(0, 4 - skill.yearsOfExperience))}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <!-- Module Footprint Pin Bar -->
+              <div class="module-pinbar mono text-2xs" aria-hidden="true">
+                <span>[BUS_SYNC]</span>
+                <span>PIN_COUNT: {skills.length}</span>
+              </div>
             </div>
-          </div>
-        ))
+          );
+        })
       }
     </div>
   </div>
 </section>
+
+<style>
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .module-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-4);
+    position: relative;
+    box-shadow: var(--shadow-solid);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0px 0px var(--color-border-strong);
+    }
+  }
+
+  .module-top {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .module-icon-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .module-icon {
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface-sunken);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .module-code {
+    letter-spacing: 0.08em;
+    color: var(--color-text-subtle);
+  }
+
+  .module-title {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.25;
+    padding-top: 2px;
+  }
+
+  /* Specific Module Color Accents */
+  .module--phosphor {
+    .module-icon {
+      color: var(--color-phosphor-text);
+      border-color: color-mix(in oklch, var(--color-phosphor) 30%, transparent);
+    }
+    &:hover {
+      border-color: var(--color-phosphor);
+    }
+  }
+
+  .module--cyan {
+    .module-icon {
+      color: var(--color-cyan-text);
+      border-color: color-mix(in oklch, var(--color-cyan) 30%, transparent);
+    }
+    &:hover {
+      border-color: var(--color-cyan);
+    }
+  }
+
+  .module--amber {
+    .module-icon {
+      color: var(--color-amber-text);
+      border-color: color-mix(in oklch, var(--color-amber) 30%, transparent);
+    }
+    &:hover {
+      border-color: var(--color-amber);
+    }
+  }
+
+  .module--purple {
+    .module-icon {
+      color: var(--color-purple-text);
+      border-color: color-mix(in oklch, var(--color-purple) 30%, transparent);
+    }
+    &:hover {
+      border-color: var(--color-purple);
+    }
+  }
+
+  /* Skills Rows */
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-block: var(--space-1);
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+    padding: var(--space-1) 0;
+    border-bottom: 1px dashed var(--color-border-subtle);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .skill-name {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .skill-calibre {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .calibre-num {
+    font-weight: 600;
+    color: var(--color-text-subtle);
+  }
+
+  .calibre-dots {
+    font-size: var(--text-2xs);
+    letter-spacing: 1px;
+    color: var(--color-amber-text);
+    opacity: 0.8;
+  }
+
+  .module-pinbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-border-subtle);
+    color: var(--color-text-subtle);
+    font-size: var(--text-2xs);
+  }
+</style>
