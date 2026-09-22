@@ -1,0 +1,100 @@
+@layer tokens {
+  :root {
+    color-scheme: dark light;
+
+    /* Superficies y Fondos Técnicos */
+    --color-bg: light-dark(oklch(96% 0.005 240), oklch(13% 0.015 250));
+    --color-surface: light-dark(oklch(99% 0.002 240), oklch(17% 0.018 250));
+    --color-surface-elevated: light-dark(oklch(93.5% 0.008 240), oklch(21% 0.022 250));
+    --color-surface-sunken: light-dark(oklch(91% 0.01 240), oklch(10% 0.012 250));
+
+    /* Bordes e Instrumentación Milimétrica */
+    --color-border: light-dark(oklch(84% 0.01 240), oklch(26% 0.02 250));
+    --color-border-subtle: light-dark(oklch(89% 0.008 240), oklch(20% 0.015 250));
+    --color-border-strong: light-dark(oklch(70% 0.015 240), oklch(40% 0.025 250));
+    --color-border-focus: var(--color-amber);
+
+    /* Textos con Contraste Perceptual */
+    --color-text: light-dark(oklch(18% 0.015 240), oklch(94% 0.005 240));
+    --color-text-muted: light-dark(oklch(45% 0.02 240), oklch(68% 0.015 240));
+    --color-text-subtle: light-dark(oklch(60% 0.015 240), oklch(48% 0.012 240));
+    --color-text-inverse: light-dark(oklch(96% 0.005 240), oklch(14% 0.015 250));
+
+    /* Acentos Funcionales de Instrumentación (Hardware / Lab) */
+    --color-amber: oklch(75% 0.18 55);
+    --color-amber-muted: light-dark(oklch(88% 0.08 55), oklch(28% 0.08 55));
+    --color-amber-text: light-dark(oklch(45% 0.16 55), oklch(85% 0.16 55));
+
+    --color-phosphor: oklch(78% 0.17 145);
+    --color-phosphor-muted: light-dark(oklch(90% 0.07 145), oklch(26% 0.07 145));
+    --color-phosphor-text: light-dark(oklch(40% 0.14 145), oklch(85% 0.15 145));
+
+    --color-cyan: oklch(72% 0.14 215);
+    --color-cyan-muted: light-dark(oklch(88% 0.06 215), oklch(26% 0.06 215));
+    --color-cyan-text: light-dark(oklch(42% 0.12 215), oklch(84% 0.12 215));
+
+    --color-coral: oklch(68% 0.19 25);
+    --color-coral-muted: light-dark(oklch(88% 0.07 25), oklch(26% 0.07 25));
+    --color-coral-text: light-dark(oklch(42% 0.15 25), oklch(84% 0.15 25));
+
+    --color-purple: oklch(68% 0.17 310);
+    --color-purple-muted: light-dark(oklch(89% 0.06 310), oklch(26% 0.06 310));
+    --color-purple-text: light-dark(oklch(42% 0.14 310), oklch(84% 0.14 310));
+
+    /* Retícula de Blueprint */
+    --grid-dot-color: light-dark(oklch(84% 0.01 240 / 60%), oklch(26% 0.02 250 / 60%));
+    --grid-line-color: light-dark(oklch(90% 0.008 240 / 50%), oklch(20% 0.015 250 / 50%));
+
+    /* Tipografías Técnicas */
+    --font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+
+    /* Escala Tipográfica Modular */
+    --text-2xs: 0.6875rem; /* 11px */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 2rem;      /* 32px */
+    --text-4xl: 2.5rem;    /* 40px */
+    --text-5xl: 3.25rem;   /* 52px */
+
+    /* Geometría de Chasis (Bordes de instrumental de precisión) */
+    --radius-none: 0px;
+    --radius-xs: 2px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 10px;
+    --radius-full: 9999px;
+
+    /* Espaciado */
+    --space-0-5: 0.125rem; /* 2px */
+    --space-1: 0.25rem;    /* 4px */
+    --space-2: 0.5rem;     /* 8px */
+    --space-3: 0.75rem;    /* 12px */
+    --space-4: 1rem;       /* 16px */
+    --space-5: 1.25rem;    /* 20px */
+    --space-6: 1.5rem;     /* 24px */
+    --space-8: 2rem;       /* 32px */
+    --space-10: 2.5rem;    /* 40px */
+    --space-12: 3rem;      /* 48px */
+    --space-16: 4rem;      /* 64px */
+    --space-20: 5rem;      /* 80px */
+    --space-24: 6rem;      /* 96px */
+
+    /* Layout */
+    --container-max-width: 1200px;
+    --container-padding: clamp(1rem, 4vw, 2rem);
+
+    /* Sombras Mecánicas / Técnicas */
+    --shadow-solid: 2px 2px 0px 0px var(--color-border);
+    --shadow-solid-focus: 3px 3px 0px 0px var(--color-amber);
+    --shadow-elevation: 0 4px 12px light-dark(oklch(0% 0 0 / 6%), oklch(0% 0 0 / 30%));
+
+    /* Transiciones */
+    --transition-fast: 120ms cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-base: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}

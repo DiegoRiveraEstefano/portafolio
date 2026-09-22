@@ -1,0 +1,248 @@
+@layer utilities {
+  /* Contenedores y Secciones */
+  .container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin-inline: auto;
+    padding-inline: var(--container-padding);
+  }
+
+  .section {
+    padding-block: clamp(var(--space-12), 8vw, var(--space-20));
+    position: relative;
+    border-bottom: 1px dashed var(--color-border-subtle);
+  }
+
+  /* Encabezado Técnico de Sección */
+  .section-header {
+    margin-bottom: clamp(var(--space-8), 5vw, var(--space-12));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .section-index {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.12em;
+    color: var(--color-amber-text);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .section-index::after {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 1px;
+    background-color: var(--color-amber);
+  }
+
+  .section-title {
+    font-family: var(--font-sans);
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .section-subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  /* Utilidades Tipográficas */
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .text-amber { color: var(--color-amber-text); }
+  .text-phosphor { color: var(--color-phosphor-text); }
+  .text-cyan { color: var(--color-cyan-text); }
+  .text-coral { color: var(--color-coral-text); }
+  .text-muted { color: var(--color-text-muted); }
+
+  /* Indicador LED / Status Dot */
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    display: inline-block;
+    position: relative;
+  }
+
+  .status-dot--green {
+    background-color: var(--color-phosphor);
+    box-shadow: 0 0 8px var(--color-phosphor);
+  }
+
+  .status-dot--green::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-phosphor);
+    animation: pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  }
+
+  .status-dot--amber {
+    background-color: var(--color-amber);
+    box-shadow: 0 0 8px var(--color-amber);
+  }
+
+  @keyframes pulse-ring {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(0.9); opacity: 0; }
+  }
+
+  /* Botones Táctiles de Hardware */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--radius-xs);
+    border: 1px solid transparent;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .btn-primary {
+    background-color: var(--color-amber);
+    color: oklch(15% 0.05 55);
+    border-color: var(--color-amber);
+    box-shadow: 2px 2px 0px 0px var(--color-border-strong);
+  }
+
+  .btn-primary:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px 0px var(--color-text);
+  }
+
+  .btn-primary:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px 0px var(--color-text);
+  }
+
+  .btn-secondary {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
+    box-shadow: 2px 2px 0px 0px var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-text);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px 0px var(--color-border-strong);
+  }
+
+  .btn-secondary:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px 0px var(--color-border);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-text-muted);
+    border-color: var(--color-border-subtle);
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-text);
+    border-color: var(--color-border);
+    background-color: var(--color-surface-elevated);
+  }
+
+  /* Badges / Chips Técnicos */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-0-5) var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+  }
+
+  .badge--amber {
+    border-color: color-mix(in oklch, var(--color-amber) 40%, transparent);
+    background-color: var(--color-amber-muted);
+    color: var(--color-amber-text);
+  }
+
+  .badge--phosphor {
+    border-color: color-mix(in oklch, var(--color-phosphor) 40%, transparent);
+    background-color: var(--color-phosphor-muted);
+    color: var(--color-phosphor-text);
+  }
+
+  .badge--cyan {
+    border-color: color-mix(in oklch, var(--color-cyan) 40%, transparent);
+    background-color: var(--color-cyan-muted);
+    color: var(--color-cyan-text);
+  }
+
+  .badge--purple {
+    border-color: color-mix(in oklch, var(--color-purple) 40%, transparent);
+    background-color: var(--color-purple-muted);
+    color: var(--color-purple-text);
+  }
+
+  /* Tarjeta de Especificaciones / Chasis */
+  .specs-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-6);
+    position: relative;
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .specs-card:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  /* Marcas de alineación esquemática en esquinas (+) */
+  .corner-marks {
+    position: relative;
+  }
+
+  .corner-marks::before,
+  .corner-marks::after {
+    content: "+";
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-border-strong);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .corner-marks::before {
+    top: -6px;
+    left: -6px;
+  }
+
+  .corner-marks::after {
+    bottom: -6px;
+    right: -6px;
+  }
+}

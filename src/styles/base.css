@@ -1,0 +1,74 @@
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    background-image: 
+      radial-gradient(var(--grid-dot-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: -1px -1px;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Selección de texto técnica */
+  ::selection {
+    background-color: var(--color-amber-muted);
+    color: var(--color-text);
+  }
+
+  /* Scrollbar personalizado estilo instrumental */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface-sunken);
+    border-left: 1px solid var(--color-border-subtle);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: var(--radius-none);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-amber);
+  }
+
+  /* Encabezados */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: clamp(var(--text-2xl), 3.5vw, var(--text-3xl));
+  }
+
+  h3 {
+    font-size: clamp(var(--text-lg), 2.5vw, var(--text-xl));
+  }
+
+  p {
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  code, pre, kbd {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+}
