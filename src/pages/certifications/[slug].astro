@@ -1,0 +1,379 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const certifications = await getCollection("certifications");
+  return certifications.map((cert) => ({
+    params: { slug: cert.id },
+    props: { cert },
+  }));
+}
+
+const { cert } = Astro.props;
+const { Content } = await render(cert);
+const basePath = import.meta.env.BASE_URL;
+---
+
+<Layout title={`${cert.data.title} // Credencial ${cert.data.platform} | Diego Rivera`}>
+  <Navigation />
+
+  <main class="cert-detail-main">
+    <div class="container">
+      <!-- Breadcrumb Bar -->
+      <nav class="breadcrumb-bar mono text-xs text-muted" aria-label="Ruta de navegación">
+        <a href={`${basePath}/`} class="crumb-link">00 // INICIO</a>
+        <span class="crumb-sep">/</span>
+        <a href={`${basePath}/certifications`} class="crumb-link">04 // CERTIFICACIONES</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current text-amber">[CERT_SPEC: {cert.id}]</span>
+      </nav>
+
+      <!-- Certification Detail Chassis -->
+      <article class="detail-chassis specs-card corner-marks">
+        <!-- Chassis Header Bar -->
+        <div class="detail-header-bar">
+          <div class="header-status">
+            <span class="status-dot status-dot--green"></span>
+            <span class="mono text-2xs">
+              STATUS: {cert.data.status}_CREDENTIAL
+            </span>
+          </div>
+          <div class="header-date mono text-2xs text-muted">
+            ISSUED: {cert.data.displayDate} // {cert.data.platform}
+          </div>
+        </div>
+
+        <!-- Hero Header -->
+        <header class="cert-meta-hero">
+          <span class="meta-serial mono text-xs text-amber">// CREDENTIAL_SPECIFICATION_SHEET</span>
+          <h1 class="cert-headline">{cert.data.title}</h1>
+          <div class="platform-badge-line">
+            <strong class="platform-highlight mono text-amber">{cert.data.platform}</strong>
+            <span class="dot-sep" aria-hidden="true">•</span>
+            <span class="mono text-xs text-muted">Expedición: {cert.data.displayDate}</span>
+            {cert.data.credentialId && (
+              <>
+                <span class="dot-sep" aria-hidden="true">•</span>
+                <span class="mono text-2xs text-subtle">ID: {cert.data.credentialId}</span>
+              </>
+            )}
+          </div>
+
+          <p class="cert-lead">{cert.data.topic}</p>
+
+          <!-- Action Switchboard -->
+          <div class="cert-switchboard">
+            {cert.data.credentialUrl && (
+              <a
+                href={cert.data.credentialUrl}
+                class="btn btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>VERIFICAR CREDENCIAL EN LÍNEA</span>
+                <span class="mono">↗</span>
+              </a>
+            )}
+            <a href={`${basePath}/certifications`} class="btn btn-secondary">
+              <span class="mono">←</span>
+              <span>VER TODAS LAS CERTIFICACIONES</span>
+            </a>
+            <a href={`${basePath}/#education`} class="btn btn-ghost">
+              <span class="mono">↑</span>
+              <span>PANEL PRINCIPAL</span>
+            </a>
+          </div>
+        </header>
+
+        <!-- Technical Telemetry & Specs Strip -->
+        <div class="specs-dashboard">
+          <div class="dashboard-block">
+            <span class="dash-label mono text-2xs text-muted">[APTITUDES_Y_COMPETENCIAS_VERIFICADAS]</span>
+            <div class="tech-badges">
+              {cert.data.skills.map((skill) => (
+                <span class="badge badge--cyan">{skill}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="dashboard-block">
+            <span class="dash-label mono text-2xs text-muted">[TELEMETRÍA_DE_EMISIÓN]</span>
+            <div class="meta-stats mono text-xs">
+              <div class="stat-row">
+                <span class="text-muted">ENTIDAD:</span>
+                <span class="text-amber">{cert.data.platform}</span>
+              </div>
+              <div class="stat-row">
+                <span class="text-muted">FECHA:</span>
+                <span>{cert.data.displayDate} ({cert.data.issueDate})</span>
+              </div>
+              {cert.data.credentialId && (
+                <div class="stat-row id-stat">
+                  <span class="text-muted">ID_HASH:</span>
+                  <span class="text-phosphor break-all">{cert.data.credentialId}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <!-- Markdown Rendered Technical Body -->
+        <div class="markdown-body">
+          <Content />
+        </div>
+
+        <!-- Detail Footer -->
+        <footer class="detail-footer">
+          <span class="mono text-2xs text-muted">
+            CREDENTIAL_KEY: {cert.id} // VERIFIED_CREDENTIAL_RECORD
+          </span>
+          <a href={`${basePath}/certifications`} class="btn btn-ghost btn-sm">
+            <span>CATÁLOGO DE CERTIFICACIONES</span>
+            <span class="mono">→</span>
+          </a>
+        </footer>
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .cert-detail-main {
+    padding-top: calc(4.25rem + var(--space-6));
+    padding-bottom: var(--space-20);
+    min-height: 85vh;
+  }
+
+  .breadcrumb-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .crumb-link {
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
+  .crumb-sep {
+    color: var(--color-border-strong);
+  }
+
+  .detail-chassis {
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-elevation);
+    background-color: var(--color-surface);
+  }
+
+  .detail-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-6);
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .header-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text);
+  }
+
+  .cert-meta-hero {
+    padding: clamp(var(--space-6), 5vw, var(--space-10));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .meta-serial {
+    letter-spacing: 0.08em;
+  }
+
+  .cert-headline {
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.15;
+  }
+
+  .platform-badge-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .platform-highlight {
+    font-size: var(--text-base);
+    letter-spacing: 0.04em;
+  }
+
+  .dot-sep {
+    color: var(--color-border-strong);
+  }
+
+  .cert-lead {
+    font-size: clamp(var(--text-base), 2vw, var(--text-lg));
+    color: var(--color-text-muted);
+    max-width: 68ch;
+    line-height: 1.6;
+    margin-top: var(--space-1);
+  }
+
+  .cert-switchboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  .specs-dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6) clamp(var(--space-6), 5vw, var(--space-10));
+    background-color: var(--color-surface-sunken);
+    border-bottom: 1px solid var(--color-border);
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+
+  .dashboard-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .dash-label {
+    letter-spacing: 0.06em;
+  }
+
+  .tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .badge--cyan {
+    border-color: color-mix(in oklch, var(--color-cyan) 40%, transparent);
+    color: var(--color-cyan-text);
+  }
+
+  .meta-stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .stat-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .id-stat {
+    font-size: var(--text-2xs);
+  }
+
+  .break-all {
+    word-break: break-all;
+  }
+
+  .markdown-body {
+    padding: clamp(var(--space-6), 5vw, var(--space-10));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    color: var(--color-text);
+    font-size: var(--text-base);
+    line-height: 1.7;
+
+    h2 {
+      font-size: var(--text-2xl);
+      margin-top: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--color-border-subtle);
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+
+      &::before {
+        content: "##";
+        font-family: var(--font-mono);
+        font-size: 0.7em;
+        color: var(--color-amber-text);
+      }
+    }
+
+    h3 {
+      font-size: var(--text-xl);
+      margin-top: var(--space-4);
+      color: var(--color-text);
+    }
+
+    p {
+      color: var(--color-text-muted);
+    }
+
+    ul, ol {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding-left: var(--space-6);
+      list-style-type: square;
+      color: var(--color-text-muted);
+    }
+
+    strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    pre {
+      background-color: var(--color-surface-sunken);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xs);
+      padding: var(--space-4);
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      line-height: 1.5;
+    }
+  }
+
+  .detail-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) clamp(var(--space-6), 5vw, var(--space-10));
+    background-color: var(--color-surface-sunken);
+    border-top: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+
+  .btn-sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-2xs);
+  }
+</style>

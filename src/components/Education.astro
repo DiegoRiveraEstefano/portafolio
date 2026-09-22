@@ -1,263 +1,366 @@
 ---
 import { getCollection } from "astro:content";
 
+const basePath = import.meta.env.BASE_URL;
 const educationList = await getCollection("education");
-const certificationsList = await getCollection("certifications");
+const certificationsList = (await getCollection("certifications"))
+    .sort((a, b) => b.data.issueDate.localeCompare(a.data.issueDate))
+    .slice(0, 2);
 ---
 
 <section id="education" class="section education-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-index">04 // FORMACIÓN &amp; CREDENCIALES</span>
-      <h2 class="section-title">Educación &amp; Certificaciones</h2>
-      <p class="section-subtitle">
-        Acreditación académica formal con grado de titulación y certificaciones continuas de especialización técnica.
-      </p>
+    <div class="container">
+        <div class="section-header">
+            <span class="section-index">
+                04 // FORMACIÓN &amp; CREDENCIALES
+            </span>
+            <h2 class="section-title">Educación &amp; Certificaciones</h2>
+            <p class="section-subtitle">
+                Acreditación académica formal con grado de titulación y
+                certificaciones continuas de especialización técnica.
+            </p>
+        </div>
+
+        <div class="education-grid">
+            <!-- Formal Education Column -->
+            <div class="edu-column">
+                <div class="column-header">
+                    <div class="column-tag mono text-2xs text-cyan">
+                        [SCHEMATIC_01: ACADEMIC_DEGREE]
+                    </div>
+                    <h3 class="column-title">Educación Formal</h3>
+                </div>
+
+                <div class="edu-list">
+                    {educationList.map((edu) => (
+                        <div class="edu-card specs-card corner-marks">
+                            <div class="card-top">
+                                <div>
+                                    <span class="institution mono text-xs text-amber">
+                                        {edu.data.institution} //{" "}
+                                        {edu.data.location}
+                                    </span>
+                                    <h4 class="degree-title">
+                                        {edu.data.degree}
+                                    </h4>
+                                </div>
+                                <div class="period-badge mono text-2xs">
+                                    <span class="status-titulado mono">
+                                        {edu.data.status}
+                                    </span>
+                                    <span class="period-years">
+                                        {edu.data.period}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <p class="degree-desc">{edu.data.description}</p>
+
+                            <div class="focus-tags">
+                                {edu.data.tags.map((tag) => (
+                                    <span class="badge">{tag}</span>
+                                ))}
+                            </div>
+
+                            <div class="card-footer mono text-2xs text-muted">
+                                <span>{edu.data.statusLabel}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Certifications Column -->
+            <div class="edu-column">
+                <div class="column-header">
+                    <div class="column-tag mono text-2xs text-phosphor">
+                        [SCHEMATIC_02: VERIFIED_CREDENTIALS]
+                    </div>
+                    <h3 class="column-title">Certificaciones Técnicas</h3>
+                </div>
+
+                <div class="certs-list">
+                    {certificationsList.map((cert) => (
+                        <div class="cert-card specs-card">
+                            <div class="cert-header">
+                                <div>
+                                    <h4 class="cert-name">
+                                        <a
+                                            href={`${basePath}/certifications/${cert.id}`}
+                                            class="cert-link"
+                                        >
+                                            {cert.data.title}
+                                        </a>
+                                    </h4>
+                                    <span class="cert-issuer mono text-xs text-muted">
+                                        {cert.data.platform} //{" "}
+                                        {cert.data.displayDate}
+                                    </span>
+                                </div>
+                                <div class="cert-status mono text-2xs text-phosphor">
+                                    <span class="status-dot status-dot--green"></span>
+                                    <span>{cert.data.status}</span>
+                                </div>
+                            </div>
+
+                            <div class="cert-skills">
+                                {cert.data.skills.map((s) => (
+                                    <span class="badge badge--cyan">{s}</span>
+                                ))}
+                            </div>
+
+                            <div class="cert-footer">
+                                <a
+                                    href={`${basePath}/certifications/${cert.id}`}
+                                    class="cert-detail-link mono text-2xs"
+                                >
+                                    <span>VER FICHA TÉCNICA</span>
+                                    <span>→</span>
+                                </a>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications Catalog Callout Panel -->
+        <div class="archive-callout">
+            <div class="archive-meta mono text-xs text-muted">
+                <span>
+                    CREDENTIALS_REGISTRY: COMPLETE_CERTIFICATIONS_CATALOG
+                </span>
+            </div>
+            <a href={`${basePath}/certifications`} class="btn btn-secondary">
+                <span>
+                    EXPLORAR CATÁLOGO DE CERTIFICACIONES (
+                    {certificationsList.length})
+                </span>
+                <span class="mono">→</span>
+            </a>
+        </div>
     </div>
-
-    <div class="education-grid">
-      <!-- Formal Education Column -->
-      <div class="edu-column">
-        <div class="column-header">
-          <div class="column-tag mono text-2xs text-cyan">
-            [SCHEMATIC_01: ACADEMIC_DEGREE]
-          </div>
-          <h3 class="column-title">Educación Formal</h3>
-        </div>
-
-        <div class="edu-list">
-          {
-            educationList.map((edu) => (
-              <div class="edu-card specs-card corner-marks">
-                <div class="card-top">
-                  <div>
-                    <span class="institution mono text-xs text-amber">
-                      {edu.data.institution} // {edu.data.location}
-                    </span>
-                    <h4 class="degree-title">{edu.data.degree}</h4>
-                  </div>
-                  <div class="period-badge mono text-2xs">
-                    <span class="status-titulado mono">{edu.data.status}</span>
-                    <span class="period-years">{edu.data.period}</span>
-                  </div>
-                </div>
-
-                <p class="degree-desc">{edu.data.description}</p>
-
-                <div class="focus-tags">
-                  {edu.data.tags.map((tag) => (
-                    <span class="badge">{tag}</span>
-                  ))}
-                </div>
-
-                <div class="card-footer mono text-2xs text-muted">
-                  <span>{edu.data.statusLabel}</span>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-
-      <!-- Certifications Column -->
-      <div class="edu-column">
-        <div class="column-header">
-          <div class="column-tag mono text-2xs text-phosphor">
-            [SCHEMATIC_02: VERIFIED_CREDENTIALS]
-          </div>
-          <h3 class="column-title">Certificaciones Técnicas</h3>
-        </div>
-
-        <div class="certs-list">
-          {
-            certificationsList.map((cert) => (
-              <div class="cert-card specs-card">
-                <div class="cert-header">
-                  <div>
-                    <h4 class="cert-name">{cert.data.name}</h4>
-                    <span class="cert-issuer mono text-xs text-muted">
-                      {cert.data.platform} // {cert.data.displayDate}
-                    </span>
-                  </div>
-                  <div class="cert-status mono text-2xs text-phosphor">
-                    <span class="status-dot status-dot--green"></span>
-                    <span>{cert.data.status}</span>
-                  </div>
-                </div>
-                <div class="cert-tagline mono text-2xs text-subtle">
-                  {cert.data.topic}
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <style>
-  .education-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
+    .education-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
 
-    @media (min-width: 900px) {
-      grid-template-columns: 1fr 1fr;
-      align-items: start;
+        @media (min-width: 900px) {
+            grid-template-columns: 1fr 1fr;
+            align-items: start;
+        }
     }
-  }
 
-  .edu-column {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .column-header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-
-  .column-tag {
-    letter-spacing: 0.08em;
-  }
-
-  .column-title {
-    font-size: var(--text-xl);
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .edu-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .edu-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    box-shadow: var(--shadow-solid);
-  }
-
-  .card-top {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-2);
-  }
-
-  .institution {
-    display: block;
-    letter-spacing: 0.06em;
-    margin-bottom: var(--space-1);
-  }
-
-  .degree-title {
-    font-size: var(--text-lg);
-    font-weight: 700;
-    color: var(--color-text);
-  }
-
-  .period-badge {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-1) var(--space-2);
-    background-color: var(--color-surface-sunken);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xs);
-  }
-
-  .status-titulado {
-    color: var(--color-phosphor-text);
-    font-weight: 700;
-    text-transform: uppercase;
-    background-color: var(--color-phosphor-muted);
-    padding: 1px 6px;
-    border-radius: var(--radius-xs);
-  }
-
-  .period-years {
-    color: var(--color-text-muted);
-  }
-
-  .degree-desc {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    line-height: 1.6;
-  }
-
-  .focus-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
-
-  .card-footer {
-    padding-top: var(--space-3);
-    border-top: 1px dashed var(--color-border-subtle);
-  }
-
-  /* Certifications */
-  .certs-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .cert-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    box-shadow: var(--shadow-solid);
-    transition: transform var(--transition-fast), border-color var(--transition-fast);
-
-    &:hover {
-      transform: translateY(-2px);
-      border-color: var(--color-border-strong);
+    .edu-column {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
     }
-  }
 
-  .cert-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-3);
-  }
+    .column-header {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+    }
 
-  .cert-name {
-    font-size: var(--text-base);
-    font-weight: 600;
-    color: var(--color-text);
-  }
+    .column-tag {
+        letter-spacing: 0.08em;
+    }
 
-  .cert-issuer {
-    display: block;
-    margin-top: 2px;
-  }
+    .column-title {
+        font-size: var(--text-xl);
+        font-weight: 600;
+        color: var(--color-text);
+    }
 
-  .cert-status {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-    font-size: var(--text-2xs);
-    padding: 2px 6px;
-    background-color: var(--color-phosphor-muted);
-    border: 1px solid color-mix(in oklch, var(--color-phosphor) 30%, transparent);
-    border-radius: var(--radius-xs);
-    white-space: nowrap;
-  }
+    .edu-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
 
-  .cert-tagline {
-    color: var(--color-text-subtle);
-    font-size: var(--text-2xs);
-    letter-spacing: 0.04em;
-    padding-top: var(--space-2);
-    border-top: 1px dashed var(--color-border-subtle);
-  }
+    .edu-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        box-shadow: var(--shadow-solid);
+    }
+
+    .card-top {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--space-2);
+    }
+
+    .institution {
+        display: block;
+        letter-spacing: 0.06em;
+        margin-bottom: var(--space-1);
+    }
+
+    .degree-title {
+        font-size: var(--text-lg);
+        font-weight: 700;
+        color: var(--color-text);
+    }
+
+    .period-badge {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-1) var(--space-2);
+        background-color: var(--color-surface-sunken);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xs);
+    }
+
+    .status-titulado {
+        color: var(--color-phosphor-text);
+        font-weight: 700;
+        text-transform: uppercase;
+        background-color: var(--color-phosphor-muted);
+        padding: 1px 6px;
+        border-radius: var(--radius-xs);
+    }
+
+    .period-years {
+        color: var(--color-text-muted);
+    }
+
+    .degree-desc {
+        font-size: var(--text-sm);
+        color: var(--color-text-muted);
+        line-height: 1.6;
+    }
+
+    .focus-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+
+    .card-footer {
+        padding-top: var(--space-3);
+        border-top: 1px dashed var(--color-border-subtle);
+    }
+
+    /* Certifications */
+    .certs-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .cert-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        box-shadow: var(--shadow-solid);
+        transition:
+            transform var(--transition-fast),
+            border-color var(--transition-fast);
+
+        &:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-border-strong);
+        }
+    }
+
+    .cert-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--space-3);
+    }
+
+    .cert-name {
+        font-size: var(--text-base);
+        font-weight: 600;
+        color: var(--color-text);
+    }
+
+    .cert-issuer {
+        display: block;
+        margin-top: 2px;
+    }
+
+    .cert-status {
+        display: flex;
+        align-items: center;
+        gap: var(--space-1);
+        font-size: var(--text-2xs);
+        padding: 2px 6px;
+        background-color: var(--color-phosphor-muted);
+        border: 1px solid
+            color-mix(in oklch, var(--color-phosphor) 30%, transparent);
+        border-radius: var(--radius-xs);
+        white-space: nowrap;
+    }
+
+    .cert-link {
+        color: var(--color-text);
+        transition: color var(--transition-fast);
+
+        &:hover {
+            color: var(--color-amber-text);
+        }
+    }
+
+    .cert-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-1);
+        margin-top: var(--space-1);
+    }
+
+    .badge--cyan {
+        border-color: color-mix(in oklch, var(--color-cyan) 35%, transparent);
+        color: var(--color-cyan-text);
+    }
+
+    .cert-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-top: var(--space-1);
+        border-top: 1px dashed var(--color-border-subtle);
+        margin-top: var(--space-1);
+    }
+
+    .cert-detail-link {
+        display: flex;
+        align-items: center;
+        gap: var(--space-1);
+        color: var(--color-amber-text);
+        font-weight: 600;
+        transition: color var(--transition-fast);
+
+        &:hover {
+            color: var(--color-text);
+        }
+    }
+
+    /* Archive Callout */
+    .archive-callout {
+        margin-top: var(--space-12);
+        padding: var(--space-6);
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        box-shadow: var(--shadow-solid);
+
+        @media (min-width: 640px) {
+            flex-direction: row;
+        }
+    }
 </style>

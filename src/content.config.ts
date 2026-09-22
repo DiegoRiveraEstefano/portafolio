@@ -66,17 +66,12 @@ const skills = defineCollection({
     z.object({
       slug: z.string(),
       name: z.string(),
-      yearsOfExperience: z.number().min(1).max(99),
-      category: z.enum([
-        "Languages",
-        "Tools",
-        "Backend Development",
-        "Frontend Development",
-        "Data Science",
-        "Databases",
-        "Hardware/IoT",
-        "System Design",
-      ]),
+      category: z.string(),
+      description: z.string(),
+      appliedIn: z.array(z.string()),
+      tags: z.array(z.string()),
+      yearsOfExperience: z.number().min(1).max(99).optional(),
+      featured: z.boolean().default(false),
     }),
 });
 
@@ -97,20 +92,21 @@ const education = defineCollection({
     }),
 });
 
-// 5. Certificaciones
+// 5. Certificaciones (Archivos Markdown)
 const certifications = defineCollection({
-  loader: file("src/data/certifications.json"),
+  loader: glob({ pattern: "**/*.md", base: "src/content/certifications" }),
   schema: () =>
     z.object({
-      id: z.string(),
-      name: z.string(),
-      slug: z.string(),
+      title: z.string(),
       platform: z.string(),
-      date: z.string(),
+      issueDate: z.string(),
       displayDate: z.string(),
-      status: z.string(),
+      credentialId: z.string().optional(),
+      credentialUrl: z.string().url().optional(),
+      status: z.string().default("VERIFIED"),
       topic: z.string(),
-      link: z.string().url().optional(),
+      skills: z.array(z.string()),
+      featured: z.boolean().default(false),
     }),
 });
 
