@@ -5,7 +5,7 @@ employmentType: "Jornada completa"
 location: "En remoto"
 period: "ene. 2026 — sept. 2026"
 duration: "9 meses"
-current: true
+current: false
 summary: "Desarrollo de soluciones de software escalables y profesionalización del ciclo de vida de desarrollo, elevando los estándares de calidad y la madurez de los procesos técnicos del equipo."
 highlights:
   - "Diseño y construcción de aplicaciones web, APIs y microservicios robustos utilizando Python (Litestar, SQLAlchemy 2.x, Pydantic) y JavaScript."

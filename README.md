@@ -1,48 +1,173 @@
-# Astro Starter Kit: Basics
+# Diego Rivera // Technical Portfolio & Systems Archive
 
-```sh
-npm create astro@latest -- --template basics
-```
+> **Especialista en Desarrollo Backend, Arquitecturas Escalables y Sistemas Distribuidos.**  
+> Portafolio de ingeniería diseñado bajo la estética **Technical Hardware & Blueprint** (*Teenage Engineering / Retro-Future Laboratory*), construido con **Astro** y **Vanilla CSS moderno** con cero dependencias de utilidades externas.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ⚡ Aspectos Técnicos Destacados
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+* **Zero-Framework CSS**: Arquitectura CSS pura y modular organizada en `@layer` (`reset`, `tokens`, `base`, `layout`, `components`, `utilities`).
+* **Colorimetría OKLCH & Modo Dual**: Paleta técnica de alta fidelidad perceptual (`oklch()`) con soporte nativo de modo claro/oscuro mediante `light-dark()`.
+* **Astro Content Collections (v5+)**: 100% del contenido desacoplado de la vista con esquemas de validación estrictos en **Zod** y loaders nativos (`glob` y `file`).
+* **Páginas de Detalle en Markdown**: Cada proyecto y experiencia laboral cuenta con su propia ficha técnica individual (`/projects/[slug]` y `/experience/[slug]`) con renderizado completo de Markdown, diagramas ASCII y tablas de impacto.
+* **Buscador en Tiempo Real**: Catálogo de proyectos (`/projects`) con filtrado dinámico instantáneo mediante Vanilla JS sin dependencias.
+* **100% Estático y Ultra Rápido**: Generación SSG optimizada, sin runtime pesado de JavaScript en cliente y tiempos de carga instantáneos.
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🛠️ Stack Tecnológico
+
+| Capa | Tecnología / Herramienta |
+| :--- | :--- |
+| **Generador Estático** | [Astro](https://astro.build/) |
+| **Estilos & Layout** | Vanilla CSS (CSS Grid, `@layer`, `oklch()`, `light-dark()`, Subgrid, Container Queries) |
+| **Gestión de Datos** | Astro Content Collections + Zod Schemas |
+| **Tipografía** | *Space Grotesk* (encabezados geométricos) + *JetBrains Mono* (telemetría y métricas) |
+| **Contenido Técnico** | Markdown (GFM) estructurado por artefactos |
+
+---
+
+## 📂 Estructura del Proyecto
 
 ```text
-/
-├── public/
-│   └── favicon.svg
+portafolio/
+├── public/                     # Assets estáticos y favicon
 ├── src/
+│   ├── components/             # Módulos y secciones de interfaz
+│   │   ├── Navigation.astro    # Barra de navegación técnica y telemetría
+│   │   ├── Hero.astro          # Consola principal de presentación e identidad
+│   │   ├── About.astro         # Manifiesto de ingeniería y métricas operativas
+│   │   ├── Experience.astro    # Grid interactivo de experiencia con acordeón in-situ
+│   │   ├── Skills.astro        # Matriz categorizada de habilidades y tecnologías
+│   │   ├── Projects.astro      # Grid de proyectos destacados con visores esquemáticos
+│   │   ├── Education.astro     # Formación profesional y certificaciones técnicas
+│   │   ├── Contact.astro       # Puertos y canales de comunicación directa
+│   │   └── Footer.astro        # Placa de identificación técnica y enlaces de red
+│   │
+│   ├── content/                # Fichas técnicas en Markdown (Colecciones)
+│   │   ├── experiences/        # Historial laboral detallado (*.md)
+│   │   │   ├── nolan-ai-software.md
+│   │   │   ├── the-green-economics-journal.md
+│   │   │   └── freelance-fullstack.md
+│   │   └── projects/           # Documentación de proyectos y arquitecturas (*.md)
+│   │       ├── arquitectura-kafka-go.md
+│   │       ├── analisis-ventas-visualizacion.md
+│   │       └── ...
+│   │
+│   ├── data/                   # Datos estructurados en JSON (Colecciones)
+│   │   ├── profile.json        # Identidad, tags, telemetría y especificaciones
+│   │   ├── skills.json         # Inventario de habilidades con años de experiencia
+│   │   ├── education.json      # Título profesional e institución
+│   │   ├── certifications.json # Certificaciones técnicas
+│   │   └── socials.json        # Puertos y enlaces de contacto
+│   │
 │   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   │   └── Layout.astro        # Shell principal con rejilla blueprint y metadatos SEO
+│   │
+│   ├── pages/                  # Enrutamiento estático (SSG)
+│   │   ├── index.astro         # Dashboard principal
+│   │   ├── archive.astro       # Redirección canónica a /projects
+│   │   ├── projects/
+│   │   │   ├── index.astro     # Catálogo completo de proyectos con buscador
+│   │   │   └── [slug].astro    # Ficha técnica individual de cada proyecto
+│   │   └── experience/
+│   │       ├── index.astro     # Archivo histórico de experiencia laboral
+│   │       └── [slug].astro    # Detalle individual de cada rol y arquitectura
+│   │
+│   ├── styles/                 # Arquitectura de estilos Vanilla CSS
+│   │   ├── layers.css          # Declaración de orden @layer
+│   │   ├── tokens.css          # Paleta OKLCH, espaciado y tipografía
+│   │   ├── reset.css           # Reset moderno
+│   │   ├── base.css            # Rejilla blueprint de fondo y scrollbars
+│   │   ├── utilities.css       # Clases utilitarias (.specs-card, .status-dot, etc.)
+│   │   └── global.css          # Orquestador global de capas
+│   │
+│   └── content.config.ts       # Definición de colecciones y esquemas Zod
+│
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## 🚀 Comandos de Desarrollo
 
-All commands are run from the root of the project, from a terminal:
+Todas las operaciones se ejecutan desde la raíz del proyecto:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```bash
+# 1. Instalar dependencias
+npm install
 
-## 👀 Want to learn more?
+# 2. Iniciar servidor de desarrollo local (http://localhost:4321)
+npm run dev
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+# 3. Compilar el sitio estático para producción (salida en ./dist)
+npm run build
+
+# 4. Previsualizar la compilación de producción localmente
+npm run preview
+```
+
+---
+
+## 📝 Gestión de Contenido
+
+### Agregar un Nuevo Proyecto
+Crea un archivo Markdown en `src/content/projects/[slug].md` con el siguiente frontmatter:
+
+```markdown
+---
+title: "Nombre del Proyecto"
+description: "Resumen técnico de la solución y objetivos de negocio."
+date: "2026"
+tags: ["Backend", "Go", "Docker"]
+technologies: ["Go", "Kafka", "PostgreSQL", "Docker"]
+results:
+  - "Reducción de latencia a < 15ms en p99."
+  - "Procesamiento de > 10,000 eventos concurrentes."
+link: "https://github.com/DiegoRiveraEstefano/mi-proyecto"
+github: "https://github.com/DiegoRiveraEstefano/mi-proyecto"
+archived: false
+featured: true
+---
+
+## Arquitectura y Diseño del Sistema
+...
+```
+
+### Agregar una Nueva Experiencia Laboral
+Crea un archivo Markdown en `src/content/experiences/[slug].md`:
+
+```markdown
+---
+role: "Backend Engineer"
+company: "Tech Company"
+employmentType: "Jornada completa"
+location: "En remoto"
+period: "oct. 2026 — actualidad"
+duration: "6 meses"
+current: true
+summary: "Breve descripción del alcance del rol."
+highlights:
+  - "Diseño de APIs REST y microservicios escalables."
+technologies:
+  - "Python"
+  - "FastAPI"
+  - "PostgreSQL"
+---
+
+## Resumen del Rol & Alcance
+...
+```
+
+---
+
+## 👤 Contacto & Perfil
+
+* **Ingeniero**: Diego Rivera
+* **Especialidad**: Backend Development // Distributed Systems & DevOps
+* **Email**: [diego.rivera.estefano@gmail.com](mailto:diego.rivera.estefano@gmail.com)
+* **GitHub**: [@DiegoRiveraEstefano](https://github.com/DiegoRiveraEstefano)
+* **LinkedIn**: [/in/diegoriveraestefano](https://linkedin.com/in/diegoriveraestefano)
