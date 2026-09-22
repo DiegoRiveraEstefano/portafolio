@@ -1,7 +1,17 @@
 ---
 import { getCollection } from "astro:content";
 
-const experiencesList = await getCollection("experiences");
+const rawExperiences = await getCollection("experiences");
+
+const experienceOrder: Record<string, number> = {
+  "nolan-ai-software": 1,
+  "the-green-economics-journal": 2,
+  "freelance-fullstack": 3,
+};
+
+const experiencesList = rawExperiences.sort(
+  (a, b) => (experienceOrder[a.id] ?? 99) - (experienceOrder[b.id] ?? 99)
+);
 ---
 
 <section id="experience" class="section experience-section">
@@ -10,105 +20,100 @@ const experiencesList = await getCollection("experiences");
       <span class="section-index">02 // HISTORIAL DE SERVICIO &amp; PRODUCCIÓN</span>
       <h2 class="section-title">Experiencia Laboral</h2>
       <p class="section-subtitle">
-        Panel interactivo de servicio técnico: haz clic en cualquier módulo para expandir los detalles de arquitectura y resultados en producción.
+        Trayectoria en desarrollo backend, arquitecturas escalables y liderazgo técnico en producción.
       </p>
     </div>
 
-    <!-- Interactive Masonry Grid of Service Records -->
-    <div id="experience-masonry-grid" class="masonry-grid" role="region" aria-label="Historial de experiencia interactivo">
+    <!-- Responsive Engineering Cards Grid -->
+    <div class="experience-grid" role="region" aria-label="Historial de experiencia laboral">
       {
         experiencesList.map((exp, index) => {
           const serial = String(index + 1).padStart(2, "0");
-          const isInitiallyExpanded = index === 0;
+          const isDefaultOpen = index === 0;
 
           return (
-            <article
-              class={`masonry-card specs-card corner-marks ${isInitiallyExpanded ? "is-expanded" : "is-collapsed"}`}
-              data-card-id={exp.id}
-              tabindex="0"
-              role="button"
-              aria-expanded={isInitiallyExpanded ? "true" : "false"}
-              aria-label={`Ver detalles de experiencia en ${exp.data.company} como ${exp.data.role}`}
-            >
-              <!-- Card Header Bar -->
+            <article class="exp-card specs-card corner-marks" id={`srv-${exp.id}`}>
+              <!-- Card Top Status Bar -->
               <div class="card-bar">
                 <div class="bar-left">
-                  <span class="card-serial mono text-xs text-amber">[SRV_{serial}]</span>
+                  <span class="serial-tag mono text-xs text-amber">[SRV_{serial}]</span>
                   <div class="status-indicator mono text-2xs">
                     <span class={`status-dot status-dot--${exp.data.current ? "green" : "amber"}`}></span>
-                    <span class="status-txt">{exp.data.current ? "ACTIVE" : "COMPLETED"}</span>
+                    <span class="status-lbl">{exp.data.current ? "ACTIVE_SERVICE" : "COMPLETED"}</span>
                   </div>
                 </div>
 
                 <div class="bar-right mono text-2xs text-muted">
-                  <span class="period-str">{exp.data.period}</span>
-                  <span class="expand-prompt mono text-amber" aria-hidden="true">
-                    {isInitiallyExpanded ? "[EXPANDED]" : "[EXPAND +]"}
-                  </span>
+                  <span class="duration-badge">{exp.data.duration}</span>
                 </div>
               </div>
 
-              <!-- Compact Header Area (Visible always) -->
-              <div class="card-identity">
-                <h3 class="role-title">{exp.data.role}</h3>
-                <div class="company-row">
-                  <strong class="company-tag mono text-amber">{exp.data.company}</strong>
-                  <span class="dot" aria-hidden="true">•</span>
-                  <span class="mono text-xs text-muted">{exp.data.employmentType}</span>
-                  <span class="dot" aria-hidden="true">•</span>
-                  <span class="mono text-xs text-subtle">{exp.data.duration}</span>
+              <!-- Main Card Body -->
+              <div class="card-body">
+                <div class="card-header-info">
+                  <h3 class="role-title">{exp.data.role}</h3>
+                  <div class="company-subline">
+                    <strong class="company-name mono text-amber">{exp.data.company}</strong>
+                    <span class="dot" aria-hidden="true">•</span>
+                    <span class="mono text-xs text-muted">{exp.data.employmentType}</span>
+                    <span class="dot" aria-hidden="true">•</span>
+                    <span class="mono text-xs text-subtle">{exp.data.location}</span>
+                  </div>
+                  <div class="period-subline mono text-2xs text-muted">
+                    <svg class="clock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{exp.data.period}</span>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Collapsed Teaser Preview -->
-              <div class="collapsed-teaser">
-                <p class="teaser-text text-muted text-xs">
-                  {exp.data.summary?.slice(0, 110)}...
-                </p>
-                <div class="teaser-footer mono text-2xs text-amber">
-                  <span>HACER CLIC PARA EXPANDIR MÓDULO</span>
-                  <span class="plus-icon">+</span>
-                </div>
-              </div>
+                {exp.data.summary && (
+                  <p class="role-summary text-muted">{exp.data.summary}</p>
+                )}
 
-              <!-- Expanded Detailed Content Area -->
-              <div class="expanded-tray">
-                {exp.data.summary && <p class="exp-summary">{exp.data.summary}</p>}
-
-                {
-                  exp.data.highlights && exp.data.highlights.length > 0 && (
-                    <div class="highlights-container">
-                      <span class="container-tag mono text-2xs text-muted">[RESPONSABILIDADES_Y_LOGROS]</span>
+                <!-- In-Situ Accordion for Technical Highlights -->
+                {exp.data.highlights && exp.data.highlights.length > 0 && (
+                  <details class="highlights-accordion" open={isDefaultOpen}>
+                    <summary class="accordion-trigger mono text-2xs">
+                      <span class="trigger-label">
+                        <span class="plus-icon" aria-hidden="true">[+]</span>
+                        <span class="minus-icon" aria-hidden="true">[-]</span>
+                        LOGROS &amp; RESPONSABILIDADES ({exp.data.highlights.length})
+                      </span>
+                      <span class="trigger-hint mono text-3xs text-muted">[TOGGLE]</span>
+                    </summary>
+                    <div class="accordion-content">
                       <ul class="highlights-list">
-                        {exp.data.highlights.map((highlight) => (
+                        {exp.data.highlights.map((item) => (
                           <li class="highlight-item">
-                            <span class="item-mark mono text-phosphor" aria-hidden="true">&gt;</span>
-                            <span class="item-body">{highlight}</span>
+                            <span class="prefix mono text-phosphor" aria-hidden="true">&gt;</span>
+                            <span class="desc">{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
-                  )
-                }
+                  </details>
+                )}
 
                 <!-- Technologies Badges -->
-                <div class="exp-techs">
+                <div class="tech-row">
                   {exp.data.technologies.map((tech) => (
                     <span class="badge">{tech}</span>
                   ))}
                 </div>
+              </div>
 
-                <!-- Action Footer -->
-                <div class="card-action-bar">
-                  <a
-                    href={`/experience/${exp.id}`}
-                    class="btn btn-primary btn-sm detail-link"
-                    tabindex="0"
-                  >
-                    <span>VER ESPECIFICACIÓN DETALLADA [MD]</span>
-                    <span class="mono">→</span>
-                  </a>
-                  <span class="mono text-2xs text-muted">ID: {exp.id}</span>
+              <!-- Footer Actions -->
+              <div class="card-footer">
+                <a
+                  href={`/experience/${exp.id}`}
+                  class="btn btn-primary btn-sm full-width"
+                >
+                  <span>VER ESPECIFICACIÓN DETALLADA [MD]</span>
+                  <span class="mono">→</span>
+                </a>
+                <div class="node-meta mono text-3xs text-muted">
+                  <span>NODE_ID: {exp.id}</span>
                 </div>
               </div>
             </article>
@@ -131,100 +136,45 @@ const experiencesList = await getCollection("experiences");
 </section>
 
 <style>
-  .masonry-grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
+  /* Experience Grid */
+  .experience-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    align-items: start;
 
-    @media (min-width: 992px) {
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
-      min-height: 480px;
+    @media (min-width: 768px) and (max-width: 1023px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .masonry-card {
+  /* Card Base */
+  .exp-card {
     padding: 0;
     overflow: hidden;
     background-color: var(--color-surface);
     box-shadow: var(--shadow-solid);
     display: flex;
     flex-direction: column;
-    cursor: pointer;
-    outline: none;
+    justify-content: space-between;
     transition:
-      flex 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-      max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform var(--transition-fast),
       border-color var(--transition-fast),
-      box-shadow var(--transition-fast),
-      background-color var(--transition-fast);
+      box-shadow var(--transition-fast);
 
-    &:focus-visible {
-      border-color: var(--color-amber);
-      box-shadow: var(--shadow-solid-focus);
-    }
-
-    @media (min-width: 992px) {
-      flex: 1;
-      min-width: 220px;
-    }
-
-    /* State: Collapsed */
-    &.is-collapsed {
-      background-color: var(--color-surface);
-      opacity: 0.88;
-
-      &:hover {
-        opacity: 1;
-        border-color: var(--color-border-strong);
-        background-color: var(--color-surface-elevated);
-      }
-
-      .expanded-tray {
-        display: none;
-      }
-
-      .collapsed-teaser {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-3);
-        padding: var(--space-4) var(--space-5);
-        background-color: var(--color-surface-sunken);
-        margin: var(--space-3);
-        border-radius: var(--radius-xs);
-        border: 1px dashed var(--color-border);
-      }
-    }
-
-    /* State: Expanded */
-    &.is-expanded {
-      opacity: 1;
-      border-color: var(--color-border-strong);
-      background-color: var(--color-surface);
-      box-shadow: 4px 4px 0px 0px var(--color-border-strong);
-
-      @media (min-width: 992px) {
-        flex: 2.8;
-      }
-
-      .collapsed-teaser {
-        display: none;
-      }
-
-      .expanded-tray {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-4);
-        padding: var(--space-5) clamp(var(--space-5), 4vw, var(--space-8));
-      }
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0px 0px var(--color-border-strong);
     }
   }
 
   /* Header Bar */
   .card-bar {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     padding: var(--space-3) var(--space-5);
@@ -239,7 +189,7 @@ const experiencesList = await getCollection("experiences");
     gap: var(--space-3);
   }
 
-  .card-serial {
+  .serial-tag {
     font-weight: 700;
   }
 
@@ -253,33 +203,36 @@ const experiencesList = await getCollection("experiences");
     border: 1px solid var(--color-border);
   }
 
-  .bar-right {
+  .duration-badge {
+    padding: 2px 6px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xs);
+  }
+
+  /* Card Body */
+  .card-body {
+    padding: var(--space-5);
     display: flex;
-    align-items: center;
-    gap: var(--space-2);
+    flex-direction: column;
+    gap: var(--space-4);
+    flex: 1;
   }
 
-  .expand-prompt {
-    font-size: var(--text-2xs);
-    font-weight: 700;
-  }
-
-  /* Identity */
-  .card-identity {
-    padding: var(--space-5) clamp(var(--space-5), 4vw, var(--space-8)) var(--space-3);
+  .card-header-info {
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
   }
 
   .role-title {
-    font-size: clamp(var(--text-lg), 2vw, var(--text-xl));
+    font-size: var(--text-xl);
     font-weight: 700;
     color: var(--color-text);
     line-height: 1.25;
   }
 
-  .company-row {
+  .company-subline {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -287,7 +240,7 @@ const experiencesList = await getCollection("experiences");
     margin-top: 2px;
   }
 
-  .company-tag {
+  .company-name {
     font-size: var(--text-sm);
   }
 
@@ -295,57 +248,113 @@ const experiencesList = await getCollection("experiences");
     color: var(--color-border-strong);
   }
 
-  /* Collapsed Teaser */
-  .collapsed-teaser {
-    margin-top: auto;
-  }
-
-  .teaser-text {
-    line-height: 1.5;
-  }
-
-  .teaser-footer {
+  .period-subline {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    gap: var(--space-1);
+    margin-top: var(--space-1);
   }
 
-  .plus-icon {
-    font-size: var(--text-base);
-    line-height: 1;
+  .clock-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
   }
 
-  /* Expanded Tray */
-  .expanded-tray {
-    flex: 1;
-  }
-
-  .exp-summary {
+  .role-summary {
     font-size: var(--text-sm);
-    color: var(--color-text-muted);
     line-height: 1.6;
   }
 
-  .highlights-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-4);
-    background-color: var(--color-surface-sunken);
-    border: 1px solid var(--color-border-subtle);
+  /* Highlights Accordion */
+  .highlights-accordion {
+    border: 1px dashed var(--color-border);
     border-radius: var(--radius-xs);
+    background-color: var(--color-surface-sunken);
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+
+    &[open] {
+      border-style: solid;
+      border-color: var(--color-border-strong);
+      background-color: var(--color-surface-sunken);
+
+      .plus-icon {
+        display: none;
+      }
+      .minus-icon {
+        display: inline;
+      }
+      .trigger-hint {
+        color: var(--color-phosphor-text);
+      }
+    }
+
+    &:not([open]) {
+      .plus-icon {
+        display: inline;
+      }
+      .minus-icon {
+        display: none;
+      }
+    }
   }
 
-  .container-tag {
-    letter-spacing: 0.06em;
+  .accordion-trigger {
+    cursor: pointer;
+    padding: var(--space-3) var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    user-select: none;
+    color: var(--color-text);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: var(--radius-xs);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:hover {
+      color: var(--color-amber-text);
+      background-color: var(--color-surface);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-amber);
+      outline-offset: -2px;
+    }
+  }
+
+  .trigger-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .plus-icon {
+    color: var(--color-amber-text);
+    font-weight: 700;
+  }
+
+  .minus-icon {
+    color: var(--color-phosphor-text);
+    font-weight: 700;
+  }
+
+  .accordion-content {
+    padding: 0 var(--space-4) var(--space-4) var(--space-4);
+    border-top: 1px dashed var(--color-border-subtle);
+    margin-top: var(--space-2);
+    padding-top: var(--space-3);
   }
 
   .highlights-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-3);
   }
 
   .highlight-item {
@@ -357,31 +366,42 @@ const experiencesList = await getCollection("experiences");
     color: var(--color-text);
   }
 
-  .item-mark {
+  .prefix {
     font-weight: 700;
+    flex-shrink: 0;
+    line-height: 1.55;
   }
 
-  .exp-techs {
+  .desc {
+    flex: 1;
+  }
+
+  /* Technologies Row */
+  .tech-row {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-1);
-    margin-top: var(--space-1);
-  }
-
-  .card-action-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-3);
     margin-top: auto;
-    padding-top: var(--space-4);
-    border-top: 1px dashed var(--color-border-subtle);
   }
 
-  .btn-sm {
-    padding: var(--space-2) var(--space-4);
-    font-size: var(--text-2xs);
+  /* Card Footer */
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+    background-color: var(--color-surface-sunken);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .full-width {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .node-meta {
+    text-align: center;
+    letter-spacing: 0.05em;
   }
 
   /* Archive Callout */
@@ -403,47 +423,3 @@ const experiencesList = await getCollection("experiences");
     }
   }
 </style>
-
-<script>
-  const cards = document.querySelectorAll<HTMLElement>(".masonry-card");
-
-  cards.forEach((card) => {
-    // Manejo de clic en la tarjeta para alternar expansión
-    card.addEventListener("click", (e) => {
-      const target = e.target as HTMLElement;
-      // Si el clic fue en el botón de navegación al detalle, no bloquear la navegación
-      if (target.closest(".detail-link")) {
-        return;
-      }
-
-      const isAlreadyExpanded = card.classList.contains("is-expanded");
-      if (isAlreadyExpanded) return; // Si ya está expandida, no hacer nada
-
-      // Colapsar las demás y expandir esta
-      cards.forEach((otherCard) => {
-        otherCard.classList.remove("is-expanded");
-        otherCard.classList.add("is-collapsed");
-        otherCard.setAttribute("aria-expanded", "false");
-        const prompt = otherCard.querySelector(".expand-prompt");
-        if (prompt) prompt.textContent = "[EXPAND +]";
-      });
-
-      card.classList.remove("is-collapsed");
-      card.classList.add("is-expanded");
-      card.setAttribute("aria-expanded", "true");
-      const prompt = card.querySelector(".expand-prompt");
-      if (prompt) prompt.textContent = "[EXPANDED]";
-    });
-
-    // Accesibilidad con teclado (Enter / Space)
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        const target = e.target as HTMLElement;
-        if (target.closest(".detail-link")) return;
-
-        e.preventDefault();
-        card.click();
-      }
-    });
-  });
-</script>

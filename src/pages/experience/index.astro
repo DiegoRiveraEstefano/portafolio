@@ -4,7 +4,17 @@ import Navigation from "../../components/Navigation.astro";
 import Footer from "../../components/Footer.astro";
 import { getCollection } from "astro:content";
 
-const experiencesList = await getCollection("experiences");
+const rawExperiences = await getCollection("experiences");
+
+const experienceOrder: Record<string, number> = {
+  "nolan-ai-software": 1,
+  "the-green-economics-journal": 2,
+  "freelance-fullstack": 3,
+};
+
+const experiencesList = rawExperiences.sort(
+  (a, b) => (experienceOrder[a.id] ?? 99) - (experienceOrder[b.id] ?? 99)
+);
 ---
 
 <Layout title="Historial de Servicio & Experiencia Laboral | Diego Rivera">
