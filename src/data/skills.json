@@ -74,7 +74,7 @@
     "tags": ["backend", "architecture"],
     "yearsOfExperience": 3,
     "featured": true,
-    "showOnHome": true
+    "showOnHome": false
   },
   {
     "slug": "django",
@@ -162,7 +162,7 @@
     "tags": ["database", "backend"],
     "yearsOfExperience": 2,
     "featured": true,
-    "showOnHome": true
+    "showOnHome": false
   },
   {
     "slug": "diseno-bases-datos",
