@@ -11,6 +11,7 @@ results:
 link: "https://github.com/DiegoRiveraEstefano/yml-traductor"
 archived: false
 featured: false
+showOnHome: false
 ---
 
 ## Visión General

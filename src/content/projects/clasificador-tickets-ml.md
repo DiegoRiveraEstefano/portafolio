@@ -8,9 +8,10 @@ results:
   - "Reducción significativa de tiempos de enrutamiento manual"
   - "Clasificación con baja latencia en endpoints REST"
   - "Contenedorización lista para producción"
-link: "https://github.com/DiegoRiveraEstefano"
+link: "https://github.com/DiegoRiveraEstefano/simple-rrss-ticket-categorizer"
 archived: false
 featured: true
+showOnHome: true
 ---
 
 ## Visión General

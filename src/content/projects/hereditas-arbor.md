@@ -11,6 +11,7 @@ results:
 link: "https://github.com/DiegoRiveraEstefano/HereditasArbor"
 archived: true
 featured: false
+showOnHome: false
 ---
 
 ## Visión General

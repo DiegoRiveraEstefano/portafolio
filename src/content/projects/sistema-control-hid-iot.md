@@ -11,6 +11,7 @@ results:
 link: "https://github.com/DiegoRiveraEstefano"
 archived: false
 featured: true
+showOnHome: true
 ---
 
 ## Visión General del Sistema

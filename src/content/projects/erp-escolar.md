@@ -11,6 +11,7 @@ results:
 link: "https://github.com/DiegoRiveraEstefano/erp-villa-alemana-escolares-tecnologicos"
 archived: true
 featured: false
+showOnHome: false
 ---
 
 ## Visión General

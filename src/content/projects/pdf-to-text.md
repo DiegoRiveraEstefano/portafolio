@@ -11,6 +11,7 @@ results:
 link: "https://github.com/DiegoRiveraEstefano/scanned-pdf-to-text"
 archived: false
 featured: false
+showOnHome: false
 ---
 
 ## Visión General

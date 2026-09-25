@@ -11,6 +11,7 @@ results:
 link: "https://github.com/DiegoRiveraEstefano/analisis-ventas-evaluacion-visualizacion-datos"
 archived: true
 featured: false
+showOnHome: false
 ---
 
 ## Visión General
