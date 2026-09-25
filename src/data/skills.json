@@ -537,5 +537,115 @@
     "yearsOfExperience": 2,
     "featured": false,
     "showOnHome": false
+  },
+  {
+    "slug": "clean-architecture-hexagonal",
+    "name": "Clean Architecture & Arquitectura Hexagonal",
+    "category": "Software Architecture",
+    "description": "Separación estricta de lógica de negocio y reglas de dominio respecto a frameworks e infraestructura externa mediante puertos y adaptadores.",
+    "appliedIn": ["Nolan AI Software", "Proyecto de Título", "Proyectos Personales"],
+    "tags": ["architecture", "backend"],
+    "yearsOfExperience": 2,
+    "featured": true,
+    "showOnHome": true
+  },
+  {
+    "slug": "domain-driven-design-patrones",
+    "name": "Domain-Driven Design (DDD) & Patrones de Diseño",
+    "category": "Software Architecture",
+    "description": "Modelado táctico y estratégico con entidades, agregados, Value Objects y aplicación de patrones GoF como Repository, Unit of Work y Dependency Injection.",
+    "appliedIn": ["Nolan AI Software", "Proyecto de Título"],
+    "tags": ["architecture", "backend"],
+    "yearsOfExperience": 2,
+    "featured": true,
+    "showOnHome": true
+  },
+  {
+    "slug": "microservicios-modular-monolith",
+    "name": "Microservicios & Modular Monolith",
+    "category": "Software Architecture",
+    "description": "Diseño de sistemas distribuidos y monolitos modulares de alta cohesión, definición de límites de contexto (bounded contexts) y comunicación asíncrona interservicios.",
+    "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go", "Nolan AI Software"],
+    "tags": ["architecture", "backend"],
+    "yearsOfExperience": 2,
+    "featured": false,
+    "showOnHome": false
+  },
+  {
+    "slug": "cache-redis",
+    "name": "Caché Distribuido & Redis",
+    "category": "System Design",
+    "description": "Implementación de capas de caché en memoria (Cache-Aside, Write-Back), mitigación de cuellos de botella de I/O, control de expiración TTL y consistencia eventual.",
+    "appliedIn": ["Nolan AI Software", "Proyecto de Título"],
+    "tags": ["architecture", "backend", "database"],
+    "yearsOfExperience": 2,
+    "featured": true,
+    "showOnHome": true
+  },
+  {
+    "slug": "event-driven-architecture",
+    "name": "Arquitectura Orientada a Eventos (EDA)",
+    "category": "System Design",
+    "description": "Diseño de flujos reactivos desacoplados con mensajería asíncrona, garantías de entrega (at-least-once), idempotencia de consumidores y manejo de Dead Letter Queues (DLQ).",
+    "appliedIn": ["Proyecto de Título: Arquitectura Kafka y Go"],
+    "tags": ["architecture", "backend"],
+    "yearsOfExperience": 2,
+    "featured": true,
+    "showOnHome": false
+  },
+  {
+    "slug": "escalabilidad-resiliencia",
+    "name": "Escalabilidad Horizontal & Resiliencia",
+    "category": "System Design",
+    "description": "Estrategias de particionamiento, rate limiting, circuit breaker, health checks y distribución de carga sin estado para alta disponibilidad.",
+    "appliedIn": ["Proyecto de Título", "Nolan AI Software"],
+    "tags": ["architecture", "backend", "tools-devops"],
+    "yearsOfExperience": 2,
+    "featured": false,
+    "showOnHome": false
+  },
+  {
+    "slug": "polars",
+    "name": "Polars",
+    "category": "Data Science",
+    "description": "Motor de procesamiento de DataFrames ultrarrápido multi-hilo implementado en Rust con optimizaciones de ejecución perezosa (lazy evaluation) y memoria Apache Arrow.",
+    "appliedIn": ["Análisis de Ventas & Evaluación de Visualización de Datos"],
+    "tags": ["data-science", "backend"],
+    "yearsOfExperience": 1,
+    "featured": true,
+    "showOnHome": true
+  },
+  {
+    "slug": "scikit-learn",
+    "name": "Scikit-learn",
+    "category": "Data Science",
+    "description": "Implementación de algoritmos de Machine Learning supervisado y no supervisado, pipelines de preprocesamiento, extracción de características TF-IDF y evaluación de modelos.",
+    "appliedIn": ["Clasificador de Tickets con ML"],
+    "tags": ["data-science", "ai-llm"],
+    "yearsOfExperience": 1,
+    "featured": true,
+    "showOnHome": true
+  },
+  {
+    "slug": "visualizacion-datos-matplotlib-seaborn",
+    "name": "Visualización de Datos (Matplotlib & Seaborn)",
+    "category": "Data Science",
+    "description": "Diseño y generación programática de gráficos estadísticos (distribución, calor, correlación y series temporales) para comunicación técnica y análisis exploratorio.",
+    "appliedIn": ["Análisis de Ventas & Evaluación de Visualización de Datos"],
+    "tags": ["data-science"],
+    "yearsOfExperience": 2,
+    "featured": false,
+    "showOnHome": false
+  },
+  {
+    "slug": "numpy-computacion-cientifica",
+    "name": "NumPy & Computación Científica",
+    "category": "Data Science",
+    "description": "Operaciones vectorizadas y matriciales eficientes sobre arrays multidimensionales (ndarrays), álgebra lineal y algoritmos numéricos de bajo consumo de memoria.",
+    "appliedIn": ["Scientific Computing with Python", "Análisis de Ventas & Evaluación de Visualización de Datos"],
+    "tags": ["data-science"],
+    "yearsOfExperience": 2,
+    "featured": false,
+    "showOnHome": false
   }
 ]
