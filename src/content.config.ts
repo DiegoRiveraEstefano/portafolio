@@ -55,6 +55,7 @@ const projects = defineCollection({
       github: z.string().optional(),
       archived: z.boolean().default(false),
       featured: z.boolean().default(false),
+      showOnHome: z.boolean().default(false),
     }),
 });
 

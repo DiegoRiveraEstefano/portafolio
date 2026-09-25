@@ -33,6 +33,18 @@ function getContextLink(context: string): { href?: string; label: string } {
   if (lower.includes("kafka") || lower.includes("proyecto de título")) {
     return { href: `${basePath}/projects/arquitectura-kafka-go`, label: "Ver Proyecto de Título →" };
   }
+  if (lower.includes("clasificador de tickets") || lower.includes("tickets")) {
+    return { href: `${basePath}/projects/clasificador-tickets-ml`, label: "Ver Proyecto Clasificador ML →" };
+  }
+  if (lower.includes("análisis de ventas") || lower.includes("analisis de ventas")) {
+    return { href: `${basePath}/projects/analisis-ventas-visualizacion`, label: "Ver Proyecto Análisis de Ventas →" };
+  }
+  if (lower.includes("erp")) {
+    return { href: `${basePath}/projects/erp-escolar`, label: "Ver Proyecto ERP Escolar →" };
+  }
+  if (lower.includes("hid") || lower.includes("coprocesamiento")) {
+    return { href: `${basePath}/projects/sistema-control-hid-iot`, label: "Ver Proyecto IoT HID →" };
+  }
   if (lower.includes("docker")) {
     return { href: `${basePath}/certifications/platzi-docker-fundamentos`, label: "Ver Certificación Docker →" };
   }
