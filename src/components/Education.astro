@@ -86,7 +86,7 @@ const certificationsList = (await getCollection("certifications"))
                                 <div>
                                     <h4 class="cert-name">
                                         <a
-                                            href={`${basePath}/certifications/${cert.id}`}
+                                            href={`${basePath}certifications/${cert.id}`}
                                             class="cert-link"
                                         >
                                             {cert.data.title}
@@ -111,7 +111,7 @@ const certificationsList = (await getCollection("certifications"))
 
                             <div class="cert-footer">
                                 <a
-                                    href={`${basePath}/certifications/${cert.id}`}
+                                    href={`${basePath}certifications/${cert.id}`}
                                     class="cert-detail-link mono text-2xs"
                                 >
                                     <span>VER FICHA TÉCNICA</span>
@@ -131,7 +131,7 @@ const certificationsList = (await getCollection("certifications"))
                     CREDENTIALS_REGISTRY: COMPLETE_CERTIFICATIONS_CATALOG
                 </span>
             </div>
-            <a href={`${basePath}/certifications`} class="btn btn-secondary">
+            <a href={`${basePath}certifications`} class="btn btn-secondary">
                 <span>
                     EXPLORAR CATÁLOGO DE CERTIFICACIONES (
                     {certificationsList.length})

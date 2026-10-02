@@ -9,183 +9,231 @@ const socialsList = await getCollection("socials");
 ---
 
 <footer class="footer-chassis">
-  <div class="container">
-    <div class="footer-grid">
-      <!-- Unit Brand / Nameplate -->
-      <div class="footer-brand">
-        <div class="brand-spec mono text-xs text-amber">
-          // MACHINE_NAMEPLATE // SDE_SYS
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Unit Brand / Nameplate -->
+            <div class="footer-brand">
+                <div class="brand-spec mono text-xs text-amber">
+                    // MACHINE_NAMEPLATE // SDE_SYS
+                </div>
+                <h3 class="footer-title">{profile?.name || "Diego Rivera"}</h3>
+                <p class="footer-desc">{profile?.heroDescription}</p>
+            </div>
+
+            <!-- Quick Jump Index -->
+            <div class="footer-nav">
+                <span class="nav-title mono text-xs text-muted">
+                    [SECTIONS_INDEX]
+                </span>
+                <ul class="footer-links">
+                    <li>
+                        <a href={`${basePath}#about`}>
+                            <span class="mono text-amber">01 //</span> Sobre Mí
+                        </a>
+                    </li>
+                    <li>
+                        <a href={`${basePath}#experience`}>
+                            <span class="mono text-amber">02 //</span>{" "}
+                            Experiencia
+                        </a>
+                    </li>
+                    <li>
+                        <a href={`${basePath}#skills`}>
+                            <span class="mono text-amber">03 //</span>{" "}
+                            Habilidades
+                        </a>
+                    </li>
+                    <li>
+                        <a href={`${basePath}#projects`}>
+                            <span class="mono text-amber">04 //</span> Proyectos
+                        </a>
+                    </li>
+                    <li>
+                        <a href={`${basePath}#education`}>
+                            <span class="mono text-amber">05 //</span> Educación
+                        </a>
+                    </li>
+                    <li>
+                        <a href={`${basePath}#contact`}>
+                            <span class="mono text-amber">06 //</span> Contacto
+                        </a>
+                    </li>
+                    <li>
+                        <a href={`${basePath}experience`}>
+                            <span class="mono text-amber">&gt;&gt; //</span>{" "}
+                            Catálogo de Experiencias
+                        </a>
+                    </li>
+                    <li>
+                        <a href={`${basePath}projects`}>
+                            <span class="mono text-amber">&gt;&gt; //</span>{" "}
+                            Catálogo de Proyectos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Network / Telemetry -->
+            <div class="footer-network">
+                <span class="nav-title mono text-xs text-muted">
+                    [NETWORK_LINKS]
+                </span>
+                <ul class="footer-links">
+                    {socialsList.map((social) => (
+                        <li>
+                            <a
+                                href={social.data.href}
+                                target={
+                                    social.data.type !== "email"
+                                        ? "_blank"
+                                        : undefined
+                                }
+                                rel={
+                                    social.data.type !== "email"
+                                        ? "noopener noreferrer"
+                                        : undefined
+                                }
+                            >
+                                {social.data.label} ↗
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+
+                <div class="status-box">
+                    <span class="status-dot status-dot--green"></span>
+                    <span class="mono text-2xs text-phosphor">
+                        {profile?.location || "CHILE"} // OPEN_TO_CHALLENGES
+                    </span>
+                </div>
+            </div>
         </div>
-        <h3 class="footer-title">{profile?.name || "Diego Rivera"}</h3>
-        <p class="footer-desc">
-          {profile?.heroDescription}
-        </p>
-      </div>
 
-      <!-- Quick Jump Index -->
-      <div class="footer-nav">
-        <span class="nav-title mono text-xs text-muted">[SECTIONS_INDEX]</span>
-        <ul class="footer-links">
-          <li><a href={`${basePath}/#about`}><span class="mono text-amber">01 //</span> Sobre Mí</a></li>
-          <li><a href={`${basePath}/#experience`}><span class="mono text-amber">02 //</span> Experiencia</a></li>
-          <li><a href={`${basePath}/#skills`}><span class="mono text-amber">03 //</span> Habilidades</a></li>
-          <li><a href={`${basePath}/#projects`}><span class="mono text-amber">04 //</span> Proyectos</a></li>
-          <li><a href={`${basePath}/#education`}><span class="mono text-amber">05 //</span> Educación</a></li>
-          <li><a href={`${basePath}/#contact`}><span class="mono text-amber">06 //</span> Contacto</a></li>
-          <li><a href={`${basePath}/experience`}><span class="mono text-amber">&gt;&gt; //</span> Catálogo de Experiencias</a></li>
-          <li><a href={`${basePath}/projects`}><span class="mono text-amber">&gt;&gt; //</span> Catálogo de Proyectos</a></li>
-        </ul>
-      </div>
-
-      <!-- Network / Telemetry -->
-      <div class="footer-network">
-        <span class="nav-title mono text-xs text-muted">[NETWORK_LINKS]</span>
-        <ul class="footer-links">
-          {
-            socialsList.map((social) => (
-              <li>
-                <a
-                  href={social.data.href}
-                  target={social.data.type !== "email" ? "_blank" : undefined}
-                  rel={social.data.type !== "email" ? "noopener noreferrer" : undefined}
-                >
-                  {social.data.label} ↗
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-
-        <div class="status-box">
-          <span class="status-dot status-dot--green"></span>
-          <span class="mono text-2xs text-phosphor">{profile?.location || "CHILE"} // OPEN_TO_CHALLENGES</span>
+        <!-- Machine Footer Bar -->
+        <div class="footer-bar">
+            <div class="mono text-2xs text-muted">
+                &copy; {currentYear}{" "}
+                {(profile?.name || "Diego Rivera").toUpperCase()}. TODOS LOS
+                DERECHOS RESERVADOS.
+            </div>
+            <a href="#" class="btn-top mono text-2xs">
+                <span>RETURN_TOP</span>
+                <span>↑</span>
+            </a>
         </div>
-      </div>
     </div>
-
-    <!-- Machine Footer Bar -->
-    <div class="footer-bar">
-      <div class="mono text-2xs text-muted">
-        &copy; {currentYear} {(profile?.name || "Diego Rivera").toUpperCase()}. TODOS LOS DERECHOS RESERVADOS.
-      </div>
-      <a href="#" class="btn-top mono text-2xs">
-        <span>RETURN_TOP</span>
-        <span>↑</span>
-      </a>
-    </div>
-  </div>
 </footer>
 
 <style>
-  .footer-chassis {
-    background-color: var(--color-surface-sunken);
-    border-top: 2px solid var(--color-border);
-    padding-top: var(--space-12);
-    padding-bottom: var(--space-8);
-    position: relative;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-    padding-bottom: var(--space-8);
-    border-bottom: 1px dashed var(--color-border);
-
-    @media (min-width: 768px) {
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: var(--space-12);
+    .footer-chassis {
+        background-color: var(--color-surface-sunken);
+        border-top: 2px solid var(--color-border);
+        padding-top: var(--space-12);
+        padding-bottom: var(--space-8);
+        position: relative;
     }
-  }
 
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        padding-bottom: var(--space-8);
+        border-bottom: 1px dashed var(--color-border);
 
-  .brand-spec {
-    letter-spacing: 0.08em;
-  }
+        @media (min-width: 768px) {
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: var(--space-12);
+        }
+    }
 
-  .footer-title {
-    font-size: var(--text-xl);
-    font-weight: 700;
-    color: var(--color-text);
-  }
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+    }
 
-  .footer-desc {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    max-width: 48ch;
-    line-height: 1.6;
-  }
+    .brand-spec {
+        letter-spacing: 0.08em;
+    }
 
-  /* Navigation & Links */
-  .footer-nav,
-  .footer-network {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .nav-title {
-    letter-spacing: 0.06em;
-  }
-
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-
-    a {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-      transition: color var(--transition-fast);
-
-      &:hover {
+    .footer-title {
+        font-size: var(--text-xl);
+        font-weight: 700;
         color: var(--color-text);
-      }
     }
-  }
 
-  .status-box {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-top: var(--space-2);
-    padding: var(--space-2);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xs);
-    width: fit-content;
-  }
-
-  /* Footer Bottom Bar */
-  .footer-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: var(--space-6);
-    gap: var(--space-4);
-  }
-
-  .btn-top {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-    padding: var(--space-1) var(--space-3);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xs);
-    background-color: var(--color-surface);
-    color: var(--color-text-muted);
-    transition: all var(--transition-fast);
-
-    &:hover {
-      border-color: var(--color-amber);
-      color: var(--color-text);
-      background-color: var(--color-amber-muted);
+    .footer-desc {
+        font-size: var(--text-sm);
+        color: var(--color-text-muted);
+        max-width: 48ch;
+        line-height: 1.6;
     }
-  }
+
+    /* Navigation & Links */
+    .footer-nav,
+    .footer-network {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .nav-title {
+        letter-spacing: 0.06em;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+
+        a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color var(--transition-fast);
+
+            &:hover {
+                color: var(--color-text);
+            }
+        }
+    }
+
+    .status-box {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-top: var(--space-2);
+        padding: var(--space-2);
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xs);
+        width: fit-content;
+    }
+
+    /* Footer Bottom Bar */
+    .footer-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: var(--space-6);
+        gap: var(--space-4);
+    }
+
+    .btn-top {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        padding: var(--space-1) var(--space-3);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xs);
+        background-color: var(--color-surface);
+        color: var(--color-text-muted);
+        transition: all var(--transition-fast);
+
+        &:hover {
+            border-color: var(--color-amber);
+            color: var(--color-text);
+            background-color: var(--color-amber-muted);
+        }
+    }
 </style>

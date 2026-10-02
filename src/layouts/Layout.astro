@@ -1,16 +1,16 @@
 ---
 export interface Props {
-  title: string;
-  description?: string;
-  keywords?: string;
+    title: string;
+    description?: string;
+    keywords?: string;
 }
 import { getLangFromUrl } from "../i18n/utils";
 import "../styles/global.css";
 
 const {
-  title,
-  description = "Portafolio de Diego Rivera - Ingeniero de Software Especialista en Backend, Sistemas Distribuidos, Optimización y DevOps.",
-  keywords = "software engineer, backend developer, python, go, django, fastapi, distributed systems, devops, docker, linux, postgresql, polars",
+    title,
+    description = "Portafolio de Diego Rivera - Ingeniero de Software Especialista en Backend, Sistemas Distribuidos, Optimización y DevOps.",
+    keywords = "software engineer, backend developer, python, go, django, fastapi, distributed systems, devops, docker, linux, postgresql, polars",
 } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const basePath = import.meta.env.BASE_URL;
@@ -18,45 +18,45 @@ const basePath = import.meta.env.BASE_URL;
 
 <!doctype html>
 <html lang={lang}>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="keywords" content={keywords} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href={`${basePath}/favicon.svg`} />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
 
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="technical-viewport">
-      <slot />
-    </div>
-  </body>
+        <!-- Preconnect for performance -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="technical-viewport">
+            <slot />
+        </div>
+    </body>
 </html>
 
 <style>
-  .technical-viewport {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
+    .technical-viewport {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
 </style>

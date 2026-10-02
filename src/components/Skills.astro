@@ -149,7 +149,7 @@ const categoryMeta: Record<
                             {skills.map((skill) => (
                                 <li class="skill-row">
                                     <a
-                                        href={`${basePath}/skills/${skill.slug}`}
+                                        href={`${basePath}skills/${skill.slug}`}
                                         class="skill-name-link"
                                     >
                                         {skill.name}
@@ -181,7 +181,7 @@ const categoryMeta: Record<
             <div class="archive-meta mono text-xs text-muted">
                 <span>STACK_INVENTORY: COMPLETE_TECHNICAL_MATRIX</span>
             </div>
-            <a href={`${basePath}/skills`} class="btn btn-secondary">
+            <a href={`${basePath}skills`} class="btn btn-secondary">
                 <span>
                     EXPLORAR CATÁLOGO COMPLETO DE HABILIDADES (
                     {allSkills.length})
