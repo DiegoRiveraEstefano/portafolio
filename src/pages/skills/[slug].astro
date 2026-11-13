@@ -20,20 +20,62 @@ function getContextLink(context: string): { href?: string; label: string } {
     const lower = context.toLowerCase();
     if (lower.includes("nolan ai")) {
         return {
-            href: `${basePath}/experience/nolan-ai-software`,
+            href: `${basePath}experience/nolan-ai-software`,
             label: "Ver Experiencia Nolan AI Software →",
         };
     }
     if (lower.includes("freelance")) {
         return {
-            href: `${basePath}/experience/freelance-fullstack`,
+            href: `${basePath}experience/freelance-fullstack`,
             label: "Ver Experiencia Freelance →",
         };
     }
     if (lower.includes("the green economics")) {
         return {
-            href: `${basePath}/experience/the-green-economics-journal`,
+            href: `${basePath}experience/the-green-economics-journal`,
             label: "Ver Experiencia Editorial →",
+        };
+    }
+    if (lower.includes("mockhavoc")) {
+        return {
+            href: `${basePath}projects/mock-havoc`,
+            label: "Ver Proyecto MockHavoc →",
+        };
+    }
+    if (lower.includes("ledgerflow")) {
+        return {
+            href: `${basePath}projects/ledger-flow`,
+            label: "Ver Proyecto LedgerFlow →",
+        };
+    }
+    if (lower.includes("nanostock")) {
+        return {
+            href: `${basePath}projects/nano-stock`,
+            label: "Ver Proyecto NanoStock →",
+        };
+    }
+    if (lower.includes("go-refinery")) {
+        return {
+            href: `${basePath}projects/go-refinery`,
+            label: "Ver Proyecto Go-Refinery →",
+        };
+    }
+    if (lower.includes("uptime-monitor")) {
+        return {
+            href: `${basePath}projects/uptime-monitor`,
+            label: "Ver Proyecto Uptime-Monitor →",
+        };
+    }
+    if (lower.includes("jte zed")) {
+        return {
+            href: `${basePath}projects/jte-zed-extension`,
+            label: "Ver Proyecto JTE Zed Extension →",
+        };
+    }
+    if (lower.includes("360")) {
+        return {
+            href: `${basePath}projects/360-tour-demo`,
+            label: "Ver Proyecto 360° Tour Demo →",
         };
     }
     if (
@@ -41,13 +83,13 @@ function getContextLink(context: string): { href?: string; label: string } {
         lower.includes("pdf-to-text")
     ) {
         return {
-            href: `${basePath}/projects/pdf-to-text`,
+            href: `${basePath}projects/pdf-to-text`,
             label: "Ver Proyecto CLI OCR →",
         };
     }
     if (lower.includes("kafka") || lower.includes("proyecto de título")) {
         return {
-            href: `${basePath}/projects/arquitectura-kafka-go`,
+            href: `${basePath}projects/arquitectura-kafka-go`,
             label: "Ver Proyecto de Título →",
         };
     }
@@ -56,7 +98,7 @@ function getContextLink(context: string): { href?: string; label: string } {
         lower.includes("tickets")
     ) {
         return {
-            href: `${basePath}/projects/clasificador-tickets-ml`,
+            href: `${basePath}projects/clasificador-tickets-ml`,
             label: "Ver Proyecto Clasificador ML →",
         };
     }
@@ -65,61 +107,79 @@ function getContextLink(context: string): { href?: string; label: string } {
         lower.includes("analisis de ventas")
     ) {
         return {
-            href: `${basePath}/projects/analisis-ventas-visualizacion`,
+            href: `${basePath}projects/analisis-ventas-visualizacion`,
             label: "Ver Proyecto Análisis de Ventas →",
         };
     }
     if (lower.includes("erp")) {
         return {
-            href: `${basePath}/projects/erp-escolar`,
+            href: `${basePath}projects/erp-escolar`,
             label: "Ver Proyecto ERP Escolar →",
         };
     }
     if (lower.includes("hid") || lower.includes("coprocesamiento")) {
         return {
-            href: `${basePath}/projects/sistema-control-hid-iot`,
+            href: `${basePath}projects/sistema-control-hid-iot`,
             label: "Ver Proyecto IoT HID →",
+        };
+    }
+    if (lower.includes("despliegue de aplicaciones python")) {
+        return {
+            href: `${basePath}certifications/platzi-despliegue-python-nube`,
+            label: "Ver Certificación Despliegue Python →",
+        };
+    }
+    if (lower.includes("curso de html")) {
+        return {
+            href: `${basePath}certifications/platzi-html`,
+            label: "Ver Certificación HTML →",
         };
     }
     if (lower.includes("docker")) {
         return {
-            href: `${basePath}/certifications/platzi-docker-fundamentos`,
+            href: `${basePath}certifications/platzi-docker-fundamentos`,
             label: "Ver Certificación Docker →",
         };
     }
     if (lower.includes("git")) {
         return {
-            href: `${basePath}/certifications/platzi-git-github`,
+            href: `${basePath}certifications/platzi-git-github`,
             label: "Ver Certificación Git & GitHub →",
         };
     }
     if (lower.includes("django rest")) {
         return {
-            href: `${basePath}/certifications/platzi-django-rest-framework`,
+            href: `${basePath}certifications/platzi-django-rest-framework`,
             label: "Ver Certificación DRF →",
         };
     }
     if (lower.includes("curso de django")) {
         return {
-            href: `${basePath}/certifications/platzi-django`,
+            href: `${basePath}certifications/platzi-django`,
             label: "Ver Certificación Django →",
         };
     }
     if (lower.includes("curso de java")) {
         return {
-            href: `${basePath}/certifications/platzi-java`,
+            href: `${basePath}certifications/platzi-java`,
             label: "Ver Certificación Java →",
+        };
+    }
+    if (lower.includes("foundational c#")) {
+        return {
+            href: `${basePath}certifications/freecodecamp-foundational-csharp-microsoft`,
+            label: "Ver Certificación C# Microsoft →",
         };
     }
     if (lower.includes("scientific computing")) {
         return {
-            href: `${basePath}/certifications/freecodecamp-scientific-computing-python`,
+            href: `${basePath}certifications/freecodecamp-scientific-computing-python`,
             label: "Ver Certificación Scientific Computing →",
         };
     }
     if (lower.includes("responsive web design")) {
         return {
-            href: `${basePath}/certifications/freecodecamp-responsive-web-design`,
+            href: `${basePath}certifications/freecodecamp-responsive-web-design`,
             label: "Ver Certificación Responsive Design →",
         };
     }

@@ -3,9 +3,10 @@ import { getCollection } from "astro:content";
 
 const basePath = import.meta.env.BASE_URL;
 const educationList = await getCollection("education");
-const certificationsList = (await getCollection("certifications"))
-    .sort((a, b) => b.data.issueDate.localeCompare(a.data.issueDate))
-    .slice(0, 2);
+const allCertifications = (await getCollection("certifications")).sort((a, b) =>
+    b.data.issueDate.localeCompare(a.data.issueDate),
+);
+const certificationsList = allCertifications.slice(0, 3);
 ---
 
 <section id="education" class="section education-section">
@@ -134,7 +135,7 @@ const certificationsList = (await getCollection("certifications"))
             <a href={`${basePath}certifications`} class="btn btn-secondary">
                 <span>
                     EXPLORAR CATÁLOGO DE CERTIFICACIONES (
-                    {certificationsList.length})
+                    {allCertifications.length})
                 </span>
                 <span class="mono">→</span>
             </a>
