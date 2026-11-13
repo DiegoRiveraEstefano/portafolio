@@ -113,16 +113,45 @@ const projectVisuals: Record<
 
                         <!-- Project Schematic Visual / Screen -->
                         <div class="project-screen">
-                            <div
-                                class="screen-grid-bg"
-                                aria-hidden="true"
-                            ></div>
-                            <div class="screen-icon">
-                                <Fragment set:html={visual.svg} />
-                            </div>
-                            <div class="screen-indicator mono text-2xs">
-                                <span>STATUS: PRODUCTION</span>
-                            </div>
+                            {project.data.image ? (
+                                <>
+                                    <picture class="screen-picture">
+                                        <source
+                                            srcset={(project.data.image.startsWith("/")
+                                                ? `${basePath}${project.data.image.slice(1)}`
+                                                : project.data.image
+                                            ).replace(/\.png$/i, ".avif")}
+                                            type="image/avif"
+                                        />
+                                        <img
+                                            src={
+                                                project.data.image.startsWith("/")
+                                                    ? `${basePath}${project.data.image.slice(1)}`
+                                                    : project.data.image
+                                            }
+                                            alt={`Vista previa de ${project.data.title}`}
+                                            class="screen-image"
+                                            loading="lazy"
+                                        />
+                                    </picture>
+                                    <div class="screen-indicator screen-indicator--badge mono text-2xs">
+                                        <span>STATUS: PRODUCTION</span>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div
+                                        class="screen-grid-bg"
+                                        aria-hidden="true"
+                                    ></div>
+                                    <div class="screen-icon">
+                                        <Fragment set:html={visual.svg} />
+                                    </div>
+                                    <div class="screen-indicator mono text-2xs">
+                                        <span>STATUS: PRODUCTION</span>
+                                    </div>
+                                </>
+                            )}
                         </div>
 
                         <!-- Project Details -->
@@ -271,6 +300,31 @@ const projectVisuals: Record<
             width: 100%;
             height: 100%;
         }
+    }
+
+    .screen-picture {
+        display: contents;
+    }
+
+    .screen-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+        transition: transform var(--transition-base);
+    }
+
+    .project-card:hover .screen-image {
+        transform: scale(1.04);
+    }
+
+    .screen-indicator--badge {
+        background-color: color-mix(in oklch, var(--color-surface-sunken) 85%, transparent);
+        padding: 2px 6px;
+        border-radius: var(--radius-xs);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
     }
 
     .project-card:hover .screen-icon {
