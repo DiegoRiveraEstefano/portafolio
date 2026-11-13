@@ -15,6 +15,14 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 const basePath = import.meta.env.BASE_URL;
+const galleryImages =
+    project.data.images && project.data.images.length > 0
+        ? project.data.images
+        : project.data.image
+          ? [{ src: project.data.image, caption: project.data.title }]
+          : [];
+const resolveImgSrc = (src: string) =>
+    src.startsWith("/") ? `${basePath}${src.slice(1)}` : src;
 ---
 
 <Layout
@@ -137,6 +145,60 @@ const basePath = import.meta.env.BASE_URL;
                         )}
                 </div>
 
+                {galleryImages.length > 0 && (
+                    <section
+                        class="gallery-section"
+                        aria-label="Capturas del sistema"
+                    >
+                        <div class="gallery-header">
+                            <span class="dash-label mono text-2xs text-muted">
+                                [CAPTURAS_DE_INTERFAZ // VISUAL_TELEMETRY]
+                            </span>
+                            <span class="mono text-2xs text-amber">
+                                {galleryImages.length}{" "}
+                                {galleryImages.length === 1
+                                    ? "CAPTURA"
+                                    : "CAPTURAS"}
+                            </span>
+                        </div>
+                        <div class="gallery-grid">
+                            {galleryImages.map((item, idx) => {
+                                const imgUrl = resolveImgSrc(item.src);
+                                return (
+                                    <figure class="gallery-card">
+                                        <button
+                                            type="button"
+                                            class="gallery-thumb-btn"
+                                            data-lightbox-src={imgUrl}
+                                            data-lightbox-caption={item.caption}
+                                            aria-label={`Ampliar captura: ${item.caption}`}
+                                        >
+                                            <picture class="gallery-picture">
+                                                <source
+                                                    srcset={imgUrl.replace(/\.png$/i, ".avif")}
+                                                    type="image/avif"
+                                                />
+                                                <img
+                                                    src={imgUrl}
+                                                    alt={item.caption}
+                                                    class="gallery-img"
+                                                    loading="lazy"
+                                                />
+                                            </picture>
+                                            <span class="gallery-zoom-tag mono text-2xs">
+                                                [IMG_{String(idx + 1).padStart(2, "0")}] ↗
+                                            </span>
+                                        </button>
+                                        <figcaption class="gallery-caption">
+                                            {item.caption}
+                                        </figcaption>
+                                    </figure>
+                                );
+                            })}
+                        </div>
+                    </section>
+                )}
+
                 <!-- Markdown Rendered Technical Body -->
                 <div class="markdown-body">
                     <Content />
@@ -159,8 +221,58 @@ const basePath = import.meta.env.BASE_URL;
         </div>
     </main>
 
+    <dialog id="image-lightbox" class="image-lightbox">
+        <div class="lightbox-frame specs-card">
+            <div class="lightbox-bar">
+                <span id="lightbox-caption" class="mono text-xs text-muted"></span>
+                <button
+                    type="button"
+                    id="lightbox-close"
+                    class="btn btn-secondary btn-sm mono"
+                    aria-label="Cerrar vista previa"
+                >
+                    [ESC // CERRAR]
+                </button>
+            </div>
+            <div class="lightbox-media">
+                <picture style="display: contents;">
+                    <source id="lightbox-avif" srcset="" type="image/avif" />
+                    <img id="lightbox-img" src="" alt="" />
+                </picture>
+            </div>
+        </div>
+    </dialog>
+
     <Footer />
 </Layout>
+
+<script>
+    const dialog = document.getElementById("image-lightbox") as HTMLDialogElement | null;
+    const dialogImg = document.getElementById("lightbox-img") as HTMLImageElement | null;
+    const dialogAvif = document.getElementById("lightbox-avif") as HTMLSourceElement | null;
+    const dialogCaption = document.getElementById("lightbox-caption");
+    const closeBtn = document.getElementById("lightbox-close");
+
+    document.querySelectorAll<HTMLButtonElement>("[data-lightbox-src]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            if (!dialog || !dialogImg || !dialogCaption) return;
+            const src = btn.dataset.lightboxSrc || "";
+            const caption = btn.dataset.lightboxCaption || "";
+            if (dialogAvif) {
+                dialogAvif.srcset = src.replace(/\.png$/i, ".avif");
+            }
+            dialogImg.src = src;
+            dialogImg.alt = caption;
+            dialogCaption.textContent = caption;
+            dialog.showModal();
+        });
+    });
+
+    closeBtn?.addEventListener("click", () => dialog?.close());
+    dialog?.addEventListener("click", (e) => {
+        if (e.target === dialog) dialog.close();
+    });
+</script>
 
 <style>
     .project-detail-main {
@@ -383,6 +495,142 @@ const basePath = import.meta.env.BASE_URL;
         background-color: var(--color-surface-sunken);
         border-top: 1px solid var(--color-border);
         gap: var(--space-2);
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+        padding: var(--space-6) clamp(var(--space-6), 5vw, var(--space-10));
+        border-bottom: 1px solid var(--color-border);
+        background-color: var(--color-surface);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .gallery-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-2);
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: var(--space-4);
+    }
+
+    .gallery-card {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-surface-sunken);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xs);
+        overflow: hidden;
+        transition:
+            border-color var(--transition-fast),
+            transform var(--transition-fast);
+
+        &:hover {
+            border-color: var(--color-amber);
+            transform: translateY(-2px);
+        }
+    }
+
+    .gallery-thumb-btn {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        padding: 0;
+        border: none;
+        background: var(--color-surface-elevated);
+        cursor: zoom-in;
+        overflow: hidden;
+    }
+
+    .gallery-picture {
+        display: contents;
+    }
+
+    .gallery-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+        transition: transform var(--transition-base);
+    }
+
+    .gallery-card:hover .gallery-img {
+        transform: scale(1.03);
+    }
+
+    .gallery-zoom-tag {
+        position: absolute;
+        bottom: var(--space-2);
+        right: var(--space-2);
+        padding: 2px 6px;
+        background-color: color-mix(in oklch, var(--color-surface-sunken) 88%, transparent);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xs);
+        color: var(--color-amber-text);
+    }
+
+    .gallery-caption {
+        padding: var(--space-3);
+        font-size: var(--text-xs);
+        color: var(--color-text-muted);
+        line-height: 1.45;
+        border-top: 1px solid var(--color-border-subtle);
+    }
+
+    /* Lightbox */
+    .image-lightbox {
+        max-width: min(92vw, 1100px);
+        width: 100%;
+        margin: auto;
+        padding: 0;
+        border: none;
+        background: transparent;
+        color: var(--color-text);
+
+        &::backdrop {
+            background-color: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(4px);
+        }
+    }
+
+    .lightbox-frame {
+        padding: 0;
+        overflow: hidden;
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border-strong);
+    }
+
+    .lightbox-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-3);
+        padding: var(--space-3) var(--space-4);
+        background-color: var(--color-surface-sunken);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .lightbox-media {
+        padding: var(--space-3);
+        background-color: var(--color-surface-sunken);
+        display: flex;
+        justify-content: center;
+
+        img {
+            max-height: 78vh;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: var(--radius-xs);
+        }
     }
 
     .btn-sm {

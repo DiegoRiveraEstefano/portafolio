@@ -53,6 +53,15 @@ const projects = defineCollection({
       results: z.array(z.string()),
       link: z.string(),
       github: z.string().optional(),
+      image: z.string().optional(),
+      images: z
+        .array(
+          z.object({
+            src: z.string(),
+            caption: z.string(),
+          })
+        )
+        .optional(),
       archived: z.boolean().default(false),
       featured: z.boolean().default(false),
       showOnHome: z.boolean().default(false),

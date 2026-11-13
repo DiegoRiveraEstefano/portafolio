@@ -33,7 +33,7 @@
   {
     "title": "360° Virtual Tour Demo",
     "description": "Recorrido virtual 360° interactivo de alto rendimiento construido con Preact, TypeScript, WebGL y Three.js",
-    "image": "",
+    "image": "/images/projects/360-tour-demo/modal-inicio.png",
     "date": "2026-11-13",
     "tags": [
       "Frontend",
@@ -94,7 +94,7 @@
   {
     "title": "LedgerFlow",
     "description": "Plataforma multi-tenant de conciliación de pagos y facturación automatizada con garantías ACID",
-    "image": "",
+    "image": "/images/projects/ledger-flow/auditoria-conciliacion.png",
     "date": "2026-11-12",
     "tags": [
       "Fintech",
@@ -127,7 +127,7 @@
   {
     "title": "NanoStock",
     "description": "Sistema modular de gestión de inventario doméstico, control FEFO y planificación alimentaria con Spring Boot",
-    "image": "",
+    "image": "/images/projects/nano-stock/panel-general.png",
     "date": "2026-11-12",
     "tags": [
       "Java",
@@ -447,7 +447,7 @@
   {
     "title": "HereditasArbor",
     "description": "Plataforma interactiva para creación de árboles genealógicos",
-    "image": "",
+    "image": "/images/projects/hereditas-arbor/landing.png",
     "date": "2022-09-01",
     "tags": [
       "Web App",
