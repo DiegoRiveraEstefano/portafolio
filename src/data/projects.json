@@ -1,5 +1,224 @@
 [
   {
+    "title": "JTE Zed Extension",
+    "description": "Extensión de lenguaje para Java Template Engine (JTE) en el editor Zed con Tree-sitter, inyecciones y LSP",
+    "image": "",
+    "date": "2026-11-13",
+    "tags": [
+      "DevTools",
+      "Editor Extension",
+      "Tree-sitter",
+      "LSP",
+      "Zed"
+    ],
+    "body": "Extensión para el editor Zed con gramática Tree-sitter para archivos .jte y .kte, inyección multilenguaje (Java, HTML, CSS, JS) y soporte LSP.",
+    "slug": "jte-zed-extension",
+    "technologies": [
+      "JavaScript",
+      "Tree-sitter",
+      "LSP",
+      "Zed",
+      "JTE",
+      "Java"
+    ],
+    "results": [
+      "Resaltado de sintaxis con gramática Tree-sitter para archivos .jte y .kte",
+      "Inyección multilenguaje integrada para Java, HTML, CSS y JavaScript",
+      "Autocompletado y formateo automático vía LSP"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/jte-zed-extension",
+    "archived": false,
+    "showOnHome": true
+  },
+  {
+    "title": "360° Virtual Tour Demo",
+    "description": "Recorrido virtual 360° interactivo de alto rendimiento construido con Preact, TypeScript, WebGL y Three.js",
+    "image": "",
+    "date": "2026-11-13",
+    "tags": [
+      "Frontend",
+      "360",
+      "WebGL",
+      "TypeScript",
+      "Preact"
+    ],
+    "body": "Aplicación web interactiva para recorridos virtuales panorámicos 360° con Preact 10, TypeScript 5, Photo Sphere Viewer (WebGL), Three.js y endurecimiento de cadena de suministro en pnpm.",
+    "slug": "360-tour-demo",
+    "technologies": [
+      "TypeScript",
+      "Preact",
+      "Three.js",
+      "WebGL",
+      "Vite",
+      "CSS3"
+    ],
+    "results": [
+      "Proyección equirectangular WebGL fluida con huella mínima (~3KB core)",
+      "Estilos puros en CSS3 sin dependencias de frameworks",
+      "Endurecimiento de seguridad en cadena de suministro npm/pnpm"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/360-tour-demo",
+    "archived": false,
+    "showOnHome": true
+  },
+  {
+    "title": "MockHavoc",
+    "description": "Proxy inverso local en Go sin dependencias externas para simular inestabilidad de red, latencia, errores HTTP y caídas TCP",
+    "image": "",
+    "date": "2026-11-12",
+    "tags": [
+      "Go",
+      "CLI",
+      "DevTools",
+      "Testing",
+      "Chaos Engineering"
+    ],
+    "body": "Proxy inverso ligero escrito exclusivamente con la biblioteca estándar de Go y arquitectura hexagonal para inyectar latencia, errores HTTP y cortes TCP RST.",
+    "slug": "mock-havoc",
+    "technologies": [
+      "Go",
+      "Net/HTTP",
+      "CLI",
+      "Reverse Proxy",
+      "Hexagonal Architecture"
+    ],
+    "results": [
+      "Cero dependencias externas utilizando exclusivamente la biblioteca estándar de Go",
+      "Inyección determinista por headers X-Havoc-* para suites de pruebas",
+      "Simulación de cortes TCP RST, jitter de latencia y errores HTTP"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/MockHavoc",
+    "archived": false,
+    "showOnHome": true
+  },
+  {
+    "title": "LedgerFlow",
+    "description": "Plataforma multi-tenant de conciliación de pagos y facturación automatizada con garantías ACID",
+    "image": "",
+    "date": "2026-11-12",
+    "tags": [
+      "Fintech",
+      "Full Stack",
+      "TypeScript",
+      "NestJS",
+      "PostgreSQL"
+    ],
+    "body": "Plataforma full-stack de conciliación bancaria y facturación automatizada en monorepo pnpm con NestJS, React, Prisma ORM, PostgreSQL, Redis y BullMQ.",
+    "slug": "ledger-flow",
+    "technologies": [
+      "TypeScript",
+      "NestJS",
+      "React",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "BullMQ",
+      "Docker"
+    ],
+    "results": [
+      "Aislamiento estricto multi-tenant por tenant_id",
+      "Conciliación bancaria asíncrona mediante colas BullMQ y Redis",
+      "Facturación atómica con transacciones ACID en Prisma"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/LedgerFlow",
+    "archived": false,
+    "showOnHome": true
+  },
+  {
+    "title": "NanoStock",
+    "description": "Sistema modular de gestión de inventario doméstico, control FEFO y planificación alimentaria con Spring Boot",
+    "image": "",
+    "date": "2026-11-12",
+    "tags": [
+      "Java",
+      "Spring Boot",
+      "ERP",
+      "Self-Hosted",
+      "Modular Monolith"
+    ],
+    "body": "Sistema self-hosted de inventario y planificación alimentaria con Java 21, Spring Boot 4, Spring Modulith, SQLite, Flyway, JTE, HTMX y observabilidad OpenTelemetry.",
+    "slug": "nano-stock",
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "Spring Modulith",
+      "SQLite",
+      "JTE",
+      "HTMX",
+      "OpenTelemetry"
+    ],
+    "results": [
+      "Seguimiento por lotes con consumo FEFO y alertas de vencimiento",
+      "Arquitectura Modular Monolith con Spring Modulith y Flyway",
+      "Observabilidad con OpenTelemetry, Micrometer y Grafana LGTM"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/NanoStock",
+    "archived": false,
+    "showOnHome": true
+  },
+  {
+    "title": "Go-Refinery",
+    "description": "Servicio ETL asíncrono en Go con inferencia automática de esquemas, transformación en streaming y telemetría SSE",
+    "image": "",
+    "date": "2026-10-24",
+    "tags": [
+      "Go",
+      "ETL",
+      "Data Engineering",
+      "Hexagonal Architecture",
+      "Backend"
+    ],
+    "body": "Servicio de ingesta, inferencia heurística de esquemas y transformación en streaming para CSV, Excel (.xlsx), JSONL y logs, con SQLite WAL y progreso en tiempo real vía SSE.",
+    "slug": "go-refinery",
+    "technologies": [
+      "Go",
+      "SQLite",
+      "Server-Sent Events",
+      "Unpoly",
+      "Web Components",
+      "Hexagonal Architecture"
+    ],
+    "results": [
+      "Ingesta en streaming con memoria acotada para archivos masivos",
+      "Inferencia automática de delimitadores, encabezados y tipos de datos",
+      "Progreso asíncrono en tiempo real vía worker pools y SSE"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/Go-Refinery",
+    "archived": false,
+    "showOnHome": true
+  },
+  {
+    "title": "Uptime-Monitor",
+    "description": "Monitor de disponibilidad multi-tenant y tolerante a fallos construido con Elixir, Phoenix LiveView y OTP",
+    "image": "",
+    "date": "2026-07-13",
+    "tags": [
+      "Elixir",
+      "Phoenix",
+      "OTP",
+      "Monitoring",
+      "Multi-Tenant"
+    ],
+    "body": "Monitor de disponibilidad multi-tenant con Elixir, Phoenix v1.8, LiveView v1.2, PostgreSQL/Ecto, RBAC y supervisión OTP tolerante a fallos.",
+    "slug": "uptime-monitor",
+    "technologies": [
+      "Elixir",
+      "Phoenix LiveView",
+      "OTP",
+      "PostgreSQL",
+      "Ecto",
+      "Tailwind CSS"
+    ],
+    "results": [
+      "Aislamiento multi-tenant estricto con control de acceso basado en roles",
+      "Supervisión OTP con DynamicSupervisor y Task.async_stream con back-pressure",
+      "Dashboard reactivo en tiempo real con Phoenix LiveView"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/Uptime-Monitor",
+    "archived": false,
+    "showOnHome": true
+  },
+  {
     "title": "Sistema de Control HID & Coprocesamiento IoT",
     "description": "Sistema de control de dispositivos móviles basado en arquitectura maestro–esclavo",
     "image": "",
@@ -114,31 +333,31 @@
     "showOnHome": false
   },
   {
-    "title": "ERP Villa Alemana",
-    "description": "Sistema de gestión escolar integral para instituciones educativas",
+    "title": "Scanned PDF to Text",
+    "description": "Conversor de PDF escaneados a texto editable con OCR mejorado",
     "image": "",
-    "date": "2022-11-30",
+    "date": "2023-05-10",
     "tags": [
-      "ERP",
-      "Gestión Escolar",
-      "SaaS"
+      "OCR",
+      "Procesamiento de documentos",
+      "Automatización"
     ],
-    "body": "Sistema ERP completo con módulos para administración de estudiantes, control de pagos, gestión de horarios, comunicación institucional y reportes académicos.",
-    "slug": "erp-escolar",
+    "body": "Solución para digitalizar documentos escaneados mediante procesamiento de imágenes y reconocimiento óptico de caracteres (OCR) con preprocesamiento para mejorar precisión.",
+    "slug": "pdf-to-text",
     "technologies": [
       "Python",
-      "Django",
-      "JavaScript",
-      "MySQL",
-      "Pico CSS"
+      "Tesseract OCR",
+      "OpenCV",
+      "PyPDF2",
+      "Image Processing"
     ],
     "results": [
-      "Automatización de procesos académicos",
-      "Reducción de trabajo manual en 60%",
-      "Plataforma unificada para toda la institución"
+      "Digitalización masiva de documentos",
+      "Precisión mejorada en texto reconocido",
+      "Extracción estructurada de datos"
     ],
-    "link": "https://github.com/DiegoRiveraEstefano/erp-villa-alemana-escolares-tecnologicos",
-    "archived": true,
+    "link": "https://github.com/DiegoRiveraEstefano/scanned-pdf-to-text",
+    "archived": false,
     "showOnHome": false
   },
   {
@@ -169,31 +388,60 @@
     "showOnHome": false
   },
   {
-    "title": "Scanned PDF to Text",
-    "description": "Conversor de PDF escaneados a texto editable con OCR mejorado",
+    "title": "Brujula Digital Profesional",
+    "description": "Plataforma educativa con cursos interactivos y comunidad",
     "image": "",
-    "date": "2023-05-10",
+    "date": "2023-01-15",
     "tags": [
-      "OCR",
-      "Procesamiento de documentos",
-      "Automatización"
+      "E-Learning",
+      "Educación Online",
+      "Comunidad"
     ],
-    "body": "Solución para digitalizar documentos escaneados mediante procesamiento de imágenes y reconocimiento óptico de caracteres (OCR) con preprocesamiento para mejorar precisión.",
-    "slug": "pdf-to-text",
+    "body": "Ecosistema de aprendizaje con cursos estructurados, lecciones interactivas, sistema de logros, foros de discusión y generación de certificados.",
+    "slug": "brujula-digital",
     "technologies": [
       "Python",
-      "Tesseract OCR",
-      "OpenCV",
-      "PyPDF2",
-      "Image Processing"
+      "Django",
+      "TailwindCSS",
+      "PostgreSQL",
+      "JavaScript",
+      "YouTube Lite Embedded Player"
     ],
     "results": [
-      "Digitalización masiva de documentos",
-      "Precisión mejorada en texto reconocido",
-      "Extracción estructurada de datos"
+      "+500 usuarios activos",
+      "Plataforma de cursos escalable",
+      "Comunidad de aprendizaje colaborativo"
     ],
-    "link": "https://github.com/DiegoRiveraEstefano/scanned-pdf-to-text",
+    "link": "https://github.com/DiegoRiveraEstefano/brujula_digital_profesional",
     "archived": false,
+    "showOnHome": false
+  },
+  {
+    "title": "ERP Villa Alemana",
+    "description": "Sistema de gestión escolar integral para instituciones educativas",
+    "image": "",
+    "date": "2022-11-30",
+    "tags": [
+      "ERP",
+      "Gestión Escolar",
+      "SaaS"
+    ],
+    "body": "Sistema ERP completo con módulos para administración de estudiantes, control de pagos, gestión de horarios, comunicación institucional y reportes académicos.",
+    "slug": "erp-escolar",
+    "technologies": [
+      "Python",
+      "Django",
+      "JavaScript",
+      "MySQL",
+      "Pico CSS"
+    ],
+    "results": [
+      "Automatización de procesos académicos",
+      "Reducción de trabajo manual en 60%",
+      "Plataforma unificada para toda la institución"
+    ],
+    "link": "https://github.com/DiegoRiveraEstefano/erp-villa-alemana-escolares-tecnologicos",
+    "archived": true,
     "showOnHome": false
   },
   {
@@ -223,62 +471,5 @@
     "link": "https://github.com/DiegoRiveraEstefano/HereditasArbor",
     "archived": true,
     "showOnHome": false
-  },
-  {
-    "title": "Lideresas",
-    "description": "App móvil para gestión financiera de PYMEs y grupos municipales",
-    "image": "",
-    "date": "2023-03-25",
-    "tags": [
-      "Fintech",
-      "Gestión PYME",
-      "App Móvil"
-    ],
-    "body": "Solución completa para seguimiento de gastos, control de boletas, generación de reportes y gestión presupuestaria para pequeñas empresas y organizaciones comunitarias.",
-    "slug": "lideresas-app",
-    "technologies": [
-      "Python",
-      "Django",
-      "TailwindCSS",
-      "S3-compatible",
-      "PostgreSQL/MySQL"
-    ],
-    "results": [
-      "Reducción de tiempo en gestión contable",
-      "Seguimiento en tiempo real de finanzas",
-      "Informes automáticos para cumplimiento fiscal"
-    ],
-    "link": "https://github.com/DiegoRiveraEstefano/lideresas",
-    "archived": false,
-    "showOnHome": false
-  },
-  {
-    "title": "Brujula Digital Profesional",
-    "description": "Plataforma educativa con cursos interactivos y comunidad",
-    "image": "",
-    "date": "2023-01-15",
-    "tags": [
-      "E-Learning",
-      "Educación Online",
-      "Comunidad"
-    ],
-    "body": "Ecosistema de aprendizaje con cursos estructurados, lecciones interactivas, sistema de logros, foros de discusión y generación de certificados.",
-    "slug": "brujula-digital",
-    "technologies": [
-      "Python",
-      "Django",
-      "TailwindCSS",
-      "PostgreSQL",
-      "JavaScript",
-      "YouTube Lite Embedded Player"
-    ],
-    "results": [
-      "+500 usuarios activos",
-      "Plataforma de cursos escalable",
-      "Comunidad de aprendizaje colaborativo"
-    ],
-    "link": "https://github.com/DiegoRiveraEstefano/brujula_digital_profesional",
-    "archived": false,
-    "showOnHome": true
   }
 ]

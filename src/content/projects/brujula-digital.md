@@ -11,7 +11,7 @@ results:
 link: "https://github.com/DiegoRiveraEstefano/brujula_digital_profesional"
 archived: false
 featured: false
-showOnHome: true
+showOnHome: false
 ---
 
 ## Visión General

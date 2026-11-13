@@ -2,8 +2,8 @@
 title: "Clasificador de Tickets con ML"
 description: "Microservicio para preprocesamiento y clasificación automática de tickets de soporte"
 date: "2025-10-15"
-tags: ["API", "Python", "FastAPI", "Docker", "Backend"]
-technologies: ["Python", "FastAPI", "Pandas", "Docker"]
+tags: ["API", "Python", "Machine Learning", "FastAPI", "Docker", "Backend"]
+technologies: ["Python", "Scikit-learn", "FastAPI", "Pandas", "Docker"]
 results:
   - "Reducción significativa de tiempos de enrutamiento manual"
   - "Clasificación con baja latencia en endpoints REST"
@@ -22,7 +22,7 @@ Microservicio desarrollado para automatizar la categorización y asignación de 
 
 * **Framework de Exposición**: API construida sobre **FastAPI**, aprovechando validación estricta de esquemas de entrada y salida mediante Pydantic y documentación interactiva OpenAPI.
 * **Preprocesamiento de Texto**: Pipeline de normalización que elimina ruido, stopwords y normaliza caracteres especiales usando Pandas y expresiones regulares optimizadas.
-* **Inferencia Ligera**: Despliegue del clasificador serializado cargado en memoria durante la inicialización del proceso (`lifespan event`) para evitar relecturas de disco en cada petición.
+* **Inferencia Ligera**: Despliegue del clasificador entrenado con **Scikit-learn** cargado en memoria durante la inicialización del proceso (`lifespan event`) para evitar relecturas de disco en cada petición.
 
 ```
 [Cliente Web / Webhook] ---> [POST /api/v1/classify]
