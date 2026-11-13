@@ -9,6 +9,16 @@ results:
   - "Estilos puros en CSS3 sin dependencias de frameworks ni sobrecarga de bundle"
   - "Endurecimiento de seguridad en cadena de suministro npm/pnpm (cooldown de releases y bloqueo de scripts)"
 link: "https://github.com/DiegoRiveraEstefano/360-tour-demo"
+image: "/images/projects/360-tour-demo/modal-inicio.png"
+images:
+  - src: "/images/projects/360-tour-demo/modal-inicio.png"
+    caption: "Pantalla de bienvenida de la plataforma industrial 360° (8 estaciones, 4K, 60 FPS WebGL)"
+  - src: "/images/projects/360-tour-demo/indice-estaciones.png"
+    caption: "Panel lateral del Índice del Tour con navegación entre las 8 estaciones registradas"
+  - src: "/images/projects/360-tour-demo/visor-taller-central.png"
+    caption: "Visor panorámico equirectangular WebGL en Estación 01: Taller Central de Mantención"
+  - src: "/images/projects/360-tour-demo/visor-nave-espesamiento.png"
+    caption: "Visor 360° con controles flotantes en Estación 04: Nave de Espesamiento y Relaves"
 archived: false
 featured: false
 showOnHome: true

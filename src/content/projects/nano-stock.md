@@ -9,6 +9,18 @@ results:
   - "Arquitectura Modular Monolith con Spring Modulith, Flyway y soporte Spring Batch/Shell"
   - "Observabilidad integrada con OpenTelemetry, Micrometer y stack Grafana LGTM"
 link: "https://github.com/DiegoRiveraEstefano/NanoStock"
+image: "/images/projects/nano-stock/panel-general.png"
+images:
+  - src: "/images/projects/nano-stock/panel-general.png"
+    caption: "Panel General de NanoStock con resumen de inventario, alertas de vencimiento y consumo"
+  - src: "/images/projects/nano-stock/catalogo-maestro.png"
+    caption: "Catálogo Maestro de productos canónicos y categorías"
+  - src: "/images/projects/nano-stock/inventario-fefo.png"
+    caption: "Módulo de Inventario & Control FEFO (First-Expired-First-Out) por lotes"
+  - src: "/images/projects/nano-stock/importacion-masiva.png"
+    caption: "Importación masiva de datos CSV, Excel (.xlsx) y JSON con validación dry-run"
+  - src: "/images/projects/nano-stock/exportacion-datos.png"
+    caption: "Exportación estructurada de inventario y reportes"
 archived: false
 featured: true
 showOnHome: true

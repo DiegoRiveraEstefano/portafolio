@@ -9,6 +9,10 @@ results:
   - "Visualización interactiva de linajes familiares"
   - "Importación y exportación de estándares genealógicos GEDCOM"
 link: "https://github.com/DiegoRiveraEstefano/HereditasArbor"
+image: "/images/projects/hereditas-arbor/landing.png"
+images:
+  - src: "/images/projects/hereditas-arbor/landing.png"
+    caption: "Vista principal de HereditasArbor enfocada en salud hereditaria y genealogía"
 archived: true
 featured: false
 showOnHome: false

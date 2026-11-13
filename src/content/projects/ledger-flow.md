@@ -9,6 +9,18 @@ results:
   - "Conciliación bancaria asíncrona mediante colas BullMQ respaldadas por Redis"
   - "Generación atómica de facturas y transacciones mediante transacciones ACID en Prisma"
 link: "https://github.com/DiegoRiveraEstefano/LedgerFlow"
+image: "/images/projects/ledger-flow/auditoria-conciliacion.png"
+images:
+  - src: "/images/projects/ledger-flow/auditoria-conciliacion.png"
+    caption: "Dashboard principal de Auditoría & Conciliación multi-tenant con métricas de worker BullMQ"
+  - src: "/images/projects/ledger-flow/auditor-movimientos.png"
+    caption: "Auditor de movimientos y discrepancias entre cartolas bancarias y transacciones registradas"
+  - src: "/images/projects/ledger-flow/transacciones-acid.png"
+    caption: "Registro transaccional y facturación atómica ACID vinculada por cliente B2B y pasarela"
+  - src: "/images/projects/ledger-flow/subir-cartola-modal.png"
+    caption: "Modal de ingesta de cartolas CSV/JSON con encolado asíncrono vía BullMQ & Redis"
+  - src: "/images/projects/ledger-flow/conciliacion-manual-modal.png"
+    caption: "Flujo de conciliación manual para resolución de descalces de monto (AMOUNT_MISMATCH)"
 archived: false
 featured: true
 showOnHome: true
